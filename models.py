@@ -491,6 +491,7 @@ if __name__ == "__main__":
     root = "/home/dissana8/LAB/Visor/cam1"
     files=[]
     pattern = "*.jpg"
+    success = 0
 
     f = open("cam1_paths.txt", "a")
     for path, subdirs, files in os.walk(root):
