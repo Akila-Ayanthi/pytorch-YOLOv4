@@ -501,7 +501,7 @@ if __name__ == "__main__":
 
     f = open("cam1_paths.txt", "r")
     files = f.readlines()
-    for i in range(2):
+    for i in range(100):
         imgfile = files[i].strip('\n')
         img = cv2.imread(imgfile)
 
@@ -532,11 +532,19 @@ if __name__ == "__main__":
         real_count=0
         imgfile = imgfile.split('\\')[6:]
         imgname = '/'.join(imgfile)
-        img, p_count = plot_boxes_cv2(img, boxes[0], imgname, class_names)
-        print("Number of people detected:", p_count)
+        img, det_count = plot_boxes_cv2(img, boxes[0], imgname, class_names)
+        print("Number of people detected:", det_count)
 
         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
         for i in range(len(gt)):
             if gt[i][0] == imgname:
                 real_count+=1
         print("Number of people in ground truth :", real_count)
+
+        if real_count == det_count:
+            success+=1
+           
+    
+print(success)
+success_rate = (success/100)*100
+print(success_rate)
