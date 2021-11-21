@@ -502,7 +502,7 @@ if __name__ == "__main__":
 
     f = open("cam1_paths.txt", "r")
     files = f.readlines()
-    for i in range(100):
+    for i in range(10):
         imgfile = files[i].strip('\n')
         img = cv2.imread(imgfile)
 
@@ -531,7 +531,7 @@ if __name__ == "__main__":
         class_names = load_class_names(namesfile)
 
         real_count=0
-        imgfile = imgfile.split('\\')[6:]
+        imgfile = imgfile.split('/')[6:]
         imgname = '/'.join(imgfile)
         img, det_count = plot_boxes_cv2(img, boxes[0], imgname, class_names)
         print("Number of people detected:", det_count)
