@@ -7,6 +7,7 @@ from tool.utils import load_class_names, plot_boxes_cv2
 from tool.torch_utils import do_detect
 import pathlib
 from fnmatch import fnmatch
+import matplotlib.pyplot as plt
 
 
 class Mish(torch.nn.Module):
