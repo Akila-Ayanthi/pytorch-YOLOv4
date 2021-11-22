@@ -452,6 +452,24 @@ class Yolov4(nn.Module):
         output = self.head(x20, x13, x6)
         return output
 
+def box_center_to_corner(boxes):
+    """Convert from (center, width, height) to (upper-left, lower-right)."""
+    cx, cy, w, h = boxes[0], boxes[1], boxes[2], boxes[3]
+    x1 = cx - 0.5 * w
+    y1 = cy - 0.8 * h
+    x2 = cx + 0.5 * w
+    y2 = cy + 0.2 * h
+    boxes = torch.stack((x1, y1, x2, y2), axis=-1)
+    return boxes
+
+def bbox_to_rect(bbox, color):
+    """Convert bounding box to matplotlib format."""
+    # Convert the bounding box (upper-left x, upper-left y, lower-right x,
+    # lower-right y) format to the matplotlib format: ((upper-left x,
+    # upper-left y), width, height)
+    return plt.Rectangle(xy=(bbox[0], bbox[1]), width=bbox[2] - bbox[0],
+                             height=bbox[3] - bbox[1], fill=False,
+                             edgecolor=color, linewidth=2)
 
 if __name__ == "__main__":
     import sys
@@ -530,22 +548,32 @@ if __name__ == "__main__":
 
         class_names = load_class_names(namesfile)
 
-        real_count=0
+        # real_count=0
         imgfile = imgfile.split('/')[6:]
         imgname = '/'.join(imgfile)
         img, det_count = plot_boxes_cv2(img, boxes[0], imgname, class_names)
-        print("Number of people detected:", det_count)
+        # print("Number of people detected:", det_count)
 
         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
         for i in range(len(gt)):
+            fig, a = plt.subplots(1,1)
+            a.imshow(img)
             if gt[i][0] == imgname:
-                real_count+=1
-        print("Number of people in ground truth :", real_count)
+                box = [float(gt[i][1]), float(gt[i][2]), 40, 80]
+                box = torch.tensor(box)
+                bbox = box_center_to_corner(box)
+                a.add_patch(bbox_to_rect(bbox, 'blue'))  
+        #         real_count+=1
+        # print("Number of people in ground truth :", real_count)
 
-        if real_count == det_count:
-            success+=1
+        # if real_count == det_count:
+        #     success+=1
+
+        break
+
+
            
     
-print(success)
-success_rate = (success/100)*100
-print(success_rate)
+# print(success)
+# success_rate = (success/100)*100
+# print(success_rate)
