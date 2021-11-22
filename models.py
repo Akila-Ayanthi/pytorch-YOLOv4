@@ -521,6 +521,7 @@ if __name__ == "__main__":
 
     f = open("cam1_paths.txt", "r")
     files = f.readlines()
+    fig, a = plt.subplots(1,1)
     for i in range(10):
         imgfile = files[i].strip('\n')
         img = cv2.imread(imgfile)
@@ -557,7 +558,6 @@ if __name__ == "__main__":
 
         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
         for i in range(len(gt)):
-            fig, a = plt.subplots(1,1)
             a.imshow(img)
             if gt[i][0] == imgname:
                 box = [float(gt[i][1]), float(gt[i][2]), 40, 80]
