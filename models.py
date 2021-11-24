@@ -522,7 +522,7 @@ if __name__ == "__main__":
     f = open("cam1_paths.txt", "r")
     fig, a = plt.subplots(1,1)
     files = f.readlines()
-    for i in range(10):
+    for i in range(2):
         imgfile = files[i].strip('\n')
         img = cv2.imread(imgfile)
 
@@ -577,7 +577,7 @@ if __name__ == "__main__":
         plt.axis("off")
         plt.savefig("output_.jpg")
         plt.show()
-    break
+        
 
 
            
