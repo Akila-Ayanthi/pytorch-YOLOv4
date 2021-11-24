@@ -536,7 +536,7 @@ if __name__ == "__main__":
 
     
 
-        for i in range(2):  # This 'for' loop is for speed check
+        for j in range(2):  # This 'for' loop is for speed check
                         # Because the first iteration is usually longer
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
@@ -559,12 +559,12 @@ if __name__ == "__main__":
 
         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
 #         print("loaded")
-        for i in range(len(gt)):
+        for k in range(len(gt)):
             a.imshow(img)
 #             print(imgname)
 #             print(gt[i][0])
-            if gt[i][0] == imgname:
-                box = [float(gt[i][1]), float(gt[i][2]), 40, 80]
+            if gt[k][0] == imgname:
+                box = [float(gt[k][1]), float(gt[k][2]), 40, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
                 a.add_patch(bbox_to_rect(bbox, 'blue')) 
@@ -575,7 +575,7 @@ if __name__ == "__main__":
         # if real_count == det_count:
         #     success+=1
         plt.axis("off")
-        plt.savefig("/home/dissana8/pytorch-YOLOv4/output/output_.{0}.jpg", format(i))
+        plt.savefig("/home/dissana8/pytorch-YOLOv4/output/output_{0}.jpg", format(i))
         plt.show()
         
 
