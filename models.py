@@ -564,15 +564,16 @@ if __name__ == "__main__":
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
                 a.imshow(img)
-                a.add_patch(bbox_to_rect(bbox, 'blue'))  
+                a.add_patch(bbox_to_rect(bbox, 'blue')) 
+                print("added")
         #         real_count+=1
         # print("Number of people in ground truth :", real_count)
 
         # if real_count == det_count:
         #     success+=1
-                plt.axis("off")
-                plt.savefig("output_.jpg")
-                plt.show()
+        plt.axis("off")
+        plt.savefig("output_.jpg")
+        plt.show()
         break
 
 
