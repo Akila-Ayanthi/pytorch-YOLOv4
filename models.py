@@ -560,13 +560,13 @@ if __name__ == "__main__":
         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
         print("loaded")
         for i in range(len(gt)):
+            a.imshow(img)
             print(imgname)
             print(gt[i][0])
             if gt[i][0] == imgname:
                 box = [float(gt[i][1]), float(gt[i][2]), 40, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
-                a.imshow(img)
                 a.add_patch(bbox_to_rect(bbox, 'blue')) 
                 print("added")
         #         real_count+=1
@@ -575,7 +575,7 @@ if __name__ == "__main__":
         # if real_count == det_count:
         #     success+=1
         plt.axis("off")
-        plt.savefig("output_.jpg")
+        plt.savefig("/home/dissana8/pytorch-YOLOv4/output/output_.{0}.jpg", format(i))
         plt.show()
         
 
