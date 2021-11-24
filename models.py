@@ -558,21 +558,21 @@ if __name__ == "__main__":
 
         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
         for i in range(len(gt)):
-            a.imshow(img)
             if gt[i][0] == imgname:
                 box = [float(gt[i][1]), float(gt[i][2]), 40, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
+                a.imshow(img)
                 a.add_patch(bbox_to_rect(bbox, 'blue'))  
         #         real_count+=1
         # print("Number of people in ground truth :", real_count)
 
         # if real_count == det_count:
         #     success+=1
-        plt.axis("off")
-        plt.savefig("output_.jpg")
-        plt.show()
-        break
+                plt.axis("off")
+                plt.savefig("output_.jpg")
+                plt.show()
+                break
 
 
            
