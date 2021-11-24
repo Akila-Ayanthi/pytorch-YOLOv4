@@ -559,6 +559,7 @@ if __name__ == "__main__":
 
         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
 #         print("loaded")
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         a.imshow(img)
         for k in range(len(gt)): 
             print(imgname)
@@ -575,7 +576,7 @@ if __name__ == "__main__":
         # if real_count == det_count:
         #     success+=1
         plt.axis("off")
-        plt.savefig("output_.jpg")
+        plt.savefig("/home/dissana8/pytorch-YOLOv4/output/output_{0}.jpg",format(i))
         plt.show()
         
 
