@@ -560,6 +560,8 @@ if __name__ == "__main__":
         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
         print("loaded")
         for i in range(len(gt)):
+            print(imgname)
+            print(gt[i][0])
             if gt[i][0] == imgname:
                 box = [float(gt[i][1]), float(gt[i][2]), 40, 80]
                 box = torch.tensor(box)
