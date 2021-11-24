@@ -521,8 +521,8 @@ if __name__ == "__main__":
 
     f = open("cam1_paths.txt", "r")
     files = f.readlines()
-    fig, a = plt.subplots(1,1)
     for i in range(10):
+        fig, a = plt.subplots(1,1)
         imgfile = files[i].strip('\n')
         img = cv2.imread(imgfile)
 
@@ -569,9 +569,9 @@ if __name__ == "__main__":
 
         # if real_count == det_count:
         #     success+=1
-            plt.axis("off")
-            plt.savefig("output_"+str(i)+".jpg")
-            plt.show()
+        plt.axis("off")
+        plt.savefig("output_"+str(i)+".jpg")
+        plt.show()
         break
 
 
