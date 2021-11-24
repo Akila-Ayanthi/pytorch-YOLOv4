@@ -148,6 +148,7 @@ def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
     if savename:
         print("save plot results to %s" % savename)
         cv2.imwrite(savename, img)
+        print('saved')
     return img, count
 
 
