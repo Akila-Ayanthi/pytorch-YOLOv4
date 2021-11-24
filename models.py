@@ -573,7 +573,7 @@ if __name__ == "__main__":
                 plt.axis("off")
                 plt.savefig("output_.jpg")
                 plt.show()
-                break
+        break
 
 
            
