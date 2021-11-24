@@ -576,7 +576,7 @@ if __name__ == "__main__":
         # if real_count == det_count:
         #     success+=1
         plt.axis("off")
-        plt.savefig("/home/dissana8/pytorch-YOLOv4/output/output_{0}.jpg",format(i))
+        plt.savefig("/home/dissana8/pytorch-YOLOv4/output/output_{0}.jpg".format(i))
         plt.show()
         
 
