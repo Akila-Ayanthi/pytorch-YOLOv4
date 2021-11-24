@@ -524,7 +524,7 @@ if __name__ == "__main__":
     f = open("cam1_paths.txt", "r")
     fig, a = plt.subplots(1,1)
     files = f.readlines()
-    for i in range(2):
+    for i in range(len(files)):
         imgfile = files[i].strip('\n')
         img = cv2.imread(imgfile)
 
