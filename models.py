@@ -553,7 +553,8 @@ if __name__ == "__main__":
         # real_count=0
         imgfile = imgfile.split('/')[6:]
         imgname = '/'.join(imgfile)
-        img, det_count = plot_boxes_cv2(img, boxes[0], imgname, class_names)
+        savename = '/home/dissana8/pytorch-YOLOv4/output/'+imgname
+        img, det_count = plot_boxes_cv2(img, boxes[0], savename, class_names)
         # print("Number of people detected:", det_count)
 
         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
