@@ -8,6 +8,8 @@ from tool.torch_utils import do_detect
 import pathlib
 from fnmatch import fnmatch
 import matplotlib.pyplot as plt
+import os
+
 
 
 class Mish(torch.nn.Module):
@@ -575,6 +577,10 @@ if __name__ == "__main__":
 
         # if real_count == det_count:
         #     success+=1
+        directory = '/home/dissana8/pytorch-YOLOv4/output/'+imgname.split('/')[0]
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        
         plt.axis("off")
         plt.savefig("/home/dissana8/pytorch-YOLOv4/output/"+imgname)
         plt.show()
