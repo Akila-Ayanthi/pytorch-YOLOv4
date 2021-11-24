@@ -570,7 +570,7 @@ if __name__ == "__main__":
         # if real_count == det_count:
         #     success+=1
         plt.axis("off")
-        plt.savefig("output_"+str(i)+".jpg")
+        plt.savefig("output_.jpg")
         plt.show()
         break
 
