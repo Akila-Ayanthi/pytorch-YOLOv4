@@ -555,20 +555,20 @@ if __name__ == "__main__":
         imgname = '/'.join(imgfile)
         savename = '/home/dissana8/pytorch-YOLOv4/output/'+imgname
         img, det_count = plot_boxes_cv2(img, boxes[0], savename, class_names)
-        print("Number of people detected:", det_count)
+#         print("Number of people detected:", det_count)
 
         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
-        print("loaded")
+#         print("loaded")
         for i in range(len(gt)):
             a.imshow(img)
-            print(imgname)
-            print(gt[i][0])
+#             print(imgname)
+#             print(gt[i][0])
             if gt[i][0] == imgname:
                 box = [float(gt[i][1]), float(gt[i][2]), 40, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
                 a.add_patch(bbox_to_rect(bbox, 'blue')) 
-                print("added")
+#                 print("added")
         #         real_count+=1
         # print("Number of people in ground truth :", real_count)
 
