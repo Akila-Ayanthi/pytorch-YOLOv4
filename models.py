@@ -565,13 +565,13 @@ if __name__ == "__main__":
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         a.imshow(img)
         for k in range(len(gt)): 
-            if gt[k][0] == imgname:
-                print(imgname)
-                print(gt[k][0])
-                box = [float(gt[k][1]), float(gt[k][2]), 40, 80]
-                box = torch.tensor(box)
-                bbox = box_center_to_corner(box)
-                a.add_patch(bbox_to_rect(bbox, 'blue')) 
+#             if gt[k][0] == imgname:
+#                 print(imgname)
+                print(gt[k])
+#                 box = [float(gt[k][1]), float(gt[k][2]), 40, 80]
+#                 box = torch.tensor(box)
+#                 bbox = box_center_to_corner(box)
+#                 a.add_patch(bbox_to_rect(bbox, 'blue')) 
                 print("added")
         #         real_count+=1
         # print("Number of people in ground truth :", real_count)
