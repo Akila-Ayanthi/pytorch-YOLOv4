@@ -580,7 +580,7 @@ if __name__ == "__main__":
         # if real_count == det_count:
         #     success+=1
         savename1 = '/home/dissana8/pytorch-YOLOv4/cbox/'+imgname
-        cv2.imwrite(savename, img)
+        cv2.imwrite(savename1, img)
         print('saved')
 #         directory = '/home/dissana8/pytorch-YOLOv4/output/'+imgname.split('/')[0]
 #         if not os.path.exists(directory):
