@@ -3,6 +3,7 @@ import os
 import time
 import math
 import numpy as np
+import cv2
 
 import itertools
 import struct  # get_image_size
