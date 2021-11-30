@@ -579,15 +579,18 @@ if __name__ == "__main__":
 
         # if real_count == det_count:
         #     success+=1
+        
+        directory = '/home/dissana8/pytorch-YOLOv4/cbox/'+imgname.split('/')[0]
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        
         savename1 = '/home/dissana8/pytorch-YOLOv4/cbox/'+imgname
         print(savename1)
         cv2.imwrite(savename1, img)
         print('saved')
-#         directory = '/home/dissana8/pytorch-YOLOv4/output/'+imgname.split('/')[0]
-#         if not os.path.exists(directory):
-#             os.makedirs(directory)
+#         
             
-        break
+        
         
 #         plt.axis("off")
 #         plt.savefig("/home/dissana8/pytorch-YOLOv4/output/"+imgname)
