@@ -521,7 +521,8 @@ if __name__ == "__main__":
                 f.write(os.path.join(path, name)+"\n")
     f.close()
 
-    f = open("cam1_paths.txt", "r")
+    #f = open("cam1_paths.txt", "r")
+    f = open("sample_cam1.txt", "r")
     fig, a = plt.subplots(1,1)
     files = f.readlines()
     for i in range(len(files)):
@@ -564,14 +565,14 @@ if __name__ == "__main__":
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         a.imshow(img)
         for k in range(len(gt)): 
-#             print(imgname)
-#             print(gt[i][0])
+            print(imgname)
+            print(gt[i][0])
             if gt[k][0] == imgname:
                 box = [float(gt[k][1]), float(gt[k][2]), 40, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
                 a.add_patch(bbox_to_rect(bbox, 'blue')) 
-#                 print("added")
+                print("added")
         #         real_count+=1
         # print("Number of people in ground truth :", real_count)
 
@@ -584,6 +585,7 @@ if __name__ == "__main__":
         plt.axis("off")
         plt.savefig("/home/dissana8/pytorch-YOLOv4/output/"+imgname)
         plt.show()
+        break
         
 
 
