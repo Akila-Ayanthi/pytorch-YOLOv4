@@ -560,33 +560,32 @@ if __name__ == "__main__":
         print(savename)
         img, det_count = plot_boxes_cv2(img, boxes[0], savename, class_names)
 #         print("Number of people detected:", det_count)
-        break
-
-#         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
-# #         print("loaded")
-#         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-#         a.imshow(img)
-#         for k in range(len(gt)): 
-#             if gt[k][0] == imgname:
-# #                 print(imgname)
-#                 #print(gt[k])
-#                 box = [float(gt[k][1]), float(gt[k][2]), 40, 80]
-#                 box = torch.tensor(box)
-#                 bbox = box_center_to_corner(box)
-#                 a.add_patch(bbox_to_rect(bbox, 'red')) 
-#                 print("added")
-#         #         real_count+=1
-#         # print("Number of people in ground truth :", real_count)
-
-#         # if real_count == det_count:
-#         #     success+=1
-#         directory = '/home/dissana8/pytorch-YOLOv4/output/'+imgname.split('/')[0]
-#         if not os.path.exists(directory):
-#             os.makedirs(directory)
         
-#         plt.axis("off")
-#         plt.savefig("/home/dissana8/pytorch-YOLOv4/output/"+imgname)
-#         plt.show()
+        gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
+#         print("loaded")
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        for k in range(len(gt)): 
+            if gt[k][0] == imgname:
+#                 print(imgname)
+                #print(gt[k])
+                box = [float(gt[k][1]), float(gt[k][2]), 40, 80]
+                box = torch.tensor(box)
+                bbox = box_center_to_corner(box)
+                img = cv2.rectangle(img, (bbox[0], bbox[1]), (bbox[2], bbox[3]), rgb, 1)
+#                 a.add_patch(bbox_to_rect(bbox, 'red')) 
+                print("added")
+        #         real_count+=1
+        # print("Number of people in ground truth :", real_count)
+
+        # if real_count == det_count:
+        #     success+=1
+        directory = '/home/dissana8/pytorch-YOLOv4/output/'+imgname.split('/')[0]
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        
+        plt.axis("off")
+        plt.savefig("/home/dissana8/pytorch-YOLOv4/output/"+imgname)
+        plt.show()
         
         
 
