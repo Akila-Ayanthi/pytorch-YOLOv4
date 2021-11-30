@@ -557,6 +557,7 @@ if __name__ == "__main__":
         imgfile = imgfile.split('/')[6:]
         imgname = '/'.join(imgfile)
         savename = '/home/dissana8/pytorch-YOLOv4/output/'+imgname
+        print(savename)
         img, det_count = plot_boxes_cv2(img, boxes[0], savename, class_names)
 #         print("Number of people detected:", det_count)
         break
