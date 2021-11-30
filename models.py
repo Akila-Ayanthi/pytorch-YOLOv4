@@ -566,7 +566,7 @@ if __name__ == "__main__":
         a.imshow(img)
         for k in range(len(gt)): 
             print(imgname)
-            print(gt[i][0])
+            print(gt[k][0])
             if gt[k][0] == imgname:
                 box = [float(gt[k][1]), float(gt[k][2]), 40, 80]
                 box = torch.tensor(box)
@@ -585,7 +585,7 @@ if __name__ == "__main__":
         plt.axis("off")
         plt.savefig("/home/dissana8/pytorch-YOLOv4/output/"+imgname)
         plt.show()
-        break
+        
         
 
 
