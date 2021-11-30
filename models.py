@@ -563,7 +563,7 @@ if __name__ == "__main__":
         
         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
 #         print("loaded")
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+#         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         for k in range(len(gt)): 
             if gt[k][0] == imgname:
 #                 print(imgname)
@@ -571,7 +571,7 @@ if __name__ == "__main__":
                 box = [float(gt[k][1]), float(gt[k][2]), 40, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
-                img = cv2.rectangle(img, (bbox[0], bbox[1]), (bbox[2], bbox[3]), (0,255,0), 1)
+                img = cv2.rectangle(img, (113, 223), (200, 400), (0,255,0), 1)
 #                 a.add_patch(bbox_to_rect(bbox, 'red')) 
                 print("added")
         #         real_count+=1
