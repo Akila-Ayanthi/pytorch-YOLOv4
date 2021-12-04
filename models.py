@@ -561,7 +561,7 @@ if __name__ == "__main__":
         img, det_count = plot_boxes_cv2(img, boxes[0], savename, class_names)
         print("Number of people detected:", det_count)
             
-        gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords_.npy', allow_pickle=True)
+        gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True)
         for k in range(len(gt)): 
             if gt[k][0] == imgname:
 # #                 print(imgname)
