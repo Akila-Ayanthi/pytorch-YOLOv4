@@ -562,34 +562,32 @@ if __name__ == "__main__":
         print("Number of people detected:", det_count)
             
         gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords.npy', allow_pickle=True)
-#         print("loaded")
-#         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         for k in range(len(gt)): 
             if gt[k][0] == imgname:
 # #                 print(imgname)
-                print(gt[k])
-#                 box = [float(gt[k][1]), float(gt[k][2]), 40, 80]
-#                 box = torch.tensor(box)
-#                 bbox = box_center_to_corner(box)
-# #                 print(bbox)
+                # print(gt[k])
+                box = [float(gt[k][1]), float(gt[k][2]), 40, 80]
+                box = torch.tensor(box)
+                bbox = box_center_to_corner(box)
+#                 print(bbox)
                     
-#                 img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (0,255,0), 1)
-# #                 a.add_patch(bbox_to_rect(bbox, 'red')) 
-#                 print("added")
-#         #         real_count+=1
-#         # print("Number of people in ground truth :", real_count)
+                img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (0,255,0), 1)
+#                 a.add_patch(bbox_to_rect(bbox, 'red')) 
+                # print("added")
+        #         real_count+=1
+        # print("Number of people in ground truth :", real_count)
 
-#         # if real_count == det_count:
-#         #     success+=1
+        # if real_count == det_count:
+        #     success+=1
         
-#         directory = '/home/dissana8/pytorch-YOLOv4/cbox/'+imgname.split('/')[0]
-#         if not os.path.exists(directory):
-#             os.makedirs(directory)
+        directory = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname.split('/')[0]
+        if not os.path.exists(directory):
+            os.makedirs(directory)
         
-#         savename1 = '/home/dissana8/pytorch-YOLOv4/cbox/'+imgname
-#         print(savename1)
-#         cv2.imwrite(savename1, img)
-#         print('saved')
+        savename1 = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname
+        # print(savename1)
+        cv2.imwrite(savename1, img)
+        # print('saved')
 #         
             
         
