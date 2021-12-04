@@ -566,7 +566,7 @@ if __name__ == "__main__":
             if gt[k][0] == imgname:
 # #                 print(imgname)
                 # print(gt[k])
-                box = [float(gt[k][1]), float(gt[k][2]), 40, 80]
+                box = [float(gt[k][2]), float(gt[k][3]), 40, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
 #                 print(bbox)
