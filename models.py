@@ -455,6 +455,134 @@ class Yolov4(nn.Module):
         output = self.head(x20, x13, x6)
         return output
 
+
+def custom_bbox(gt_coords, imgname):
+    for k in range(len(gt_coords)): 
+            if gt_coords[k][0] == imgname:
+                box = [float(gt_coords[k][2]), float(gt_coords[k][3]), 40, 80]
+                box = torch.tensor(box)
+                bbox = box_center_to_corner(box)
+                    
+                img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (0,255,0), 1)
+    return imgname
+
+
+def findClosest(time, camera_time_list):
+    val = min(camera_time_list, key=lambda x: abs(x - time))
+    return camera_time_list.index(val)
+
+def extract_frames(path,file_name, model, class_names, width, height):
+    #===== process the index files of camera 1 ======#
+    with open('/home/dissana8/LAB/Visor/cam1/index.dmp') as f:
+        content = f.readlines()
+    cam_content = [x.strip() for x in content]
+    c1_frames = []
+    c1_times = []
+    for line in cam_content:
+        s = line.split(" ")
+        frame = s[0]
+        time = float(s[1]+'.'+s[2])
+        c1_frames.append(frame)
+        c1_times.append(time)
+
+    with open('/home/dissana8/LAB/Visor/cam2/index.dmp') as f:
+        content = f.readlines()
+
+    cam_content = [x.strip() for x in content]
+    c2_frames = []
+    c2_times = []
+    for line in cam_content:
+        s = line.split(" ")
+        frame = s[0]
+        time = float(s[1]+'.'+s[2])
+        c2_frames.append(frame)
+        c2_times.append(time)
+    
+
+    # ===== process the index files of camera 3 ======#
+    with open('/home/dissana8/LAB/Visor/cam3/index.dmp') as f:
+        content = f.readlines()
+
+    cam_content = [x.strip() for x in content]
+    c3_frames = []
+    c3_times = []
+    for line in cam_content:
+        s = line.split(" ")
+        frame = s[0]
+        time = float(s[1] + '.' + s[2])
+        c3_frames.append(frame)
+        c3_times.append(time)
+    
+
+    # ===== process the index files of camera 4 ======#
+    with open('/home/dissana8/LAB/Visor/cam4/index.dmp') as f:
+        content = f.readlines()
+
+    cam_content = [x.strip() for x in content]
+    c4_frames = []
+    c4_times = []
+    for line in cam_content:
+        s = line.split(" ")
+        frame = s[0]
+        time = float(s[1] + '.' + s[2])
+        c4_frames.append(frame)
+        c4_times.append(time)
+      
+    #===== process the GT annotations  =======#
+    with open("/home/dissana8/LAB/"+file_name) as f:
+        content = f.readlines()
+        
+
+    content = [x.strip() for x in content]
+    counter = -1
+    print('Extracting GT annotation ...')
+    for line in content:
+        counter += 1
+        s = line.split(" ")
+        
+        time = float(s[0])
+        frame_idx = findClosest(time, c1_times) # we have to map the time to frame number
+        c1_frame_no = c1_frames[frame_idx]
+        
+
+        frame_idx = findClosest(time, c2_times)  # we have to map the time to frame number
+        c2_frame_no = c2_frames[frame_idx]
+        
+
+        frame_idx = findClosest(time, c3_times)  # we have to map the time to frame number
+        c3_frame_no = c3_frames[frame_idx]
+
+        
+        frame_idx = findClosest(time, c4_times)  # we have to map the time to frame number
+        c4_frame_no = c4_frames[frame_idx]
+
+        cam1_img = '/home/dissana8/LAB/Visor/cam1/'+c1_frame_no
+        cam2_img = '/home/dissana8/LAB/Visor/cam2/'+c2_frame_no
+        cam3_img = '/home/dissana8/LAB/Visor/cam3/'+c3_frame_no
+        cam4_img = '/home/dissana8/LAB/Visor/cam4/'+c4_frame_no
+
+        f, axs = plt.subplots(1, 4, figsize=(15, 4))
+
+        for i in range(4):
+            img = cv2.imread(cam{0}_img.format(i))
+            sized = cv2.resize(img, (width, height))
+            sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+
+            for j in range(2):  # This 'for' loop is for speed check
+                        # Because the first iteration is usually longer
+            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+
+            img, det_count = plot_boxes_cv2(img, boxes[0], savename, class_names)
+
+            image = custom_bbox(gt{0}.format(i), img)
+            ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)).format(i)
+
+            plt.savefig("/home/dissana8/LAB/out{0}.jpg".format(i))
+            ax[i].cla()
+
+        break
+
+
 def box_center_to_corner(boxes):
     """Convert from (center, width, height) to (upper-left, lower-right)."""
     cx, cy, w, h = boxes[0], boxes[1], boxes[2], boxes[3]
@@ -509,21 +637,42 @@ if __name__ == "__main__":
     if use_cuda:
         model.cuda()
 
-    root = "/home/dissana8/LAB/Visor/cam1"
-    files=[]
-    pattern = "*.jpg"
-    success = 0
+    path = "~/LAB/"
+    file_name = 'LAB-GROUNDTRUTH.ref'
 
-    f = open("cam2_paths.txt", "a")
-    for path, subdirs, files in os.walk(root):
-        for name in files:
-            if fnmatch(name, pattern):
-                f.write(os.path.join(path, name)+"\n")
-    f.close()
+    if namesfile == None:
+            if n_classes == 20:
+                namesfile = '/home/dissana8/pytorch-YOLOv4/data/voc.names'
+            elif n_classes == 80:
+                namesfile = '/home/dissana8/pytorch-YOLOv4/data/coco.names'
+            else:
+                print("please give namefile")
+
+    class_names = load_class_names(namesfile)
+
+    gt1= np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True)
+    gt2= np.load('/home/dissana8/LAB/data/LAB/cam2_coords__.npy', allow_pickle=True)
+    gt3= np.load('/home/dissana8/LAB/data/LAB/cam3_coords__.npy', allow_pickle=True)
+    gt4= np.load('/home/dissana8/LAB/data/LAB/cam4_coords__.npy', allow_pickle=True)
+
+    fig, a = plt.subplots(4, 1)
+    extract_frames(path, filename, model, class_names, width, height, gt1, gt2, gt3, gt4)
+
+    # root = "/home/dissana8/LAB/Visor/cam1"
+    # files=[]
+    # pattern = "*.jpg"
+    # success = 0
+
+    # f = open("cam2_paths.txt", "a")
+    # for path, subdirs, files in os.walk(root):
+    #     for name in files:
+    #         if fnmatch(name, pattern):
+    #             f.write(os.path.join(path, name)+"\n")
+    # f.close()
 
     # #f = open("cam1_paths.txt", "r")
     # f = open("sample_cam1.txt", "r")
-    # fig, a = plt.subplots(1,1)
+    # fig, a = plt.subplots(4, 1)
     # files = f.readlines()
     # for i in range(len(files)):
     #     imgfile = files[i].strip('\n')
@@ -543,36 +692,28 @@ if __name__ == "__main__":
     #                     # Because the first iteration is usually longer
     #         boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-    #     if namesfile == None:
-    #         if n_classes == 20:
-    #             namesfile = '/home/dissana8/pytorch-YOLOv4/data/voc.names'
-    #         elif n_classes == 80:
-    #             namesfile = '/home/dissana8/pytorch-YOLOv4/data/coco.names'
-    #         else:
-    #             print("please give namefile")
+        
 
-    #     class_names = load_class_names(namesfile)
-
-    #     imgfile = imgfile.split('/')[6:]
-    #     imgname = '/'.join(imgfile)
-    #     savename = '/home/dissana8/pytorch-YOLOv4/output/'+imgname
-    #     print(savename)
-    #     img, det_count = plot_boxes_cv2(img, boxes[0], savename, class_names)
-    #     print("Number of people detected:", det_count)
+        # imgfile = imgfile.split('/')[6:]
+        # imgname = '/'.join(imgfile)
+        # savename = '/home/dissana8/pytorch-YOLOv4/output/'+imgname
+        # print(savename)
+        # img, det_count = plot_boxes_cv2(img, boxes[0], savename, class_names)
+        # print("Number of people detected:", det_count)
             
-    #     gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True)
-    #     for k in range(len(gt)): 
-    #         if gt[k][0] == imgname:
-    #             box = [float(gt[k][2]), float(gt[k][3]), 40, 80]
-    #             box = torch.tensor(box)
-    #             bbox = box_center_to_corner(box)
+
+        # for k in range(len(gt)): 
+        #     if gt[k][0] == imgname:
+        #         box = [float(gt[k][2]), float(gt[k][3]), 40, 80]
+        #         box = torch.tensor(box)
+        #         bbox = box_center_to_corner(box)
                     
-    #             img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (0,255,0), 1)
+        #         img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (0,255,0), 1)
         
-    #     directory = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname.split('/')[0]
-    #     if not os.path.exists(directory):
-    #         os.makedirs(directory)
+        # directory = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname.split('/')[0]
+        # if not os.path.exists(directory):
+        #     os.makedirs(directory)
         
-    #     savename1 = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname
-    #     cv2.imwrite(savename1, img)
+        # savename1 = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname
+        # cv2.imwrite(savename1, img)
 
