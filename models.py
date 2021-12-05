@@ -514,93 +514,65 @@ if __name__ == "__main__":
     pattern = "*.jpg"
     success = 0
 
-    f = open("cam1_paths.txt", "a")
+    f = open("cam2_paths.txt", "a")
     for path, subdirs, files in os.walk(root):
         for name in files:
             if fnmatch(name, pattern):
                 f.write(os.path.join(path, name)+"\n")
     f.close()
 
-    #f = open("cam1_paths.txt", "r")
-    f = open("sample_cam1.txt", "r")
-    fig, a = plt.subplots(1,1)
-    files = f.readlines()
-    for i in range(len(files)):
-        imgfile = files[i].strip('\n')
-        img = cv2.imread(imgfile)
+    # #f = open("cam1_paths.txt", "r")
+    # f = open("sample_cam1.txt", "r")
+    # fig, a = plt.subplots(1,1)
+    # files = f.readlines()
+    # for i in range(len(files)):
+    #     imgfile = files[i].strip('\n')
+    #     img = cv2.imread(imgfile)
 
-    # Inference input size is 416*416 does not mean training size is the same
-    # Training size could be 608*608 or even other sizes
-    # Optional inference sizes:
-    #   Hight in {320, 416, 512, 608, ... 320 + 96 * n}
-    #   Width in {320, 416, 512, 608, ... 320 + 96 * m}
-        sized = cv2.resize(img, (width, height))
-        sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+    # # Inference input size is 416*416 does not mean training size is the same
+    # # Training size could be 608*608 or even other sizes
+    # # Optional inference sizes:
+    # #   Hight in {320, 416, 512, 608, ... 320 + 96 * n}
+    # #   Width in {320, 416, 512, 608, ... 320 + 96 * m}
+    #     sized = cv2.resize(img, (width, height))
+    #     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
     
 
-        for j in range(2):  # This 'for' loop is for speed check
-                        # Because the first iteration is usually longer
-            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+    #     for j in range(2):  # This 'for' loop is for speed check
+    #                     # Because the first iteration is usually longer
+    #         boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-        if namesfile == None:
-            if n_classes == 20:
-                namesfile = '/home/dissana8/pytorch-YOLOv4/data/voc.names'
-            elif n_classes == 80:
-                namesfile = '/home/dissana8/pytorch-YOLOv4/data/coco.names'
-            else:
-                print("please give namefile")
+    #     if namesfile == None:
+    #         if n_classes == 20:
+    #             namesfile = '/home/dissana8/pytorch-YOLOv4/data/voc.names'
+    #         elif n_classes == 80:
+    #             namesfile = '/home/dissana8/pytorch-YOLOv4/data/coco.names'
+    #         else:
+    #             print("please give namefile")
 
-        class_names = load_class_names(namesfile)
+    #     class_names = load_class_names(namesfile)
 
-        # real_count=0
-        imgfile = imgfile.split('/')[6:]
-        imgname = '/'.join(imgfile)
-        savename = '/home/dissana8/pytorch-YOLOv4/output/'+imgname
-        print(savename)
-        img, det_count = plot_boxes_cv2(img, boxes[0], savename, class_names)
-        print("Number of people detected:", det_count)
+    #     imgfile = imgfile.split('/')[6:]
+    #     imgname = '/'.join(imgfile)
+    #     savename = '/home/dissana8/pytorch-YOLOv4/output/'+imgname
+    #     print(savename)
+    #     img, det_count = plot_boxes_cv2(img, boxes[0], savename, class_names)
+    #     print("Number of people detected:", det_count)
             
-        gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True)
-        for k in range(len(gt)): 
-            if gt[k][0] == imgname:
-# #                 print(imgname)
-                # print(gt[k])
-                box = [float(gt[k][2]), float(gt[k][3]), 40, 80]
-                box = torch.tensor(box)
-                bbox = box_center_to_corner(box)
-#                 print(bbox)
+    #     gt= np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True)
+    #     for k in range(len(gt)): 
+    #         if gt[k][0] == imgname:
+    #             box = [float(gt[k][2]), float(gt[k][3]), 40, 80]
+    #             box = torch.tensor(box)
+    #             bbox = box_center_to_corner(box)
                     
-                img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (0,255,0), 1)
-#                 a.add_patch(bbox_to_rect(bbox, 'red')) 
-                # print("added")
-        #         real_count+=1
-        # print("Number of people in ground truth :", real_count)
+    #             img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (0,255,0), 1)
+        
+    #     directory = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname.split('/')[0]
+    #     if not os.path.exists(directory):
+    #         os.makedirs(directory)
+        
+    #     savename1 = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname
+    #     cv2.imwrite(savename1, img)
 
-        # if real_count == det_count:
-        #     success+=1
-        
-        directory = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname.split('/')[0]
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-        
-        savename1 = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname
-        # print(savename1)
-        cv2.imwrite(savename1, img)
-        # print('saved')
-#         
-            
-        
-        
-#         plt.axis("off")
-#         plt.savefig("/home/dissana8/pytorch-YOLOv4/output/"+imgname)
-#         plt.show()
-        
-        
-
-
-           
-    
-# print(success)
-# success_rate = (success/100)*100
-# print(success_rate)
