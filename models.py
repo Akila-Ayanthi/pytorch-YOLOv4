@@ -581,7 +581,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             img, det_count = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
             image = custom_bbox("gt{0}".format(i), img)
-            ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)).format(i)
+            ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
         plt.savefig("/home/dissana8/LAB/out{0}.jpg".format(i))
         ax1.cla()
