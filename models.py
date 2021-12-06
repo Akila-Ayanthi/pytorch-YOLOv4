@@ -559,7 +559,7 @@ def extract_frames(path,file_name, model, class_names, width, height, gt1, gt2, 
         cam = []
 
         cam.append('/home/dissana8/LAB/Visor/cam1/'+c1_frame_no)
-        cam.appned('/home/dissana8/LAB/Visor/cam2/'+c2_frame_no)
+        cam.append('/home/dissana8/LAB/Visor/cam2/'+c2_frame_no)
         cam.append('/home/dissana8/LAB/Visor/cam3/'+c3_frame_no)
         cam.append('/home/dissana8/LAB/Visor/cam4/'+c4_frame_no)
 
