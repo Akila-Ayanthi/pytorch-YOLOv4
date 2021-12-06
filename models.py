@@ -563,7 +563,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         cam.append('/home/dissana8/LAB/Visor/cam3/'+c3_frame_no)
         cam.append('/home/dissana8/LAB/Visor/cam4/'+c4_frame_no)
 
-        f, axs = plt.subplots(1, 4, figsize=(15, 4))
+        f, ax = plt.subplots(1, 4, figsize=(15, 4))
 
         for i in range(4):
             img = cv2.imread(cam[i])
