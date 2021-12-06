@@ -466,7 +466,7 @@ def custom_bbox(gt_coords, img, imgname):
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
                     
-                img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (255,0, 0), 2)
+                img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (0, 0, 255), 2)
     return img
 
 
@@ -568,7 +568,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             cam.append('/home/dissana8/LAB/Visor/cam3/'+c3_frame_no)
             cam.append('/home/dissana8/LAB/Visor/cam4/'+c4_frame_no)
 
-            f, ax = plt.subplots(1, 4, figsize=(15, 4))
+            f, ax = plt.subplots(1, 4, figsize=(25, 4))
 
             for i in range(4):
                 img = cv2.imread(cam[i])
