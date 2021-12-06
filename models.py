@@ -584,7 +584,12 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 image = custom_bbox("gt{0}".format(i), img)
                 ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-            plt.savefig("/home/dissana8/LAB/custom_bbox/"+c1_frame_no)
+            savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
+
+            if not os.path.exists(savepath):
+                os.makedirs(savepath)
+
+            plt.savefig(savepath+c1_frame_no)
             ax[0].cla()
             ax[1].cla()
             ax[2].cla()
