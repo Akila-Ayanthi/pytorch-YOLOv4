@@ -462,7 +462,7 @@ def custom_bbox(gt_coords, img, imgname):
                 print(gt_coords[k])
                 print(gt_coords[k][2])
                 print(imgname)
-                box = [float(gt_coords[k][2]), float(gt_coords[k][3]), 40, 80]
+                box = [float(gt_coords[k][2]), float(gt_coords[k][3]), 60, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
                     
