@@ -541,7 +541,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     print('Extracting GT annotation ...')
     for line in content:
         counter += 1
-        if counter % 1000 == 0:
+        if counter % 100 == 0:
             print(counter)
             s = line.split(" ")
             
