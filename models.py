@@ -659,7 +659,7 @@ if __name__ == "__main__":
     gt4= np.load('/home/dissana8/LAB/data/LAB/cam4_coords__.npy', allow_pickle=True)
 
     fig, a = plt.subplots(4, 1)
-    extract_frames(path, filename, model, class_names, width, height, gt1, gt2, gt3, gt4)
+    extract_frames(path, file_name, model, class_names, width, height, gt1, gt2, gt3, gt4)
 
     # root = "/home/dissana8/LAB/Visor/cam1"
     # files=[]
