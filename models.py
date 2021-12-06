@@ -459,7 +459,7 @@ class Yolov4(nn.Module):
 def custom_bbox(gt_coords, imgname):
     for k in range(len(gt_coords)): 
             if gt_coords[k][0] == imgname:
-                box = [float(gt_coords[k][2]), float(gt_coords[k][3]), 40, 80]
+                box = [float(gt_coords[k][1]), float(gt_coords[k][2]), 40, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
                     
