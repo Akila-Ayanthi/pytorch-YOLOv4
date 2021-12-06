@@ -589,7 +589,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             if not os.path.exists(savepath):
                 os.makedirs(savepath)
 
-            plt.savefig(savepath+c1_frame_no)
+            plt.savefig(savepath+c1_frame_no.split('/')[-1])
             ax[0].cla()
             ax[1].cla()
             ax[2].cla()
