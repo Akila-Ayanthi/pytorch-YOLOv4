@@ -471,7 +471,7 @@ def findClosest(time, camera_time_list):
     val = min(camera_time_list, key=lambda x: abs(x - time))
     return camera_time_list.index(val)
 
-def extract_frames(path,file_name, model, class_names, savename, width, height, gt1, gt2, gt3, gt4):
+def extract_frames(path,file_name, model, class_names, width, height, savename, gt1, gt2, gt3, gt4):
     #===== process the index files of camera 1 ======#
     with open('/home/dissana8/LAB/Visor/cam1/index.dmp') as f:
         content = f.readlines()
