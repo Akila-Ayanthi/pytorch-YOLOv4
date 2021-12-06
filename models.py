@@ -471,7 +471,7 @@ def findClosest(time, camera_time_list):
     val = min(camera_time_list, key=lambda x: abs(x - time))
     return camera_time_list.index(val)
 
-def extract_frames(path,file_name, model, class_names, width, height, savename, gt1, gt2, gt3, gt4):
+def extract_frames(path,file_name, model, class_names, width, height, savename, gt):
     #===== process the index files of camera 1 ======#
     with open('/home/dissana8/LAB/Visor/cam1/index.dmp') as f:
         content = f.readlines()
@@ -582,7 +582,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
                 img, det_count = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
-                image = custom_bbox("gt{0}".format(i), img)
+                image = custom_bbox(gt[i], img)
                 ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
             savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
@@ -668,13 +668,15 @@ if __name__ == "__main__":
 
     savename = '/home/dissana8/pytorch-YOLOv4/output/'
 
-    gt1= np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True)
-    gt2= np.load('/home/dissana8/LAB/data/LAB/cam2_coords__.npy', allow_pickle=True)
-    gt3= np.load('/home/dissana8/LAB/data/LAB/cam3_coords__.npy', allow_pickle=True)
-    gt4= np.load('/home/dissana8/LAB/data/LAB/cam4_coords__.npy', allow_pickle=True)
+
+    gt = []
+    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True))
+    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam2_coords__.npy', allow_pickle=True))
+    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam3_coords__.npy', allow_pickle=True))
+    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam4_coords__.npy', allow_pickle=True))
 
     fig, a = plt.subplots(4, 1)
-    extract_frames(path, file_name, model, class_names, width, height, savename, gt1, gt2, gt3, gt4)
+    extract_frames(path, file_name, model, class_names, width, height, savename, gt)
 
     # root = "/home/dissana8/LAB/Visor/cam1"
     # files=[]
