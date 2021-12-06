@@ -564,7 +564,7 @@ def extract_frames(path,file_name, model, class_names, width, height):
         f, axs = plt.subplots(1, 4, figsize=(15, 4))
 
         for i in range(4):
-            img = cv2.imread(cam{0}_img.format(i))
+            img = cv2.imread("cam{0}_img".format(i))
             sized = cv2.resize(img, (width, height))
             sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
@@ -577,8 +577,11 @@ def extract_frames(path,file_name, model, class_names, width, height):
             image = custom_bbox(gt{0}.format(i), img)
             ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB)).format(i)
 
-            plt.savefig("/home/dissana8/LAB/out{0}.jpg".format(i))
-            ax[i].cla()
+        plt.savefig("/home/dissana8/LAB/out{0}.jpg".format(i))
+        ax1.cla()
+        ax2.cla()
+        ax3.cla()
+        ax4.cla()
 
         break
 
