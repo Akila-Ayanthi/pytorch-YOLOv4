@@ -456,7 +456,7 @@ class Yolov4(nn.Module):
         return output
 
 
-def custom_bbox(gt_coords, imgname):
+def custom_bbox(gt_coords, img, imgname):
     for k in range(len(gt_coords)): 
             if gt_coords[k][0] == imgname:
                 print(gt_coords[k])
@@ -584,7 +584,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
                 img, det_count = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
-                image = custom_bbox(gt[i], img)
+                image = custom_bbox(gt[i], img, imgname)
                 print("done")
             #     ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
