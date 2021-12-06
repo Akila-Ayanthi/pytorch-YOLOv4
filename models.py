@@ -538,58 +538,59 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     print('Extracting GT annotation ...')
     for line in content:
         counter += 1
-        s = line.split(" ")
-        
-        time = float(s[0])
-        frame_idx = findClosest(time, c1_times) # we have to map the time to frame number
-        c1_frame_no = c1_frames[frame_idx]
-        
+        if counter % 100:
+            s = line.split(" ")
+            
+            time = float(s[0])
+            frame_idx = findClosest(time, c1_times) # we have to map the time to frame number
+            c1_frame_no = c1_frames[frame_idx]
+            
 
-        frame_idx = findClosest(time, c2_times)  # we have to map the time to frame number
-        c2_frame_no = c2_frames[frame_idx]
-        
+            frame_idx = findClosest(time, c2_times)  # we have to map the time to frame number
+            c2_frame_no = c2_frames[frame_idx]
+            
 
-        frame_idx = findClosest(time, c3_times)  # we have to map the time to frame number
-        c3_frame_no = c3_frames[frame_idx]
+            frame_idx = findClosest(time, c3_times)  # we have to map the time to frame number
+            c3_frame_no = c3_frames[frame_idx]
 
-        
-        frame_idx = findClosest(time, c4_times)  # we have to map the time to frame number
-        c4_frame_no = c4_frames[frame_idx]
+            
+            frame_idx = findClosest(time, c4_times)  # we have to map the time to frame number
+            c4_frame_no = c4_frames[frame_idx]
 
-        cam = []
+            cam = []
 
-        cam.append('/home/dissana8/LAB/Visor/cam1/'+c1_frame_no)
-        cam.append('/home/dissana8/LAB/Visor/cam2/'+c2_frame_no)
-        cam.append('/home/dissana8/LAB/Visor/cam3/'+c3_frame_no)
-        cam.append('/home/dissana8/LAB/Visor/cam4/'+c4_frame_no)
+            cam.append('/home/dissana8/LAB/Visor/cam1/'+c1_frame_no)
+            cam.append('/home/dissana8/LAB/Visor/cam2/'+c2_frame_no)
+            cam.append('/home/dissana8/LAB/Visor/cam3/'+c3_frame_no)
+            cam.append('/home/dissana8/LAB/Visor/cam4/'+c4_frame_no)
 
-        f, ax = plt.subplots(1, 4, figsize=(15, 4))
+            f, ax = plt.subplots(1, 4, figsize=(15, 4))
 
-        for i in range(4):
-            img = cv2.imread(cam[i])
-            sized = cv2.resize(img, (width, height))
-            sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+            for i in range(4):
+                img = cv2.imread(cam[i])
+                sized = cv2.resize(img, (width, height))
+                sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-            for j in range(2):  # This 'for' loop is for speed check
-                        # Because the first iteration is usually longer
-                boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+                for j in range(2):  # This 'for' loop is for speed check
+                            # Because the first iteration is usually longer
+                    boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-            imgfile = cam[i].split('/')[6:]
-            imgname = '/'.join(imgfile)
-            sname = savename + imgname
+                imgfile = cam[i].split('/')[6:]
+                imgname = '/'.join(imgfile)
+                sname = savename + imgname
 
-            img, det_count = plot_boxes_cv2(img, boxes[0], sname, class_names)
+                img, det_count = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
-            image = custom_bbox("gt{0}".format(i), img)
-            ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+                image = custom_bbox("gt{0}".format(i), img)
+                ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-        plt.savefig("/home/dissana8/LAB/out{0}.jpg".format(i))
-        ax[0].cla()
-        ax[1].cla()
-        ax[2].cla()
-        ax[3].cla()
+            plt.savefig("/home/dissana8/LAB/custom_bbox/"+c1_frame_no)
+            ax[0].cla()
+            ax[1].cla()
+            ax[2].cla()
+            ax[3].cla()
 
-        break
+        # break
 
 
 def box_center_to_corner(boxes):
