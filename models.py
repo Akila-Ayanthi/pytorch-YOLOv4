@@ -459,8 +459,8 @@ class Yolov4(nn.Module):
 def custom_bbox(gt_coords, img, imgname):
     for k in range(len(gt_coords)): 
             if gt_coords[k][0] == imgname:
-                print(gt_coords[k])
-                print(imgname)
+                # print(gt_coords[k])
+                # print(imgname)
                 box = [float(gt_coords[k][1]), float(gt_coords[k][2]), 40, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
@@ -585,19 +585,18 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 img, det_count = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
                 image = custom_bbox(gt[i], img, imgname)
-                print("done")
-            #     ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+                ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-            # savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
+            savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
 
-            # if not os.path.exists(savepath):
-            #     os.makedirs(savepath)
+            if not os.path.exists(savepath):
+                os.makedirs(savepath)
 
-            # plt.savefig(savepath+"/"+c1_frame_no.split('/')[-1])
-            # ax[0].cla()
-            # ax[1].cla()
-            # ax[2].cla()
-            # ax[3].cla()
+            plt.savefig(savepath+"/"+c1_frame_no.split('/')[-1])
+            ax[0].cla()
+            ax[1].cla()
+            ax[2].cla()
+            ax[3].cla()
 
         # break
 
