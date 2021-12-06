@@ -556,15 +556,17 @@ def extract_frames(path,file_name, model, class_names, width, height, gt1, gt2, 
         frame_idx = findClosest(time, c4_times)  # we have to map the time to frame number
         c4_frame_no = c4_frames[frame_idx]
 
-        cam1_img = '/home/dissana8/LAB/Visor/cam1/'+c1_frame_no
-        cam2_img = '/home/dissana8/LAB/Visor/cam2/'+c2_frame_no
-        cam3_img = '/home/dissana8/LAB/Visor/cam3/'+c3_frame_no
-        cam4_img = '/home/dissana8/LAB/Visor/cam4/'+c4_frame_no
+        cam = []
+
+        cam[0] = '/home/dissana8/LAB/Visor/cam1/'+c1_frame_no
+        cam[1] = '/home/dissana8/LAB/Visor/cam2/'+c2_frame_no
+        cam[2] = '/home/dissana8/LAB/Visor/cam3/'+c3_frame_no
+        cam[3] = '/home/dissana8/LAB/Visor/cam4/'+c4_frame_no
 
         f, axs = plt.subplots(1, 4, figsize=(15, 4))
 
         for i in range(4):
-            img = cv2.imread("cam{0}_img".format(i))
+            img = cv2.imread(cam[i])
             sized = cv2.resize(img, (width, height))
             sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
