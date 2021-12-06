@@ -466,7 +466,7 @@ def custom_bbox(gt_coords, img, imgname):
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
                     
-                img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (0,255,0), 1)
+                img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (255,0, 0), 2)
     return img
 
 
