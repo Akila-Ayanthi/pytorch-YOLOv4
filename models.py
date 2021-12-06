@@ -467,7 +467,7 @@ def custom_bbox(gt_coords, img, imgname):
                 bbox = box_center_to_corner(box)
                     
                 img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (0,255,0), 1)
-    return imgname
+    return img
 
 
 def findClosest(time, camera_time_list):
