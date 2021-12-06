@@ -584,10 +584,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
         plt.savefig("/home/dissana8/LAB/out{0}.jpg".format(i))
-        ax1.cla()
-        ax2.cla()
-        ax3.cla()
-        ax4.cla()
+        ax.cla()
+        # ax2.cla()
+        # ax3.cla()
+        # ax4.cla()
 
         break
 
