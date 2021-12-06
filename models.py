@@ -640,7 +640,7 @@ if __name__ == "__main__":
     if use_cuda:
         model.cuda()
 
-    path = "~/LAB/"
+    path = "/home/dissana8/LAB/"
     file_name = 'LAB-GROUNDTRUTH.ref'
 
     if namesfile == None:
