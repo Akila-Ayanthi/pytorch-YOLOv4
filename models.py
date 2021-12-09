@@ -548,14 +548,14 @@ def batch_iou(a, b, epsilon=1e-5):
 
     """
 
-    print(a)
-    print("b")
-    print(b)
+    print(a[:, 0])
+    # print("b")
+    # print(b)
     # COORDINATES OF THE INTERSECTION BOXES
-    x1 = np.array([a[0], b[0]]).max(axis=0)
-    y1 = np.array([a[1], b[1]]).max(axis=0)
-    x2 = np.array([a[2], b[2]]).min(axis=0)
-    y2 = np.array([a[3], b[3]]).min(axis=0)
+    x1 = np.array([a[:, 0], b[:, 0]]).max(axis=0)
+    y1 = np.array([a[:, 1], b[:, 1]]).max(axis=0)
+    x2 = np.array([a[:, 2], b[:, 2]]).min(axis=0)
+    y2 = np.array([a[:, 3], b[:, 3]]).min(axis=0)
 
     # AREAS OF OVERLAP - Area where the boxes intersect
     width = (x2 - x1)
