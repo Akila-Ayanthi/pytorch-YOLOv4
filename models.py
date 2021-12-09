@@ -494,6 +494,7 @@ def get_iou(a, b, epsilon=1e-5):
     """
 
     iou_list = []
+    iou_l=[]
     iou = 0.0
     bj = b[0]
 
@@ -517,7 +518,7 @@ def get_iou(a, b, epsilon=1e-5):
             # print(height)
             # handle case where there is NO overlap
             if (width<0) or (height <0):
-                n_iou = 0.0
+                iou = 0.0
             area_overlap = width * height
 
         # COMBINED AREA
@@ -526,12 +527,15 @@ def get_iou(a, b, epsilon=1e-5):
             area_combined = area_a + area_b - area_overlap
 
             # RATIO OF AREA OF OVERLAP OVER COMBINED AREA
-            n_iou = area_overlap / (area_combined+epsilon)
-            if n_iou >= iou:
-                iou = n_iou
+            iou = area_overlap / (area_combined+epsilon)
+            # if n_iou >= iou:
+            #     iou = n_iou
             #     print("greater")
             #     # bj = b[j]
-        iou_list.append([a[i], b[j], iou])        
+            iou_l.append([a[i], b[j], iou])  
+
+        max_iou = max(iou_list[2] for l in iou_list )
+        iou_list.appen([a[i], max_iou])
             
     return iou_list
         
