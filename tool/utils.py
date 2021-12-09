@@ -121,6 +121,7 @@ def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
 
         bbox_coords = [x1, y1, x2, y2]
 
+        print("bbox_coords")
         print(bbox_coords)
         if color:
             rgb = color
