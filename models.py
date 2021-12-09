@@ -711,7 +711,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
                     for k in range(len(iou)):
                         print(iou[k][1][0], iou[k][1][1])
-                        img = cv2.putText(img, iou[k][2], (iou[k][1][0], iou[k][1][1]), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 1)
+                        img = cv2.putText(img, str(iou[k][2]), (iou[k][1][0], iou[k][1][1]), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 1)
 
                     print("iou")
                     print(iou)
