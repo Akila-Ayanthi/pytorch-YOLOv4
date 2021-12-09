@@ -545,7 +545,12 @@ def batch_iou(a, b, epsilon=1e-5):
     Returns:
         (numpy array) The Intersect of Union scores for each pair of bounding
         boxes.
+
     """
+
+    print(a)
+    print("b")
+    print(b)
     # COORDINATES OF THE INTERSECTION BOXES
     x1 = np.array([a[:, 0], b[:, 0]]).max(axis=0)
     y1 = np.array([a[:, 1], b[:, 1]]).max(axis=0)
