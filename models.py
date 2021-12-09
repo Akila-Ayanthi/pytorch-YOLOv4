@@ -497,7 +497,12 @@ def get_iou(a, b, epsilon=1e-5):
     print(len(b))
     iou = 0.0
 
-    for i in range(len(b)):
+    if len(a) > len(b):
+        arr = a
+    else:
+        arr = b
+
+    for i in range(len(arr)):
     # COORDINATES OF THE INTERSECTION BOX
         x1 = max(a[i][0], b[i][0])
         y1 = max(a[i][1], b[i][1])
