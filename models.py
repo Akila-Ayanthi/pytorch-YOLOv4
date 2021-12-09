@@ -495,11 +495,13 @@ def get_iou(a, b, epsilon=1e-5):
 
     iou_list = []
     iou = 0.0
+    bj = b[0]
 
 
 
     for i in range(len(a)):
         for j in range(len(b)):
+            # bj = b[j]
     # COORDINATES OF THE INTERSECTION BOX
             x1 = max(a[i][0], b[j][0])
             y1 = max(a[i][1], b[j][1])
@@ -525,10 +527,10 @@ def get_iou(a, b, epsilon=1e-5):
 
             # RATIO OF AREA OF OVERLAP OVER COMBINED AREA
             n_iou = area_overlap / (area_combined+epsilon)
-            if iou <= n_iou:
+            if iou < n_iou:
                 iou = n_iou
-                bj = b[j]
-        iou_list.append([a[i], bj, iou])        
+                # bj = b[j]
+        iou_list.append([a[i], iou])        
             
     return iou_list
         
