@@ -708,21 +708,25 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     # mx = torch.min(bbox[0], cbbox[0])
 
                     iou = get_iou(bbox, cbbox)
-                    print("iou")
-                    print(iou)
 
-                # ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+                    for k in range(len(iou)):
+                        img = cv2.putText(img, iou[k][3], (iou[k][1][0], iou[k][1][1]), cv2.FONT_HERSHEY_SIMPLEX, 1.2, rgb, 1)
 
-            # savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
+                    # print("iou")
+                    # print(iou)
 
-            # if not os.path.exists(savepath):
-            #     os.makedirs(savepath)
+                ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-            # plt.savefig(savepath+"/"+c1_frame_no.split('/')[-1])
-            # ax[0].cla()
-            # ax[1].cla()
-            # ax[2].cla()
-            # ax[3].cla()
+            savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
+
+            if not os.path.exists(savepath):
+                os.makedirs(savepath)
+
+            plt.savefig(savepath+"/"+c1_frame_no.split('/')[-1])
+            ax[0].cla()
+            ax[1].cla()
+            ax[2].cla()
+            ax[3].cla()
 
         
 
