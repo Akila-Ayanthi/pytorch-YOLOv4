@@ -493,44 +493,43 @@ def get_iou(a, b, epsilon=1e-5):
         (float) The Intersect of Union score.
     """
 
-    # print(a)
-    print(len(b))
+    iou_list = []
     iou = 0.0
 
-    if len(a) > len(b):
-        arr = b
-    else:
-        arr = a
 
-    for i in range(len(arr)):
+
+    for i in range(len(a)):
+        for j in range(len(b)):
     # COORDINATES OF THE INTERSECTION BOX
-        x1 = max(a[i][0], b[i][0])
-        y1 = max(a[i][1], b[i][1])
-        x2 = min(a[i][2], b[i][2])
-        y2 = min(a[i][3], b[i][3])
+            x1 = max(a[i][0], b[j][0])
+            y1 = max(a[i][1], b[j][1])
+            x2 = min(a[i][2], b[j][2])
+            y2 = min(a[i][3], b[j][3])
 
 
 
     # AREA OF OVERLAP - Area where the boxes intersect
-        width = (x2 - x1)
-        height = (y2 - y1)
-        # print(width)
-        # print(height)
-        # handle case where there is NO overlap
-        if (width<0) or (height <0):
-            iou = 0.0
-        area_overlap = width * height
+            width = (x2 - x1)
+            height = (y2 - y1)
+            # print(width)
+            # print(height)
+            # handle case where there is NO overlap
+            if (width<0) or (height <0):
+                iou = 0.0
+            area_overlap = width * height
 
-    # COMBINED AREA
-        area_a = (a[i][2] - a[i][0]) * (a[i][3] - a[i][1])
-        area_b = (b[i][2] - b[i][0]) * (b[i][3] - b[i][1])
-        area_combined = area_a + area_b - area_overlap
+        # COMBINED AREA
+            area_a = (a[i][2] - a[i][0]) * (a[i][3] - a[i][1])
+            area_b = (b[i][2] - b[i][0]) * (b[i][3] - b[i][1])
+            area_combined = area_a + area_b - area_overlap
 
-        # RATIO OF AREA OF OVERLAP OVER COMBINED AREA
-        n_iou = area_overlap / (area_combined+epsilon)
-        if iou <= n_iou:
-            iou = n_iou
-    return iou
+            # RATIO OF AREA OF OVERLAP OVER COMBINED AREA
+            n_iou = area_overlap / (area_combined+epsilon)
+            if iou <= n_iou:
+                iou = n_iou
+        iou_list.append([a[i], b[j], iou])        
+            
+    return iou_list
         
 
 # def batch_iou(a, b, epsilon=1e-5):
