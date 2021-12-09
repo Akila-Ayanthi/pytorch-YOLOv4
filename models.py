@@ -527,8 +527,9 @@ def get_iou(a, b, epsilon=1e-5):
 
             # RATIO OF AREA OF OVERLAP OVER COMBINED AREA
             n_iou = area_overlap / (area_combined+epsilon)
-            if iou < n_iou:
+            if n_iou >= iou:
                 iou = n_iou
+                print("greater")
                 # bj = b[j]
         iou_list.append([a[i], iou])        
             
