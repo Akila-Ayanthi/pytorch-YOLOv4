@@ -46,6 +46,8 @@ def bbox_ious(boxes1, boxes2, x1y1x2y2=True):
     carea = cw * ch
     carea[mask] = 0
     uarea = area1 + area2 - carea
+    print(carea)
+    print(uarea)
     return carea / uarea
 
 
