@@ -501,9 +501,9 @@ def get_iou(a, b, epsilon=1e-5):
     # y2 = min(a[3], b[3])
 
     x1 = max(a[0], b[0])
-    y1 = min(a[1], b[1])
+    y1 = max(a[1], b[1])
     x2 = min(a[2], b[2])
-    y2 = max(a[3], b[3])
+    y2 = min(a[3], b[3])
 
 
 
@@ -644,28 +644,29 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
                 image, cbbox = custom_bbox(gt[i], img, imgname)
 
+                print(bbox)
 
-                if cbbox:
-                    # cbbox = torch.Tensor(cbbox)
-                    # bbox = torch.Tensor(bbox)
-                    # mx = torch.min(bbox[0], cbbox[0])
+            #     if cbbox:
+            #         # cbbox = torch.Tensor(cbbox)
+            #         # bbox = torch.Tensor(bbox)
+            #         # mx = torch.min(bbox[0], cbbox[0])
 
-                    iou = get_iou(bbox, cbbox)
-                    print("iou")
-                    print(iou)
+            #         iou = get_iou(bbox, cbbox)
+            #         print("iou")
+            #         print(iou)
 
-                ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+            #     ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-            savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
+            # savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
 
-            if not os.path.exists(savepath):
-                os.makedirs(savepath)
+            # if not os.path.exists(savepath):
+            #     os.makedirs(savepath)
 
-            plt.savefig(savepath+"/"+c1_frame_no.split('/')[-1])
-            ax[0].cla()
-            ax[1].cla()
-            ax[2].cla()
-            ax[3].cla()
+            # plt.savefig(savepath+"/"+c1_frame_no.split('/')[-1])
+            # ax[0].cla()
+            # ax[1].cla()
+            # ax[2].cla()
+            # ax[3].cla()
 
         
 
