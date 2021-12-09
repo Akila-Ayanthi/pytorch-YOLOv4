@@ -595,8 +595,8 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
 
                 if cbbox:
-                    print(bbox[0])
-                    print(cbbox[0])
+                    cbbox = torch.Tensor(cbbox)
+                    bbox = torch.Tensor(bbox)
                     mx = torch.min(bbox[0], cbbox[0])
                     print(mx)
 
