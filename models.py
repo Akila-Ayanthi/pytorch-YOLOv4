@@ -598,9 +598,9 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     cbbox = torch.Tensor(cbbox)
                     bbox = torch.Tensor(bbox)
                     mx = torch.min(bbox[0], cbbox[0])
-                    print(mx)
 
                     iou = bbox_ious(bbox, cbbox)
+                    print("iou")
                     print(iou)
 
                 ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
