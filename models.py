@@ -465,9 +465,15 @@ def custom_bbox(gt_coords, img, imgname):
                 box = [float(gt_coords[k][2]), float(gt_coords[k][3]), 50, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
+
+                x1 = int(bbox[0].item())
+                y1 = int(bbox[1].item())
+                x2 = int(bbox[2].item())
+                y2 = int(bbox[3].item())
                     
-                img = cv2.rectangle(img, (int(bbox[0].item()), int(bbox[1].item())), (int(bbox[2].item()), int(bbox[3].item())), (0, 0, 255), 2)
-    return img
+                img = cv2.rectangle(img, x1, y1, x2, y2, (0, 0, 255), 2)
+                bbox_coords = [x1, y1, x2, y2]
+    return img, bbox_coords
 
 
 def findClosest(time, camera_time_list):
@@ -583,9 +589,13 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 imgname = '/'.join(imgfile)
                 sname = savename + imgname
 
-                img, det_count = plot_boxes_cv2(img, boxes[0], sname, class_names)
+                img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
-                image = custom_bbox(gt[i], img, imgname)
+                image, cbbox = custom_bbox(gt[i], img, imgname)
+
+                iou = bbox_ious(bbox, cbbox)
+                print(iou)
+
                 ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
             savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
@@ -599,7 +609,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             ax[2].cla()
             ax[3].cla()
 
-        # break
+        break
 
 
 def box_center_to_corner(boxes):
