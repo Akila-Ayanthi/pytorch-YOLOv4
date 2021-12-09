@@ -23,6 +23,10 @@ def bbox_ious(boxes1, boxes2, x1y1x2y2=True):
         h1 = boxes1[3] - boxes1[1]
         w2 = boxes2[2] - boxes2[0]
         h2 = boxes2[3] - boxes2[1]
+        print(w1)
+        print(h1)
+        print(w2)
+        print(h2)
     else:
         mx = torch.min(boxes1[0] - boxes1[2] / 2.0, boxes2[0] - boxes2[2] / 2.0)
         Mx = torch.max(boxes1[0] + boxes1[2] / 2.0, boxes2[0] + boxes2[2] / 2.0)
