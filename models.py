@@ -593,13 +593,15 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
                 image, cbbox = custom_bbox(gt[i], img, imgname)
 
-                print(bbox[0])
-                print(cbbox[0])
-                mx = torch.min(bbox[0], cbbox[0])
-                print(mx)
 
-                iou = bbox_ious(bbox, cbbox)
-                print(iou)
+                if cbbox:
+                    print(bbox[0])
+                    print(cbbox[0])
+                    mx = torch.min(bbox[0], cbbox[0])
+                    print(mx)
+
+                    iou = bbox_ious(bbox, cbbox)
+                    print(iou)
 
                 ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
