@@ -459,9 +459,6 @@ class Yolov4(nn.Module):
 def custom_bbox(gt_coords, img, imgname):
     for k in range(len(gt_coords)): 
             if gt_coords[k][0] == imgname:
-                print(gt_coords[k])
-                print(gt_coords[k][2])
-                print(imgname)
                 box = [float(gt_coords[k][2]), float(gt_coords[k][3]), 50, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
@@ -470,10 +467,13 @@ def custom_bbox(gt_coords, img, imgname):
                 y1 = int(bbox[1].item())
                 x2 = int(bbox[2].item())
                 y2 = int(bbox[3].item())
+
                     
                 img = cv2.rectangle(img, x1, y1, x2, y2, (0, 0, 255), 2)
-                bbox_coords = [x1, y1, x2, y2]
-    return img, bbox_coords
+                cbbox_coords = [x1, y1, x2, y2]
+
+                print(cbbox_coords)
+    return img, cbbox_coords
 
 
 def findClosest(time, camera_time_list):
