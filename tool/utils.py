@@ -112,6 +112,7 @@ def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
 
     width = img.shape[1]
     height = img.shape[0]
+    bbox_coords=[]
     for i in range(len(boxes)):
         box = boxes[i]
         x1 = int(box[0] * width)
@@ -119,7 +120,9 @@ def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
         x2 = int(box[2] * width)
         y2 = int(box[3] * height)
 
-        bbox_coords = [x1, y1, x2, y2]
+        coords = [x1, y1, x2, y2]
+
+        bbox_coords.append(coords)
 
         if color:
             rgb = color
