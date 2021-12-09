@@ -457,6 +457,7 @@ class Yolov4(nn.Module):
 
 
 def custom_bbox(gt_coords, img, imgname):
+    cbbox_coords = []
     for k in range(len(gt_coords)): 
             if gt_coords[k][0] == imgname:
                 box = [float(gt_coords[k][2]), float(gt_coords[k][3]), 50, 80]
@@ -468,11 +469,10 @@ def custom_bbox(gt_coords, img, imgname):
                 x2 = int(bbox[2].item())
                 y2 = int(bbox[3].item())
 
+                cbbox_coords = [x1, y1, x2, y2]
                     
                 img = cv2.rectangle(img, x1, y1, x2, y2, (0, 0, 255), 2)
-                cbbox_coords = [x1, y1, x2, y2]
-
-                print(cbbox_coords)
+                
     return img, cbbox_coords
 
 
