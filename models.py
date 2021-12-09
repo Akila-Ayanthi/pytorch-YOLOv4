@@ -520,7 +520,7 @@ def get_iou(a, b, epsilon=1e-5):
 
         # COMBINED AREA
             area_a = (a[i][2] - a[i][0]) * (a[i][3] - a[i][1])
-            area_b = (b[i][2] - b[i][0]) * (b[i][3] - b[i][1])
+            area_b = (b[j][2] - b[j][0]) * (b[j][3] - b[j][1])
             area_combined = area_a + area_b - area_overlap
 
             # RATIO OF AREA OF OVERLAP OVER COMBINED AREA
