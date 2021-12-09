@@ -616,7 +616,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             ax[2].cla()
             ax[3].cla()
 
-        break
+        
 
 
 def box_center_to_corner(boxes):
