@@ -493,8 +493,8 @@ def get_iou(a, b, epsilon=1e-5):
         (float) The Intersect of Union score.
     """
 
-    print(a)
-    print(b)
+    # print(a)
+    print(len(b))
     iou = 0.0
 
     for i in range(len(b)):
@@ -698,14 +698,14 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 # print(bbox)
 
                 if cbbox:
-                    print(len(cbbox))
+                    # print(len(cbbox))
                     # cbbox = torch.Tensor(cbbox)
                     # bbox = torch.Tensor(bbox)
                     # mx = torch.min(bbox[0], cbbox[0])
 
-                    # iou = get_iou(bbox, cbbox)
-                    # print("iou")
-                    # print(iou)
+                    iou = get_iou(bbox, cbbox)
+                    print("iou")
+                    print(iou)
 
                 # ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
