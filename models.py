@@ -712,16 +712,13 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 # print(bbox)
 
                 if cbbox:
-                    # print(len(cbbox))
-                    # cbbox = torch.Tensor(cbbox)
-                    # bbox = torch.Tensor(bbox)
-                    # mx = torch.min(bbox[0], cbbox[0])
-
                     iou = get_iou(bbox, cbbox)
+                    print("iou")
                     print(len(iou))
 
                     for k in range(len(iou)):
                         print(str(iou[k][1]))
+                        print("ioukkkkkk")
                         print(iou[k][0][0], iou[k][0][1])
                         # img = cv2.putText(img, str(iou[k][1]), (iou[k][0][0], iou[k][0][1]), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 1)
 
