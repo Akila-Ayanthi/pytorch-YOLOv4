@@ -520,7 +520,7 @@ def get_iou(a, b, epsilon=1e-5):
             # handle case where there is NO overlap
             if (width<0) or (height <0):
                 iou = 0.0
-                iou_l.apppend(iou)
+                iou_l.append(iou)
                 break
             area_overlap = width * height
 
