@@ -530,7 +530,7 @@ def get_iou(a, b, epsilon=1e-5):
             area_combined = area_a + area_b - area_overlap
 
             # RATIO OF AREA OF OVERLAP OVER COMBINED AREA
-            iou_l.apppend(area_overlap / (area_combined+epsilon))
+            iou_l.append(area_overlap / (area_combined+epsilon))
             
 
         max_iou = max(iou_l)
