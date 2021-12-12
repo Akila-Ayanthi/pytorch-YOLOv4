@@ -537,7 +537,7 @@ def get_iou(a, b, epsilon=1e-5):
             # iou_l.append([a[i], b[j], iou])  
 
         # max_iou = max(l[2] for l in iou_l )
-        print("appending"+iou)
+        print("appending"+str(iou))
         iou_list.append([a[i], iou])
             
     return iou_list
