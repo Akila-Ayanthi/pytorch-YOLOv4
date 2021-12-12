@@ -518,7 +518,8 @@ def get_iou(a, b, epsilon=1e-5):
             # print(height)
             # handle case where there is NO overlap
             if (width<0) or (height <0):
-                n_iou = 0.0
+                iou = 0.0
+                break
             area_overlap = width * height
 
         # COMBINED AREA
