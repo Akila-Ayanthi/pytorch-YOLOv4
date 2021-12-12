@@ -534,7 +534,7 @@ def get_iou(a, b, epsilon=1e-5):
             
 
         max_iou = max(iou_l)
-        iou_list.append([b[i], max_iou])
+        iou_list.append([b[i], round(max_iou, 3)])
             
     return iou_list
         
