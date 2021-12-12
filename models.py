@@ -534,7 +534,6 @@ def get_iou(a, b, epsilon=1e-5):
             
 
         max_iou = max(iou_l)
-        print("appending"+str(max_iou))
         iou_list.append([b[i], max_iou])
             
     return iou_list
@@ -661,7 +660,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     print('Extracting GT annotation ...')
     for line in content:
         counter += 1
-        if counter % 100 == 0:
+        if counter % 150 == 0:
             print(counter)
             s = line.split(" ")
             
@@ -715,13 +714,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     print(len(iou))
 
                     for k in range(len(iou)):
-                        print(str(iou[k][1]))
-                        print("ioukkkkkk")
-                        print(iou[k][0][0], iou[k][0][1])
                         img = cv2.putText(img, str(iou[k][1]), (iou[k][0][0], iou[k][0][1]), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-
-                    # print("iou")
-                    # print(iou)
 
                 ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
