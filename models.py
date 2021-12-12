@@ -531,7 +531,7 @@ def get_iou(a, b, epsilon=1e-5):
             n_iou = area_overlap / (area_combined+epsilon)
             if n_iou >= iou:
                 iou = n_iou
-                print(iou)
+                # print(iou)
                 # print("greater")
                 # bj = b[j]
             # iou_l.append([a[i], b[j], iou])  
@@ -718,28 +718,28 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     # mx = torch.min(bbox[0], cbbox[0])
 
                     iou = get_iou(bbox, cbbox)
-                    # print(len(iou))
+                    print(len(iou))
 
                     for k in range(len(iou)):
                         print(str(iou[k][1]))
                         print(iou[k][0][0], iou[k][0][1])
-                        img = cv2.putText(img, str(iou[k][1]), (iou[k][0][0], iou[k][0][1]), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 1)
+                        # img = cv2.putText(img, str(iou[k][1]), (iou[k][0][0], iou[k][0][1]), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 1)
 
                     # print("iou")
                     # print(iou)
 
-                ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+            #     ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-            savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
+            # savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
 
-            if not os.path.exists(savepath):
-                os.makedirs(savepath)
+            # if not os.path.exists(savepath):
+            #     os.makedirs(savepath)
 
-            plt.savefig(savepath+"/"+c1_frame_no.split('/')[-1])
-            ax[0].cla()
-            ax[1].cla()
-            ax[2].cla()
-            ax[3].cla()
+            # plt.savefig(savepath+"/"+c1_frame_no.split('/')[-1])
+            # ax[0].cla()
+            # ax[1].cla()
+            # ax[2].cla()
+            # ax[3].cla()
 
         
 
