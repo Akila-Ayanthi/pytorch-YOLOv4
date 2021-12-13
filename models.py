@@ -9,6 +9,9 @@ import pathlib
 from fnmatch import fnmatch
 import matplotlib.pyplot as plt
 import os
+from __future__ import division
+import scipy.optimize
+import numpy as np
 
 
 
@@ -476,68 +479,68 @@ def custom_bbox(gt_coords, img, imgname):
                 
     return img, cbbox_coords
 
-def get_iou(a, b, epsilon=1e-5):
-    """ Given two boxes `a` and `b` defined as a list of four numbers:
-            [x1,y1,x2,y2]
-        where:
-            x1,y1 represent the upper left corner
-            x2,y2 represent the lower right corner
-        It returns the Intersect of Union score for these two boxes.
+# def get_iou(a, b, epsilon=1e-5):
+#     """ Given two boxes `a` and `b` defined as a list of four numbers:
+#             [x1,y1,x2,y2]
+#         where:
+#             x1,y1 represent the upper left corner
+#             x2,y2 represent the lower right corner
+#         It returns the Intersect of Union score for these two boxes.
 
-    Args:
-        a:          (list of 4 numbers) [x1,y1,x2,y2]
-        b:          (list of 4 numbers) [x1,y1,x2,y2]
-        epsilon:    (float) Small value to prevent division by zero
+#     Args:
+#         a:          (list of 4 numbers) [x1,y1,x2,y2]
+#         b:          (list of 4 numbers) [x1,y1,x2,y2]
+#         epsilon:    (float) Small value to prevent division by zero
 
-    Returns:
-        (float) The Intersect of Union score.
-    """
+#     Returns:
+#         (float) The Intersect of Union score.
+#     """
 
-    iou_list = []
-    # iou = 0.0
-    bj = b[0]
-    n_iou = []
-
-
-
-    for i in range(len(b)):
-        iou_l=[]
-        for j in range(len(a)):
-            # bj = b[j]
-    # COORDINATES OF THE INTERSECTION BOX
-            x1 = max(a[j][0], b[i][0])
-            y1 = max(a[j][1], b[i][1])
-            x2 = min(a[j][2], b[i][2])
-            y2 = min(a[j][3], b[i][3])
+#     iou_list = []
+#     # iou = 0.0
+#     bj = b[0]
+#     n_iou = []
 
 
 
-    # AREA OF OVERLAP - Area where the boxes intersect
-            width = (x2 - x1)
-            height = (y2 - y1)
-            # print(width)
-            # print(height)
-            # handle case where there is NO overlap
-            if (width<0) or (height <0):
-                iou = 0.0
-                iou_l.append(iou)
-                break
-            area_overlap = width * height
+#     for i in range(len(b)):
+#         iou_l=[]
+#         for j in range(len(a)):
+#             # bj = b[j]
+#     # COORDINATES OF THE INTERSECTION BOX
+#             x1 = max(a[j][0], b[i][0])
+#             y1 = max(a[j][1], b[i][1])
+#             x2 = min(a[j][2], b[i][2])
+#             y2 = min(a[j][3], b[i][3])
 
-        # COMBINED AREA
-            area_a = (a[j][2] - a[j][0]) * (a[j][3] - a[j][1])
-            area_b = (b[i][2] - b[i][0]) * (b[i][3] - b[i][1])
-            area_combined = area_a + area_b - area_overlap
 
-            # RATIO OF AREA OF OVERLAP OVER COMBINED AREA
-            iou_l.append(area_overlap / (area_combined+epsilon))
+
+#     # AREA OF OVERLAP - Area where the boxes intersect
+#             width = (x2 - x1)
+#             height = (y2 - y1)
+#             # print(width)
+#             # print(height)
+#             # handle case where there is NO overlap
+#             if (width<0) or (height <0):
+#                 iou = 0.0
+#                 iou_l.append(iou)
+#                 break
+#             area_overlap = width * height
+
+#         # COMBINED AREA
+#             area_a = (a[j][2] - a[j][0]) * (a[j][3] - a[j][1])
+#             area_b = (b[i][2] - b[i][0]) * (b[i][3] - b[i][1])
+#             area_combined = area_a + area_b - area_overlap
+
+#             # RATIO OF AREA OF OVERLAP OVER COMBINED AREA
+#             iou_l.append(area_overlap / (area_combined+epsilon))
             
 
-        max_iou = max(iou_l)
-        # print(max_iou)
-        iou_list.append([b[i], round(max_iou, 3)])
+#         max_iou = max(iou_l)
+#         # print(max_iou)
+#         iou_list.append([b[i], round(max_iou, 3)])
             
-    return iou_list
+#     return iou_list
         
 
 # def batch_iou(a, b, epsilon=1e-5):
@@ -588,6 +591,90 @@ def get_iou(a, b, epsilon=1e-5):
 #     # RATIO OF AREA OF OVERLAP OVER COMBINED AREA
 #     iou = area_overlap / (area_combined + epsilon)
 #     return iou
+
+def bbox_iou(boxA, boxB):
+  # https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/
+  # ^^ corrected.
+    
+  # Determine the (x, y)-coordinates of the intersection rectangle
+  xA = max(boxA[0], boxB[0])
+  yA = max(boxA[1], boxB[1])
+  xB = min(boxA[2], boxB[2])
+  yB = min(boxA[3], boxB[3])
+
+  interW = xB - xA + 1
+  interH = yB - yA + 1
+
+  # Correction: reject non-overlapping boxes
+  if interW <=0 or interH <=0 :
+    return -1.0
+
+  interArea = interW * interH
+  boxAArea = (boxA[2] - boxA[0] + 1) * (boxA[3] - boxA[1] + 1)
+  boxBArea = (boxB[2] - boxB[0] + 1) * (boxB[3] - boxB[1] + 1)
+  iou = interArea / float(boxAArea + boxBArea - interArea)
+  return iou
+
+
+
+def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.5):
+    '''
+    Given sets of true and predicted bounding-boxes,
+    determine the best possible match.
+    Parameters
+    ----------
+    bbox_gt, bbox_pred : N1x4 and N2x4 np array of bboxes [x1,y1,x2,y2]. 
+      The number of bboxes, N1 and N2, need not be the same.
+    
+    Returns
+    -------
+    (idxs_true, idxs_pred, ious, labels)
+        idxs_true, idxs_pred : indices into gt and pred for matches
+        ious : corresponding IOU value of each match
+        labels: vector of 0/1 values for the list of detections
+    '''
+    n_true = bbox_gt.shape[0]
+    n_pred = bbox_pred.shape[0]
+    MAX_DIST = 1.0
+    MIN_IOU = 0.0
+
+    # NUM_GT x NUM_PRED
+    iou_matrix = np.zeros((n_true, n_pred))
+    for i in range(n_true):
+        for j in range(n_pred):
+            iou_matrix[i, j] = bbox_iou(bbox_gt[i,:], bbox_pred[j,:])
+
+    if n_pred > n_true:
+      # there are more predictions than ground-truth - add dummy rows
+      diff = n_pred - n_true
+      iou_matrix = np.concatenate( (iou_matrix, 
+                                    np.full((diff, n_pred), MIN_IOU)), 
+                                  axis=0)
+
+    if n_true > n_pred:
+      # more ground-truth than predictions - add dummy columns
+      diff = n_true - n_pred
+      iou_matrix = np.concatenate( (iou_matrix, 
+                                    np.full((n_true, diff), MIN_IOU)), 
+                                  axis=1)
+
+    # call the Hungarian matching
+    idxs_true, idxs_pred = scipy.optimize.linear_sum_assignment(1 - iou_matrix)
+
+    if (not idxs_true.size) or (not idxs_pred.size):
+        ious = np.array([])
+    else:
+        ious = iou_matrix[idxs_true, idxs_pred]
+
+    # remove dummy assignments
+    sel_pred = idxs_pred<n_pred
+    idx_pred_actual = idxs_pred[sel_pred] 
+    idx_gt_actual = idxs_true[sel_pred]
+    ious_actual = iou_matrix[idx_gt_actual, idx_pred_actual]
+    sel_valid = (ious_actual > IOU_THRESH)
+    label = sel_valid.astype(int)
+
+    return idx_gt_actual[sel_valid], idx_pred_actual[sel_valid], ious_actual[sel_valid], label 
 
 
 def findClosest(time, camera_time_list):
@@ -710,25 +797,32 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 # print(bbox)
 
                 if cbbox:
-                    iou = get_iou(bbox, cbbox)
-                    print("iou")
-                    print(len(iou))
+                    idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+                    print(idx_gt_actual)
+                    print(idx_pred_actual)
+                    print(ious_actual)
+                    print(label)
+                    # iou = get_iou(bbox, cbbox)
+                    # print("iou")
+                    # print(len(iou))
 
-                    for k in range(len(iou)):
-                        img = cv2.putText(img, str(iou[k][1]), (iou[k][0][0], iou[k][0][1]), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+                    # for k in range(len(iou)):
+                    #     img = cv2.putText(img, str(iou[k][1]), (iou[k][0][0], iou[k][0][1]), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
-                ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-            savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
 
-            if not os.path.exists(savepath):
-                os.makedirs(savepath)
+            #     ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-            plt.savefig(savepath+"/"+c1_frame_no.split('/')[-1])
-            ax[0].cla()
-            ax[1].cla()
-            ax[2].cla()
-            ax[3].cla()
+            # savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
+
+            # if not os.path.exists(savepath):
+            #     os.makedirs(savepath)
+
+            # plt.savefig(savepath+"/"+c1_frame_no.split('/')[-1])
+            # ax[0].cla()
+            # ax[1].cla()
+            # ax[2].cla()
+            # ax[3].cla()
 
         
 
