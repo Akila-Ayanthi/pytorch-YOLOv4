@@ -797,6 +797,8 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 # print(bbox)
 
                 if cbbox:
+                    cbbox = np.array(cbbox)
+                    bbox = np.array(bbox)
                     idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                     print(idx_gt_actual)
                     print(idx_pred_actual)
