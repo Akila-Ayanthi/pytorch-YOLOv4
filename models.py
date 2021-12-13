@@ -1,3 +1,4 @@
+from __future__ import division
 import torch
 from torch import nn
 import torch.nn.functional as F
@@ -9,7 +10,6 @@ import pathlib
 from fnmatch import fnmatch
 import matplotlib.pyplot as plt
 import os
-from __future__ import division
 import scipy.optimize
 import numpy as np
 
