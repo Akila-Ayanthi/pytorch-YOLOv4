@@ -809,7 +809,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
                     for h in range(len(idx_gt_actual)):
                         t = idx_gt_actual[h]
-                        text_c = ccbox[t]
+                        text_c = cbbox[t]
                         print(text_c)
 
                     # iou = get_iou(bbox, cbbox)
