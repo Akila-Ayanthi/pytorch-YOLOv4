@@ -635,6 +635,8 @@ def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.1):
     '''
     n_true = bbox_gt.shape[0]
     n_pred = bbox_pred.shape[0]
+    print(n_true)
+    print(n_pred)
     MAX_DIST = 1.0
     MIN_IOU = 0.0
 
@@ -647,14 +649,14 @@ def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.1):
     if n_pred > n_true:
       # there are more predictions than ground-truth - add dummy rows
       diff = n_pred - n_true
-      iou_matrix = np.concatenate( (iou_matrix, 
+      iou_matrix = np.concatenate((iou_matrix, 
                                     np.full((diff, n_pred), MIN_IOU)), 
                                   axis=0)
 
     if n_true > n_pred:
       # more ground-truth than predictions - add dummy columns
       diff = n_true - n_pred
-      iou_matrix = np.concatenate( (iou_matrix, 
+      iou_matrix = np.concatenate((iou_matrix, 
                                     np.full((n_true, diff), MIN_IOU)), 
                                   axis=1)
 
@@ -804,6 +806,12 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     print(idx_pred_actual)
                     print(ious_actual)
                     print(label)
+
+                    for h in range(len(idx_gt_actual)):
+                        t = idx_gt_actual[h]
+                        text_c = ccbox[t]
+                        print(text_c)
+
                     # iou = get_iou(bbox, cbbox)
                     # print("iou")
                     # print(len(iou))
