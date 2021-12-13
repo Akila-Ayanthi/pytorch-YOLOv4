@@ -715,7 +715,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     print(len(iou))
 
                     for k in range(len(iou)):
-                        img = cv2.putText(img, str(iou[k][1]), (iou[k][0][0], iou[k][0][1]), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+                        img = cv2.putText(img, str(iou[k][1]), (iou[k][0][0], iou[k][0][1]), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
                 ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
