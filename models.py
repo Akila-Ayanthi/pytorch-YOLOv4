@@ -811,7 +811,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                         t = idx_gt_actual[h]
                         text_c = cbbox[t]
                         print(text_c)
-                        img = cv2.putText(img, str(ious_actual[h]), (text_c[0], text_c[1]), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+                        img = cv2.putText(img, str(round(ious_actual[h], 3)), (text_c[0], text_c[1]), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
                     # iou = get_iou(bbox, cbbox)
                     # print("iou")
