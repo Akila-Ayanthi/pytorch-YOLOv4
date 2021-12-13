@@ -494,7 +494,6 @@ def get_iou(a, b, epsilon=1e-5):
     """
 
     iou_list = []
-    iou_l=[]
     # iou = 0.0
     bj = b[0]
     n_iou = []
@@ -502,6 +501,7 @@ def get_iou(a, b, epsilon=1e-5):
 
 
     for i in range(len(b)):
+        iou_l=[]
         for j in range(len(a)):
             # bj = b[j]
     # COORDINATES OF THE INTERSECTION BOX
@@ -534,6 +534,7 @@ def get_iou(a, b, epsilon=1e-5):
             
 
         max_iou = max(iou_l)
+        # print(max_iou)
         iou_list.append([b[i], round(max_iou, 3)])
             
     return iou_list
