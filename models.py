@@ -617,7 +617,7 @@ def bbox_iou(boxA, boxB):
 
 
 
-def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.1):
+def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.0):
     '''
     Given sets of true and predicted bounding-boxes,
     determine the best possible match.
@@ -802,16 +802,13 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     cbbox = np.array(cbbox)
                     bbox = np.array(bbox)
                     idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-                    print(idx_gt_actual)
-                    print(idx_pred_actual)
-                    print(ious_actual)
-                    print(label)
 
                     for h in range(len(idx_gt_actual)):
                         t = idx_gt_actual[h]
                         text_c = cbbox[t]
                         print(text_c)
                         img = cv2.putText(img, str(round(ious_actual[h], 3)), (text_c[0], text_c[1]), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+
 
                     # iou = get_iou(bbox, cbbox)
                     # print("iou")
