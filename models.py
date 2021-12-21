@@ -920,7 +920,7 @@ if __name__ == "__main__":
     gt.append(np.load('/home/dissana8/LAB/data/LAB/cam4_coords__.npy', allow_pickle=True))
 
     fig, a = plt.subplots(4, 1)
-    extract_frames(path, file_name, model, class_names, width, height, savename, gt)
+    # extract_frames(path, file_name, model, class_names, width, height, savename, gt)
 
     success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
 
