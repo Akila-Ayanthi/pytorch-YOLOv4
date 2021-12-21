@@ -684,6 +684,8 @@ def findClosest(time, camera_time_list):
     return camera_time_list.index(val)
 
 def extract_frames(path,file_name, model, class_names, width, height, savename, gt):
+    detections=0
+    gt_actual=0
     #===== process the index files of camera 1 ======#
     with open('/home/dissana8/LAB/Visor/cam1/index.dmp') as f:
         content = f.readlines()
@@ -806,8 +808,11 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     for h in range(len(idx_gt_actual)):
                         t = idx_gt_actual[h]
                         text_c = cbbox[t]
-                        print(text_c)
-                        img = cv2.putText(img, str(round(ious_actual[h], 3)), (text_c[0], text_c[1]), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
+                        # print(gt_actual)
+                        if round(ious_actual[h], 3)>=0.0:
+                            print(ious_actual[h])
+                            detections+=1
+                            # img = cv2.putText(img, str(round(ious_actual[h], 3)), (text_c[0], text_c[1]), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
 
                     # iou = get_iou(bbox, cbbox)
@@ -819,18 +824,18 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
 
 
-                ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+            #     ax[i].imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-            savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
+            # savepath = "/home/dissana8/LAB/custom_bbox/"+c1_frame_no.split('/')[0]
 
-            if not os.path.exists(savepath):
-                os.makedirs(savepath)
+            # if not os.path.exists(savepath):
+            #     os.makedirs(savepath)
 
-            plt.savefig(savepath+"/"+c1_frame_no.split('/')[-1])
-            ax[0].cla()
-            ax[1].cla()
-            ax[2].cla()
-            ax[3].cla()
+            # plt.savefig(savepath+"/"+c1_frame_no.split('/')[-1])
+            # ax[0].cla()
+            # ax[1].cla()
+            # ax[2].cla()
+            # ax[3].cla()
 
         
 
