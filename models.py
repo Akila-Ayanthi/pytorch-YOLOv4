@@ -683,7 +683,7 @@ def findClosest(time, camera_time_list):
     val = min(camera_time_list, key=lambda x: abs(x - time))
     return camera_time_list.index(val)
 
-def extract_frames(path,file_name, model, class_names, width, height, savename, gt):
+def extract_frames(path,file_name, model, class_names, width, height, savename, gt, min_size, device):
     detections=0
     gt_actual=0
     #===== process the index files of camera 1 ======#
@@ -836,6 +836,9 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # ax[1].cla()
         # ax[2].cla()
         # ax[3].cla()
+    print(detections)
+    print(gt_actual)
+    return detections/gt_actual*100
 
     
 
@@ -919,6 +922,12 @@ if __name__ == "__main__":
     fig, a = plt.subplots(4, 1)
     extract_frames(path, file_name, model, class_names, width, height, savename, gt)
 
+    success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, args['min_size'], device)
+
+    f = open("success_rate.txt", "a")
+    f.write("Success rate of Yolo-V4 : "+str(success_rate))
+    f.write("\n")
+    f.close()
     # root = "/home/dissana8/LAB/Visor/cam1"
     # files=[]
     # pattern = "*.jpg"
