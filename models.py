@@ -804,6 +804,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     cbbox = np.array(cbbox)
                     bbox = np.array(bbox)
                     idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+                    gt_actual+=len(cbbox)
 
                     for h in range(len(idx_gt_actual)):
                         t = idx_gt_actual[h]
@@ -838,8 +839,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     #     # ax[3].cla()
     print(detections)
     print(gt_actual)
-    # return detections/gt_actual*100
-    return 0
+    return detections/gt_actual*100
 
     
 
