@@ -754,64 +754,64 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         counter += 1
         if counter % 150 == 0:
             print(counter)
-    #         s = line.split(" ")
+            s = line.split(" ")
             
-    #         time = float(s[0])
-    #         frame_idx = findClosest(time, c1_times) # we have to map the time to frame number
-    #         c1_frame_no = c1_frames[frame_idx]
-            
-
-    #         frame_idx = findClosest(time, c2_times)  # we have to map the time to frame number
-    #         c2_frame_no = c2_frames[frame_idx]
+            time = float(s[0])
+            frame_idx = findClosest(time, c1_times) # we have to map the time to frame number
+            c1_frame_no = c1_frames[frame_idx]
             
 
-    #         frame_idx = findClosest(time, c3_times)  # we have to map the time to frame number
-    #         c3_frame_no = c3_frames[frame_idx]
+            frame_idx = findClosest(time, c2_times)  # we have to map the time to frame number
+            c2_frame_no = c2_frames[frame_idx]
+            
+
+            frame_idx = findClosest(time, c3_times)  # we have to map the time to frame number
+            c3_frame_no = c3_frames[frame_idx]
 
             
-    #         frame_idx = findClosest(time, c4_times)  # we have to map the time to frame number
-    #         c4_frame_no = c4_frames[frame_idx]
+            frame_idx = findClosest(time, c4_times)  # we have to map the time to frame number
+            c4_frame_no = c4_frames[frame_idx]
 
-    #         cam = []
+            cam = []
 
-    #         cam.append('/home/dissana8/LAB/Visor/cam1/'+c1_frame_no)
-    #         cam.append('/home/dissana8/LAB/Visor/cam2/'+c2_frame_no)
-    #         cam.append('/home/dissana8/LAB/Visor/cam3/'+c3_frame_no)
-    #         cam.append('/home/dissana8/LAB/Visor/cam4/'+c4_frame_no)
+            cam.append('/home/dissana8/LAB/Visor/cam1/'+c1_frame_no)
+            cam.append('/home/dissana8/LAB/Visor/cam2/'+c2_frame_no)
+            cam.append('/home/dissana8/LAB/Visor/cam3/'+c3_frame_no)
+            cam.append('/home/dissana8/LAB/Visor/cam4/'+c4_frame_no)
 
-    #         f, ax = plt.subplots(1, 4, figsize=(25, 4))
+            f, ax = plt.subplots(1, 4, figsize=(25, 4))
 
-    #         for i in range(4):
-    #             img = cv2.imread(cam[i])
-    #             sized = cv2.resize(img, (width, height))
-    #             sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+            for i in range(4):
+                img = cv2.imread(cam[i])
+                sized = cv2.resize(img, (width, height))
+                sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-    #             for j in range(2):  # This 'for' loop is for speed check
-    #                         # Because the first iteration is usually longer
-    #                 boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+                for j in range(2):  # This 'for' loop is for speed check
+                            # Because the first iteration is usually longer
+                    boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-    #             imgfile = cam[i].split('/')[6:]
-    #             imgname = '/'.join(imgfile)
-    #             sname = savename + imgname
+                imgfile = cam[i].split('/')[6:]
+                imgname = '/'.join(imgfile)
+                sname = savename + imgname
 
-    #             img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+                img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
-    #             image, cbbox = custom_bbox(gt[i], img, imgname)
+                image, cbbox = custom_bbox(gt[i], img, imgname)
 
-    #             # print(bbox)
+                # print(bbox)
 
-    #             if cbbox:
-    #                 cbbox = np.array(cbbox)
-    #                 bbox = np.array(bbox)
-    #                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+                if cbbox:
+                    cbbox = np.array(cbbox)
+                    bbox = np.array(bbox)
+                    idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
 
-    #                 for h in range(len(idx_gt_actual)):
-    #                     t = idx_gt_actual[h]
-    #                     text_c = cbbox[t]
-    #                     # print(gt_actual)
-    #                     if round(ious_actual[h], 3)>=0.0:
-    #                         print(ious_actual[h])
-    #                         detections+=1
+                    for h in range(len(idx_gt_actual)):
+                        t = idx_gt_actual[h]
+                        text_c = cbbox[t]
+                        # print(gt_actual)
+                        if round(ious_actual[h], 3)>=0.0:
+                            print(ious_actual[h])
+                            detections+=1
     #                         # img = cv2.putText(img, str(round(ious_actual[h], 3)), (text_c[0], text_c[1]), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
 
 
