@@ -836,8 +836,8 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     #     # ax[1].cla()
     #     # ax[2].cla()
     #     # ax[3].cla()
-    # print(detections)
-    # print(gt_actual)
+    print(detections)
+    print(gt_actual)
     # return detections/gt_actual*100
     return 0
 
