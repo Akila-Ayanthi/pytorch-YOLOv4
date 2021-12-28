@@ -842,7 +842,7 @@ def findClosest(time, camera_time_list):
 #     return detections/gt_actual*100
 
 
-def extract_frames(path ,file_name, model, model_name, min_size, savename, gt, device):
+def extract_frames(path,file_name, model, class_names, width, height, savename, gt, device):
     cam1_det, cam2_det, cam3_det, cam4_det= 0, 0, 0, 0
     cam1_gt, cam2_gt, cam3_gt, cam4_gt = 0, 0, 0, 0
     # gt_actual=0
