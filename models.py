@@ -597,6 +597,9 @@ def bbox_iou(boxA, boxB):
   # ^^ corrected.
     
   # Determine the (x, y)-coordinates of the intersection rectangle
+  print("inside bbox_iou")
+  print(boxA)
+  print(boxB)
   xA = max(boxA[0], boxB[0])
   yA = max(boxA[1], boxB[1])
   xB = min(boxA[2], boxB[2])
