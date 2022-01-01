@@ -802,7 +802,9 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
             if cbbox:
                 cbbox = np.array(cbbox)
+                print(cbbox)
                 bbox = np.array(bbox)
+                print(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 gt_actual+=len(cbbox)
 
