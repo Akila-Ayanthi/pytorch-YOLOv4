@@ -799,8 +799,9 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             image, cbbox = custom_bbox(gt[i], img, imgname)
 
             # print(bbox)
-            print("sjbkjsbkjdvbskjdnkvjsbkjdvbsjbdjkbkbjvbkbkjsbkzj")
+            
             if cbbox:
+                print("sjbkjsbkjdvbskjdnkvjsbkjdvbsjbdjkbkbjvbkbkjsbkzj")
                 cbbox = np.array(cbbox)
                 print(cbbox)
                 bbox = np.array(bbox)
