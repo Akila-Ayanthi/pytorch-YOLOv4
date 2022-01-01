@@ -956,7 +956,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 print("sjdbfbsfjbwdsjbbdsbwisbdjsbdjvbkjsdbiusbjdvbwjbsd")
                 cbbox = np.array(cbbox)
                 print(cbbox)
-                bbox = np.array(boxes)
+                bbox = np.array(boxes[0])
                 print(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam1_gt+=len(cbbox)
