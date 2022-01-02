@@ -1070,6 +1070,22 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     tot_det = cam1_det+cam2_det+cam3_det+cam4_det
     tot_gt = cam1_gt+cam2_gt+cam3_gt+cam4_gt
 
+    f = open("detections.txt", "a")
+    f.write("total detections: " +str(tot_det)+"\n")
+    f.write("total gt : " +str(tot_gt)+"\n")
+    f.write("cam1 detections: " +str(cam1_det)+"\n")
+    f.write("cam1 gt: " +str(cam1_gt)+"\n")
+    f.write("cam2 detections: " +str(cam2_det)+"\n")
+    f.write("cam2 gt: " +str(cam2_gt)+"\n")
+    f.write("cam3 detections: " +str(cam3_det)+"\n")
+    f.write("cam3_gt: " +str(cam3_gt)+"\n")
+    f.write("cam4_detections: " +str(cam4_det)+"\n")
+    f.write("cam4_gt: " +str(cam4_gt)+"\n")
+    
+    f.write("\n")
+    f.write("\n")
+    f.close()
+
     return (tot_det/tot_gt)*100, (cam1_det/cam1_gt)*100, (cam2_det/cam2_gt)*100, (cam3_det/cam3_gt)*100, (cam4_det/cam4_gt)*100   
     # return 0, 0, 0, 0, 0
 
