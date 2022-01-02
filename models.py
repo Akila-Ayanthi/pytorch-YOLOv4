@@ -966,7 +966,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         if cbbox:
                 print("sjdbfbsfjbwdsjbbdsbwisbdjsbdjvbkjsdbiusbjdvbwjbsd")
                 cbbox = np.array(cbbox)
-                bbox = np.array(boxes[0])
+                bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam1_gt+=len(cbbox)
                 print("idx_gt_actual")
@@ -1003,7 +1003,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         if cbbox:
                 print(sname)
                 cbbox = np.array(cbbox)
-                bbox = np.array(boxes[0])
+                bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam2_gt+=len(cbbox)
 
@@ -1033,7 +1033,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         image, cbbox = custom_bbox(gt[2], img, imgname)
         if cbbox:
                 cbbox = np.array(cbbox)
-                bbox = np.array(boxes[0])
+                bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam3_gt+=len(cbbox)
 
@@ -1061,7 +1061,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         image, cbbox = custom_bbox(gt[3], img, imgname)
         if cbbox:
                 cbbox = np.array(cbbox)
-                bbox = np.array(boxes[0])
+                bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam4_gt+=len(cbbox)
 
