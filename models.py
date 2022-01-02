@@ -958,19 +958,20 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         if cbbox:
                 print("sjdbfbsfjbwdsjbbdsbwisbdjsbdjvbkjsdbiusbjdvbwjbsd")
                 cbbox = np.array(cbbox)
-                print(cbbox)
                 bbox = np.array(boxes[0])
-                print(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam1_gt+=len(cbbox)
 
                 for h in range(len(idx_gt_actual)):
+                    print("inside")
                     t = idx_gt_actual[h]
                     text_c = cbbox[t]
                     # print(gt_actual)
                     if round(ious_actual[h], 3)>=0.0:
                         print(ious_actual[h])
                         cam1_det+=1
+                        print(cam1_det)
+        
 
     # view 02 success rate
     for ele in enumerate(c2_frame_no):
