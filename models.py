@@ -616,6 +616,7 @@ def bbox_iou(boxA, boxB):
   boxAArea = (boxA[2] - boxA[0] + 1) * (boxA[3] - boxA[1] + 1)
   boxBArea = (boxB[2] - boxB[0] + 1) * (boxB[3] - boxB[1] + 1)
   iou = interArea / float(boxAArea + boxBArea - interArea)
+  print(iou)
   return iou
 
 
@@ -649,7 +650,6 @@ def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.0):
         for j in range(n_pred):
             iou_matrix[i, j] = bbox_iou(bbox_gt[i,:], bbox_pred[j,:])
     
-    print(iou_matrix)
 
     if n_pred > n_true:
       # there are more predictions than ground-truth - add dummy rows
@@ -664,6 +664,8 @@ def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.0):
       iou_matrix = np.concatenate((iou_matrix, 
                                     np.full((n_true, diff), MIN_IOU)), 
                                   axis=1)
+
+    print(iou_matrix)
 
     # call the Hungarian matching
     idxs_true, idxs_pred = scipy.optimize.linear_sum_assignment(1 - iou_matrix)
