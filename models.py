@@ -596,10 +596,7 @@ def bbox_iou(boxA, boxB):
   # https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/
   # ^^ corrected.
     
-  # Determine the (x, y)-coordinates of the intersection rectangle
-  print("inside bbox_iou")
-  print(boxA)
-  print(boxB)
+  # Determine the (x, y)-coordinates of the intersection rectangle  
   xA = max(boxA[0], boxB[0])
   yA = max(boxA[1], boxB[1])
   xB = min(boxA[2], boxB[2])
@@ -639,8 +636,7 @@ def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.0):
     '''
     n_true = bbox_gt.shape[0]
     n_pred = bbox_pred.shape[0]
-    print(bbox_gt)
-    print(bbox_pred)
+    
     MAX_DIST = 1.0
     MIN_IOU = 0.0
 
@@ -665,7 +661,6 @@ def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.0):
                                     np.full((n_true, diff), MIN_IOU)), 
                                   axis=1)
 
-    print(iou_matrix)
 
     # call the Hungarian matching
     idxs_true, idxs_pred = scipy.optimize.linear_sum_assignment(1 - iou_matrix)
@@ -964,7 +959,6 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
         image, cbbox = custom_bbox(gt[0], img, imgname)
         if cbbox:
-                print("sjdbfbsfjbwdsjbbdsbwisbdjsbdjvbkjsdbiusbjdvbwjbsd")
                 cbbox = np.array(cbbox)
                 bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
@@ -981,7 +975,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     if round(ious_actual[h], 3)>=0.0:
                         print(ious_actual[h])
                         cam1_det+=1
-                        print(cam1_det)
+                        # print(cam1_det)
         
 
     # view 02 success rate
