@@ -961,6 +961,9 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 bbox = np.array(boxes[0])
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam1_gt+=len(cbbox)
+                print("idx_gt_actual")
+                print(idx_gt_actual)
+                
 
                 for h in range(len(idx_gt_actual)):
                     print("inside")
