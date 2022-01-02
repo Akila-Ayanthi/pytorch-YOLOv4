@@ -956,123 +956,128 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
         print(boxes)
 
-    #     imgfile = im.split('/')[6:]
-    #     imgname = '/'.join(imgfile)
-    #     sname = savename + imgname
+        imgfile = im.split('/')[6:]
+        imgname = '/'.join(imgfile)
+        sname = savename + imgname
 
-    #     image, cbbox = custom_bbox(gt[0], img, imgname)
-    #     if cbbox:
-    #             print("sjdbfbsfjbwdsjbbdsbwisbdjsbdjvbkjsdbiusbjdvbwjbsd")
-    #             cbbox = np.array(cbbox)
-    #             bbox = np.array(boxes[0])
-    #             idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-    #             cam1_gt+=len(cbbox)
-    #             print("idx_gt_actual")
-    #             print(idx_gt_actual)
+        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+
+        image, cbbox = custom_bbox(gt[0], img, imgname)
+        if cbbox:
+                print("sjdbfbsfjbwdsjbbdsbwisbdjsbdjvbkjsdbiusbjdvbwjbsd")
+                cbbox = np.array(cbbox)
+                bbox = np.array(boxes[0])
+                idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+                cam1_gt+=len(cbbox)
+                print("idx_gt_actual")
+                print(idx_gt_actual)
                 
 
-    #             for h in range(len(idx_gt_actual)):
-    #                 print("inside")
-    #                 t = idx_gt_actual[h]
-    #                 text_c = cbbox[t]
-    #                 # print(gt_actual)
-    #                 if round(ious_actual[h], 3)>=0.0:
-    #                     print(ious_actual[h])
-    #                     cam1_det+=1
-    #                     print(cam1_det)
+                for h in range(len(idx_gt_actual)):
+                    print("inside")
+                    t = idx_gt_actual[h]
+                    text_c = cbbox[t]
+                    # print(gt_actual)
+                    if round(ious_actual[h], 3)>=0.0:
+                        print(ious_actual[h])
+                        cam1_det+=1
+                        print(cam1_det)
         
 
-    # # view 02 success rate
-    # for ele in enumerate(c2_frame_no):
-    #     im = "/home/dissana8/LAB/Visor/cam2/"+ele[1]
-    #     img = cv2.imread(im) 
-    #     sized = cv2.resize(img, (width, height))
-    #     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+    # view 02 success rate
+    for ele in enumerate(c2_frame_no):
+        im = "/home/dissana8/LAB/Visor/cam2/"+ele[1]
+        img = cv2.imread(im) 
+        sized = cv2.resize(img, (width, height))
+        sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-    #     for j in range(2):  # This 'for' loop is for speed check
-    #                 # Because the first iteration is usually longer
-    #         boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+        for j in range(2):  # This 'for' loop is for speed check
+                    # Because the first iteration is usually longer
+            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-    #     imgfile = im.split('/')[6:]
-    #     imgname = '/'.join(imgfile)
-    #     sname = savename + imgname
-    #     image, cbbox = custom_bbox(gt[1], img, imgname)
-    #     if cbbox:
-    #             print(sname)
-    #             cbbox = np.array(cbbox)
-    #             bbox = np.array(boxes[0])
-    #             idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-    #             cam2_gt+=len(cbbox)
+        imgfile = im.split('/')[6:]
+        imgname = '/'.join(imgfile)
+        sname = savename + imgname
+        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        image, cbbox = custom_bbox(gt[1], img, imgname)
+        if cbbox:
+                print(sname)
+                cbbox = np.array(cbbox)
+                bbox = np.array(boxes[0])
+                idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+                cam2_gt+=len(cbbox)
 
-    #             for h in range(len(idx_gt_actual)):
-    #                 t = idx_gt_actual[h]
-    #                 text_c = cbbox[t]
-    #                 # print(gt_actual)
-    #                 if round(ious_actual[h], 3)>=0.0:
-    #                     print(ious_actual[h])
-    #                     cam2_det+=1
+                for h in range(len(idx_gt_actual)):
+                    t = idx_gt_actual[h]
+                    text_c = cbbox[t]
+                    # print(gt_actual)
+                    if round(ious_actual[h], 3)>=0.0:
+                        print(ious_actual[h])
+                        cam2_det+=1
 
-    # # view 03 success rate
-    # for ele in enumerate(c3_frame_no):
-    #     im = "/home/dissana8/LAB/Visor/cam3/"+ele[1]
-    #     img = cv2.imread(im)
-    #     sized = cv2.resize(img, (width, height))
-    #     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+    # view 03 success rate
+    for ele in enumerate(c3_frame_no):
+        im = "/home/dissana8/LAB/Visor/cam3/"+ele[1]
+        img = cv2.imread(im)
+        sized = cv2.resize(img, (width, height))
+        sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-    #     for j in range(2):  # This 'for' loop is for speed check
-    #                 # Because the first iteration is usually longer
-    #         boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+        for j in range(2):  # This 'for' loop is for speed check
+                    # Because the first iteration is usually longer
+            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-    #     imgfile = im.split('/')[6:]
-    #     imgname = '/'.join(imgfile)
-    #     sname = savename + imgname
-    #     image, cbbox = custom_bbox(gt[2], img, imgname)
-    #     if cbbox:
-    #             cbbox = np.array(cbbox)
-    #             bbox = np.array(boxes[0])
-    #             idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-    #             cam3_gt+=len(cbbox)
+        imgfile = im.split('/')[6:]
+        imgname = '/'.join(imgfile)
+        sname = savename + imgname
+        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        image, cbbox = custom_bbox(gt[2], img, imgname)
+        if cbbox:
+                cbbox = np.array(cbbox)
+                bbox = np.array(boxes[0])
+                idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+                cam3_gt+=len(cbbox)
 
-    #             for h in range(len(idx_gt_actual)):
-    #                 t = idx_gt_actual[h]
-    #                 text_c = cbbox[t]
-    #                 # print(gt_actual)
-    #                 if round(ious_actual[h], 3)>=0.0:
-    #                     print(ious_actual[h])
-    #                     cam3_det+=1
+                for h in range(len(idx_gt_actual)):
+                    t = idx_gt_actual[h]
+                    text_c = cbbox[t]
+                    # print(gt_actual)
+                    if round(ious_actual[h], 3)>=0.0:
+                        print(ious_actual[h])
+                        cam3_det+=1
 
-    # # view 04 success rate
-    # for ele in enumerate(c4_frame_no):
-    #     im = "/home/dissana8/LAB/Visor/cam4/"+ele[1]
-    #     sized = cv2.resize(img, (width, height))
-    #     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+    # view 04 success rate
+    for ele in enumerate(c4_frame_no):
+        im = "/home/dissana8/LAB/Visor/cam4/"+ele[1]
+        sized = cv2.resize(img, (width, height))
+        sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-    #     for j in range(2):  # This 'for' loop is for speed check
-    #                 # Because the first iteration is usually longer
-    #         boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
-    #     imgfile = im.split('/')[6:]
-    #     imgname = '/'.join(imgfile)
-    #     sname = savename + imgname
-    #     image, cbbox = custom_bbox(gt[3], img, imgname)
-    #     if cbbox:
-    #             cbbox = np.array(cbbox)
-    #             bbox = np.array(boxes[0])
-    #             idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-    #             cam4_gt+=len(cbbox)
+        for j in range(2):  # This 'for' loop is for speed check
+                    # Because the first iteration is usually longer
+            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+        imgfile = im.split('/')[6:]
+        imgname = '/'.join(imgfile)
+        sname = savename + imgname
+        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        image, cbbox = custom_bbox(gt[3], img, imgname)
+        if cbbox:
+                cbbox = np.array(cbbox)
+                bbox = np.array(boxes[0])
+                idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+                cam4_gt+=len(cbbox)
 
-    #             for h in range(len(idx_gt_actual)):
-    #                 t = idx_gt_actual[h]
-    #                 text_c = cbbox[t]
-    #                 # print(gt_actual)
-    #                 if round(ious_actual[h], 3)>=0.0:
-    #                     print(ious_actual[h])
-    #                     cam4_det+=1
+                for h in range(len(idx_gt_actual)):
+                    t = idx_gt_actual[h]
+                    text_c = cbbox[t]
+                    # print(gt_actual)
+                    if round(ious_actual[h], 3)>=0.0:
+                        print(ious_actual[h])
+                        cam4_det+=1
 
-    # tot_det = cam1_det+cam2_det+cam3_det+cam4_det
-    # tot_gt = cam1_gt+cam2_gt+cam3_gt+cam4_gt
+    tot_det = cam1_det+cam2_det+cam3_det+cam4_det
+    tot_gt = cam1_gt+cam2_gt+cam3_gt+cam4_gt
 
-    # return (tot_det/tot_gt)*100, (cam1_det/cam1_gt)*100, (cam2_det/cam2_gt)*100, (cam3_det/cam3_gt)*100, (cam4_det/cam4_gt)*100   
-    return 0, 0, 0, 0, 0
+    return (tot_det/tot_gt)*100, (cam1_det/cam1_gt)*100, (cam2_det/cam2_gt)*100, (cam3_det/cam3_gt)*100, (cam4_det/cam4_gt)*100   
+    # return 0, 0, 0, 0, 0
 
     
 
