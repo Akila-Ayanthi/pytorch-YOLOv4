@@ -981,7 +981,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     # view 02 success rate
     for ele in enumerate(c2_frame_no):
         im = "/home/dissana8/LAB/Visor/cam2/"+ele[1]
-        img = cv2.imread(im) 
+        img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
@@ -989,25 +989,34 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     # Because the first iteration is usually longer
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
+        print(boxes)
+
         imgfile = im.split('/')[6:]
         imgname = '/'.join(imgfile)
         sname = savename + imgname
+
         img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+
         image, cbbox = custom_bbox(gt[1], img, imgname)
         if cbbox:
-                print(sname)
                 cbbox = np.array(cbbox)
                 bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam2_gt+=len(cbbox)
+                print("idx_gt_actual")
+                print(idx_gt_actual)
+                
 
                 for h in range(len(idx_gt_actual)):
+                    print("inside")
                     t = idx_gt_actual[h]
                     text_c = cbbox[t]
                     # print(gt_actual)
                     if round(ious_actual[h], 3)>=0.0:
                         print(ious_actual[h])
                         cam2_det+=1
+                        # print(cam1_det)
+        
 
     # view 03 success rate
     for ele in enumerate(c3_frame_no):
@@ -1020,28 +1029,37 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     # Because the first iteration is usually longer
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
+        print(boxes)
+
         imgfile = im.split('/')[6:]
         imgname = '/'.join(imgfile)
         sname = savename + imgname
+
         img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+
         image, cbbox = custom_bbox(gt[2], img, imgname)
         if cbbox:
                 cbbox = np.array(cbbox)
                 bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam3_gt+=len(cbbox)
+                print("idx_gt_actual")
+                print(idx_gt_actual)
+                
 
                 for h in range(len(idx_gt_actual)):
+                    print("inside")
                     t = idx_gt_actual[h]
                     text_c = cbbox[t]
                     # print(gt_actual)
                     if round(ious_actual[h], 3)>=0.0:
                         print(ious_actual[h])
                         cam3_det+=1
-
+                        # print(cam1_det)
+        
     # view 04 success rate
     for ele in enumerate(c4_frame_no):
-        im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
+        im = "/home/dissana8/LAB/Visor/cam4/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
