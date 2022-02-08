@@ -976,6 +976,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                         print(ious_actual[h])
                         cam1_det+=1
                         # print(cam1_det)
+                break
         
 
 #     # view 02 success rate
