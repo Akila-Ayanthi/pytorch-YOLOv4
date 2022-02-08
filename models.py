@@ -950,6 +950,8 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
         print(boxes)
+        print("boxes[0]")
+        print(boxes[0])
 
         imgfile = im.split('/')[6:]
         imgname = '/'.join(imgfile)
