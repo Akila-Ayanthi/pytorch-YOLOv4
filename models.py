@@ -940,7 +940,11 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
     # view 01 success rate
     for ele in enumerate(c1_frame_no):
-        im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
+        #real images
+        # im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
+
+        #adversarial images
+        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/Visor/cam1/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1118,7 +1122,8 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 #     f.write("\n")
 #     f.close()
 
-#     return (tot_det/tot_gt)*100, (cam1_det/cam1_gt)*100, (cam2_det/cam2_gt)*100, (cam3_det/cam3_gt)*100, (cam4_det/cam4_gt)*100   
+#     return (tot_det/tot_gt)*100, (cam1_det/cam1_gt)*100, (cam2_det/cam2_gt)*100, (cam3_det/cam3_gt)*100, (cam4_det/cam4_gt)*100
+    return 0, (cam1_det/cam1_gt)*100, 0, 0, 0   
 # #     # return 0, 0, 0, 0, 0
 
     
@@ -1184,7 +1189,7 @@ if __name__ == "__main__":
     #adversarial images
     path = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/"
 
-    file_name = '/home/dissana8/LAB/LAB-GROUNDTRUTH.ref'
+    file_name = 'LAB-GROUNDTRUTH.ref'
 
     if namesfile == None:
             if n_classes == 20:
