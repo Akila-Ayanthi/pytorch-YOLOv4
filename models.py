@@ -953,31 +953,31 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         print("boxes[0]")
         print(boxes[0])
 
-        # imgfile = im.split('/')[6:]
-        # imgname = '/'.join(imgfile)
-        # sname = savename + imgname
+        imgfile = im.split('/')[6:]
+        imgname = '/'.join(imgfile)
+        sname = savename + imgname
 
-        # img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
-        # image, cbbox = custom_bbox(gt[0], img, imgname)
-        # if cbbox:
-        #         cbbox = np.array(cbbox)
-        #         bbox = np.array(bbox)
-        #         idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-        #         cam1_gt+=len(cbbox)
-        #         print("idx_gt_actual")
-        #         print(idx_gt_actual)
+        image, cbbox = custom_bbox(gt[0], img, imgname)
+        if cbbox:
+                cbbox = np.array(cbbox)
+                bbox = np.array(bbox)
+                idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+                cam1_gt+=len(cbbox)
+                print("idx_gt_actual")
+                print(idx_gt_actual)
                 
 
-        #         for h in range(len(idx_gt_actual)):
-        #             print("inside")
-        #             t = idx_gt_actual[h]
-        #             text_c = cbbox[t]
-        #             # print(gt_actual)
-        #             if round(ious_actual[h], 3)>=0.0:
-        #                 print(ious_actual[h])
-        #                 cam1_det+=1
-        #                 # print(cam1_det)
+                for h in range(len(idx_gt_actual)):
+                    print("inside")
+                    t = idx_gt_actual[h]
+                    text_c = cbbox[t]
+                    # print(gt_actual)
+                    if round(ious_actual[h], 3)>=0.0:
+                        print(ious_actual[h])
+                        cam1_det+=1
+                        # print(cam1_det)
         #         break
         
 
@@ -1178,8 +1178,13 @@ if __name__ == "__main__":
     if use_cuda:
         model.cuda()
 
-    path = "/home/dissana8/LAB/"
-    file_name = 'LAB-GROUNDTRUTH.ref'
+    #real images
+    # path = "/home/dissana8/LAB/"
+
+    #adversarial images
+    path = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/"
+
+    file_name = '/home/dissana8/LAB/LAB-GROUNDTRUTH.ref'
 
     if namesfile == None:
             if n_classes == 20:
@@ -1191,7 +1196,7 @@ if __name__ == "__main__":
 
     class_names = load_class_names(namesfile)
 
-    savename = '/home/dissana8/pytorch-YOLOv4/output/'
+    savename = '/home/dissana8/pytorch-YOLOv4/output_adv/'
 
 
     gt = []
@@ -1205,7 +1210,7 @@ if __name__ == "__main__":
 
     success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
 
-    f = open("success_rate.txt", "a")
+    f = open("success_rate_adv.txt", "a")
     f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
     f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
     f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
