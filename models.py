@@ -946,8 +946,8 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         #adversarial images
         im = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/Visor/cam1/"+ele[1]
         print(im)
-        print(img)
         img = cv2.imread(im)
+        print(img)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
         print(sized)
