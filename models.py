@@ -961,6 +961,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
+        print("image")
         print(img)
         img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
         print(bbox)
