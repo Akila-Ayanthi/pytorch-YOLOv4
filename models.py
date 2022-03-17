@@ -946,9 +946,11 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         #adversarial images
         im = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/Visor/cam1/"+ele[1]
         print(im)
+        print(img)
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+        print(sized)
 
         for j in range(2):  # This 'for' loop is for speed check
                     # Because the first iteration is usually longer
@@ -962,11 +964,11 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
-        print("image")
-        print(img)
+        # print("image")
+        # print(img)
         img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-        print(bbox)
-        print(img)
+        # print(bbox)
+        # print(img)
 
         # image, cbbox = custom_bbox(gt[0], img, imgname)
         # print(cbbox)
