@@ -953,14 +953,15 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     # Because the first iteration is usually longer
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-        print(boxes)
-        print("boxes[0]")
-        print(boxes[0])
+        # print(boxes)
+        # print("boxes[0]")
+        # print(boxes[0])
 
         imgfile = im.split('/')[6:]
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
+        print(img)
         img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
         print(bbox)
         print(img)
