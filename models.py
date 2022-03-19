@@ -970,27 +970,27 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # print(bbox)
         # print(img)
 
-        # image, cbbox = custom_bbox(gt[0], img, imgname)
-        # print(cbbox)
-        # if cbbox:
-        #     cbbox = np.array(cbbox)
-        #     bbox = np.array(bbox)
-        #     idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-        #     cam1_gt+=len(cbbox)
-        #     print("idx_gt_actual")
-        #     print(idx_gt_actual)
+        image, cbbox = custom_bbox(gt[0], img, imgname)
+        print(cbbox)
+        if cbbox:
+            cbbox = np.array(cbbox)
+            bbox = np.array(bbox)
+            idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+            cam1_gt+=len(cbbox)
+            print("idx_gt_actual")
+            print(idx_gt_actual)
                 
 
-        #     for h in range(len(idx_gt_actual)):
-        #         print("inside")
-        #         t = idx_gt_actual[h]
-        #         text_c = cbbox[t]
-        #         # print(gt_actual)
-        #         if round(ious_actual[h], 3)>=0.0:
-        #             print(ious_actual[h])
-        #             cam1_det+=1
-                        # print(cam1_det)
-        #         break
+            for h in range(len(idx_gt_actual)):
+                print("inside")
+                t = idx_gt_actual[h]
+                text_c = cbbox[t]
+                # print(gt_actual)
+                if round(ious_actual[h], 3)>=0.0:
+                    print(ious_actual[h])
+                    cam1_det+=1
+                    print(cam1_det)
+                break
         
 
 #     # view 02 success rate
