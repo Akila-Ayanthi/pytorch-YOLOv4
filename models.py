@@ -947,10 +947,8 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         im = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/Visor/cam1/"+ele[1]
         print(im)
         img = cv2.imread(im)
-        print(img)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
-        print(sized)
 
         for j in range(2):  # This 'for' loop is for speed check
                     # Because the first iteration is usually longer
@@ -967,8 +965,8 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # print("image")
         # print(img)
         img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-        # print(bbox)
-        # print(img)
+        print(bbox)
+        print(img)
 
         image, cbbox = custom_bbox(gt[0], img, imgname)
         print(cbbox)
@@ -978,7 +976,6 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
             cam1_gt+=len(cbbox)
             print("idx_gt_actual")
-            print(idx_gt_actual)
                 
 
             for h in range(len(idx_gt_actual)):
@@ -987,10 +984,8 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 text_c = cbbox[t]
                 # print(gt_actual)
                 if round(ious_actual[h], 3)>=0.0:
-                    print(ious_actual[h])
                     cam1_det+=1
-                    print(cam1_det)
-                break
+                    print("cam1_det")
         
 
 #     # view 02 success rate
