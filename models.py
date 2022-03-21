@@ -952,7 +952,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
         #adversarial images
         # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/Visor/cam1/"+ele[1]
-    im = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/Visor/cam3/000005/005012.jpg"
+    im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/000005/005012.jpg"
     print(im)
     img = cv2.imread(im)
     sized = cv2.resize(img, (width, height))
