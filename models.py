@@ -1118,7 +1118,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     tot_det = cam1_det+cam2_det+cam3_det+cam4_det
     tot_gt = cam1_gt+cam2_gt+cam3_gt+cam4_gt
 
-    f = open("detections.txt", "a")
+    f = open("detections_adv.txt", "a")
     f.write("total detections: " +str(tot_det)+"\n")
     f.write("total gt : " +str(tot_gt)+"\n")
     f.write("cam1 detections: " +str(cam1_det)+"\n")
