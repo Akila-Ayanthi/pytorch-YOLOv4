@@ -482,7 +482,7 @@ def custom_bbox(gt_coords, img, imgname):
             cbbox_coords.append(coords)
                 
             img = cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
-            break
+        break
                 
     return img, cbbox_coords
 
