@@ -950,7 +950,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
 
         #adversarial images
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/Visor/cam1/"+ele[1]
+        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam1/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -996,7 +996,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
 #     # view 02 success rate
     for ele in enumerate(c2_frame_no):
-        im = "/home/dissana8/LAB/Visor/cam2/"+ele[1]
+        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam2/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1034,7 +1034,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
 #     # view 03 success rate
     for ele in enumerate(c3_frame_no):
-        im = "/home/dissana8/LAB/Visor/cam3/"+ele[1]
+        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1071,7 +1071,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         
 #     # view 04 success rate
     for ele in enumerate(c4_frame_no):
-        im = "/home/dissana8/LAB/Visor/cam4/"+ele[1]
+        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam4/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
