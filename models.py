@@ -461,6 +461,7 @@ class Yolov4(nn.Module):
 
 def custom_bbox(gt_coords, img, imgname):
     cbbox_coords = []
+    print("length of gt_coords")
     print(len(gt_coords))
     for k in range(len(gt_coords)): 
             if gt_coords[k][0] == imgname:
