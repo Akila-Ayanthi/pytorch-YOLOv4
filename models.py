@@ -945,56 +945,53 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         c4_frame_no.append(c4_frames[frame_idx])
 
     # view 01 success rate
-    # for ele in enumerate(c1_frame_no):
+    for ele in enumerate(c1_frame_no):
         #real images
         # im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
 
         #adversarial images
-        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/Visor/cam1/"+ele[1]
-    im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/000005/005012.jpg"
-    print(im)
-    img = cv2.imread(im)
-    sized = cv2.resize(img, (width, height))
-    sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/Visor/cam1/"+ele[1]
+        img = cv2.imread(im)
+        sized = cv2.resize(img, (width, height))
+        sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-    for j in range(2):  # This 'for' loop is for speed check
-                # Because the first iteration is usually longer
-        boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+        for j in range(2):  # This 'for' loop is for speed check
+                    # Because the first iteration is usually longer
+            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-    # print(boxes)
-    # print("boxes[0]")
-    # print(boxes[0])
+        # print(boxes)
+        # print("boxes[0]")
+        # print(boxes[0])
 
-    #real images
-    # imgfile = im.split('/')[6:]
+        #real images
+        # imgfile = im.split('/')[6:]
 
-    #adv images
-    imgfile = im.split('/')[9:]
-    imgname = '/'.join(imgfile)
-    sname = savename + imgname
+        #adv images
+        imgfile = im.split('/')[9:]
+        imgname = '/'.join(imgfile)
+        sname = savename + imgname
 
-    # print("image")
-    # print(img)
-    img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-    # print(bbox)
-    # print(img)
+        # print("image")
+        # print(img)
+        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        # print(bbox)
+        # print(img)
 
-    image, cbbox = custom_bbox(gt[0], img, imgname)
-    print(cbbox)
-    if cbbox:
-        cbbox = np.array(cbbox)
-        bbox = np.array(bbox)
-        idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-        cam1_gt+=len(cbbox)
-        print("idx_gt_actual")
-            
+        image, cbbox = custom_bbox(gt[0], img, imgname)
+        print(cbbox)
+        if cbbox:
+            cbbox = np.array(cbbox)
+            bbox = np.array(bbox)
+            idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+            cam1_gt+=len(cbbox)
+                
 
-        for h in range(len(idx_gt_actual)):
-            t = idx_gt_actual[h]
-            text_c = cbbox[t]
-            # print(gt_actual)
-            if round(ious_actual[h], 3)>=0.0:
-                cam1_det+=1
+            for h in range(len(idx_gt_actual)):
+                t = idx_gt_actual[h]
+                text_c = cbbox[t]
+                # print(gt_actual)
+                if round(ious_actual[h], 3)>=0.0:
+                    cam1_det+=1
         
 
 #     # view 02 success rate
@@ -1022,12 +1019,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam2_gt+=len(cbbox)
-                print("idx_gt_actual")
                 print(idx_gt_actual)
                 
 
                 for h in range(len(idx_gt_actual)):
-                    print("inside")
                     t = idx_gt_actual[h]
                     text_c = cbbox[t]
                     # print(gt_actual)
@@ -1062,12 +1057,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam3_gt+=len(cbbox)
-                print("idx_gt_actual")
                 print(idx_gt_actual)
                 
 
                 for h in range(len(idx_gt_actual)):
-                    print("inside")
                     t = idx_gt_actual[h]
                     text_c = cbbox[t]
                     # print(gt_actual)
@@ -1101,12 +1094,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam4_gt+=len(cbbox)
-                print("idx_gt_actual")
                 print(idx_gt_actual)
                 
 
                 for h in range(len(idx_gt_actual)):
-                    print("inside")
                     t = idx_gt_actual[h]
                     text_c = cbbox[t]
                     # print(gt_actual)
