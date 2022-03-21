@@ -965,7 +965,11 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     # print("boxes[0]")
     # print(boxes[0])
 
-    imgfile = im.split('/')[6:]
+    #real images
+    # imgfile = im.split('/')[6:]
+
+    #adv images
+    imgfile = im.split('/')[9:]
     imgname = '/'.join(imgfile)
     print(imgname)
     sname = savename + imgname
