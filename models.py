@@ -482,7 +482,6 @@ def custom_bbox(gt_coords, img, imgname):
             cbbox_coords.append(coords)
                 
             img = cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
-        break
                 
     return img, cbbox_coords
 
@@ -968,32 +967,33 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
     imgfile = im.split('/')[6:]
     imgname = '/'.join(imgfile)
+    print(imgname)
     sname = savename + imgname
 
     # print("image")
     # print(img)
-    img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-    # print(bbox)
-    # print(img)
+    # img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    # # print(bbox)
+    # # print(img)
 
-    image, cbbox = custom_bbox(gt[0], img, imgname)
-    print(cbbox)
-    if cbbox:
-        cbbox = np.array(cbbox)
-        bbox = np.array(bbox)
-        idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-        cam1_gt+=len(cbbox)
-        print("idx_gt_actual")
+    # image, cbbox = custom_bbox(gt[0], img, imgname)
+    # print(cbbox)
+    # if cbbox:
+    #     cbbox = np.array(cbbox)
+    #     bbox = np.array(bbox)
+    #     idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+    #     cam1_gt+=len(cbbox)
+    #     print("idx_gt_actual")
             
 
-        for h in range(len(idx_gt_actual)):
-            print("inside")
-            t = idx_gt_actual[h]
-            text_c = cbbox[t]
-            # print(gt_actual)
-            if round(ious_actual[h], 3)>=0.0:
-                cam1_det+=1
-                print("cam1_det")
+    #     for h in range(len(idx_gt_actual)):
+    #         print("inside")
+    #         t = idx_gt_actual[h]
+    #         text_c = cbbox[t]
+    #         # print(gt_actual)
+    #         if round(ious_actual[h], 3)>=0.0:
+    #             cam1_det+=1
+    #             print("cam1_det")
         
 
 #     # view 02 success rate
