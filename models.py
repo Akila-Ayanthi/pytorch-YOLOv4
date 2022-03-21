@@ -461,8 +461,11 @@ class Yolov4(nn.Module):
 
 def custom_bbox(gt_coords, img, imgname):
     cbbox_coords = []
+    print(len(gt_coords))
     for k in range(len(gt_coords)): 
             if gt_coords[k][0] == imgname:
+                print(gt_coords)
+                print(imgname)
                 box = [float(gt_coords[k][2]), float(gt_coords[k][3]), 50, 80]
                 box = torch.tensor(box)
                 bbox = box_center_to_corner(box)
@@ -473,6 +476,7 @@ def custom_bbox(gt_coords, img, imgname):
                 y2 = int(bbox[3].item())
 
                 coords = [x1, y1, x2, y2]
+                print(coords)
                 cbbox_coords.append(coords)
                     
                 img = cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
@@ -966,8 +970,8 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     # print("image")
     # print(img)
     img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-    print(bbox)
-    print(img)
+    # print(bbox)
+    # print(img)
 
     image, cbbox = custom_bbox(gt[0], img, imgname)
     print(cbbox)
