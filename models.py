@@ -945,6 +945,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         c4_frame_no.append(c4_frames[frame_idx])
 
     # view 01 success rate
+    print("View 01 success rate")
     for ele in enumerate(c1_frame_no):
         #real images
         # im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
@@ -959,26 +960,18 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     # Because the first iteration is usually longer
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-        # print(boxes)
-        # print("boxes[0]")
-        # print(boxes[0])
-
         #real images
         # imgfile = im.split('/')[6:]
 
         #adv images
         imgfile = im.split('/')[9:]
+        
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
-        # print("image")
-        # print(img)
         img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-        # print(bbox)
-        # print(img)
 
         image, cbbox = custom_bbox(gt[0], img, imgname)
-        print(cbbox)
         if cbbox:
             cbbox = np.array(cbbox)
             bbox = np.array(bbox)
@@ -989,12 +982,12 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             for h in range(len(idx_gt_actual)):
                 t = idx_gt_actual[h]
                 text_c = cbbox[t]
-                # print(gt_actual)
                 if round(ious_actual[h], 3)>=0.0:
                     cam1_det+=1
         
 
 #     # view 02 success rate
+    print("View 01 success rate")
     for ele in enumerate(c2_frame_no):
         im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam2/"+ele[1]
         img = cv2.imread(im)
@@ -1005,7 +998,6 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     # Because the first iteration is usually longer
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-        print(boxes)
 
         imgfile = im.split('/')[9:]
         imgname = '/'.join(imgfile)
@@ -1019,20 +1011,17 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam2_gt+=len(cbbox)
-                print(idx_gt_actual)
                 
 
                 for h in range(len(idx_gt_actual)):
                     t = idx_gt_actual[h]
                     text_c = cbbox[t]
-                    # print(gt_actual)
                     if round(ious_actual[h], 3)>=0.0:
-                        print(ious_actual[h])
                         cam2_det+=1
-                        # print(cam1_det)
         
 
 #     # view 03 success rate
+    print("View 03 success rate")
     for ele in enumerate(c3_frame_no):
         im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/"+ele[1]
         img = cv2.imread(im)
@@ -1043,7 +1032,6 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     # Because the first iteration is usually longer
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-        print(boxes)
 
         imgfile = im.split('/')[9:]
         imgname = '/'.join(imgfile)
@@ -1057,19 +1045,16 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam3_gt+=len(cbbox)
-                print(idx_gt_actual)
                 
 
                 for h in range(len(idx_gt_actual)):
                     t = idx_gt_actual[h]
                     text_c = cbbox[t]
-                    # print(gt_actual)
                     if round(ious_actual[h], 3)>=0.0:
-                        print(ious_actual[h])
                         cam3_det+=1
-                        # print(cam1_det)
         
 #     # view 04 success rate
+    print("View 04 success rate")
     for ele in enumerate(c4_frame_no):
         im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam4/"+ele[1]
         img = cv2.imread(im)
@@ -1080,7 +1065,6 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     # Because the first iteration is usually longer
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-        print(boxes)
 
         imgfile = im.split('/')[9:]
         imgname = '/'.join(imgfile)
@@ -1094,17 +1078,13 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 bbox = np.array(bbox)
                 idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
                 cam4_gt+=len(cbbox)
-                print(idx_gt_actual)
                 
 
                 for h in range(len(idx_gt_actual)):
                     t = idx_gt_actual[h]
                     text_c = cbbox[t]
-                    # print(gt_actual)
                     if round(ious_actual[h], 3)>=0.0:
-                        print(ious_actual[h])
                         cam4_det+=1
-                        # print(cam1_det)
 
     tot_det = cam1_det+cam2_det+cam3_det+cam4_det
     tot_gt = cam1_gt+cam2_gt+cam3_gt+cam4_gt
