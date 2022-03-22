@@ -464,9 +464,6 @@ def custom_bbox(gt_coords, img, imgname):
     print("length of gt_coords")
     print(len(gt_coords))
     for k in range(len(gt_coords)):
-        print(gt_coords)
-        print(gt_coords[k][0])
-        print(imgname) 
         if gt_coords[k][0] == imgname:
             box = [float(gt_coords[k][2]), float(gt_coords[k][3]), 50, 80]
             box = torch.tensor(box)
@@ -478,7 +475,6 @@ def custom_bbox(gt_coords, img, imgname):
             y2 = int(bbox[3].item())
 
             coords = [x1, y1, x2, y2]
-            print(coords)
             cbbox_coords.append(coords)
                 
             img = cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
@@ -965,7 +961,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
         #adv images
         imgfile = im.split('/')[9:]
-        
+
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
