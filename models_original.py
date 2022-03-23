@@ -12,12 +12,7 @@ import matplotlib.pyplot as plt
 import os
 import scipy.optimize
 import numpy as np
-from PIL import Image
 
-PATCH_SIZE = (16, 16)
-MIN_ROI_SIZE = PATCH_SIZE[0] * PATCH_SIZE[1] * 1
-SOURCE_CLASS = 'person'
-TARGET_CLASS = 'chair'
 
 
 class Mish(torch.nn.Module):
@@ -1130,118 +1125,6 @@ def bbox_to_rect(bbox, color):
                              height=bbox[3] - bbox[1], fill=False,
                              edgecolor=color, linewidth=2)
 
-def letterbox_image_padded(image, size=(416, 416)):
-    """ Resize image with unchanged aspect ratio using padding """
-    image_copy = image.copy()
-    iw, ih = image_copy.size
-    w, h = size
-    scale = min(w / iw, h / ih)
-    nw = int(iw * scale)
-    nh = int(ih * scale)
-
-    image_copy = image_copy.resize((416, 416), Image.BICUBIC)
-    # print(np.asarray(image_copy))
-    # new_image = Image.new('RGB', size, (0, 0, 0))
-    # print(np.asarray(new_image))
-    # new_image.paste(image_copy, ((w - nw) // 2, (h - nh) // 2))
-    # print("pasted image")
-    # print(np.asarray(new_image))
-    # new_image = np.asarray(new_image)[np.newaxis, :, :, :] / 255.
-    new_image = np.asarray(image_copy)[np.newaxis, :, :, :] / 255.
-    meta = ((w - nw) // 2, (h - nh) // 2, nw + (w - nw) // 2, nh + (h - nh) // 2, scale)
-
-    return new_image, meta
-
-def bb_intersection_over_union(boxA, boxB):
-    # determine the (x, y)-coordinates of the intersection rectangle
-    xA = max(boxA[0], boxB[0])
-    yA = max(boxA[1], boxB[1])
-    xB = min(boxA[2], boxB[2])
-    yB = min(boxA[3], boxB[3])
-
-    # compute the area of intersection rectangle
-    interArea = max(0, xB - xA + 1) * max(0, yB - yA + 1)
-
-    # compute the area of both the prediction and ground-truth rectangles
-    boxAArea = (boxA[2] - boxA[0] + 1) * (boxA[3] - boxA[1] + 1)
-    boxBArea = (boxB[2] - boxB[0] + 1) * (boxB[3] - boxB[1] + 1)
-
-    # compute the intersection over union by taking the intersection area and dividing it by the sum
-    # of prediction + ground-truth areas - the intersection area
-    iou = interArea / float(boxAArea + boxBArea - interArea)
-
-    # return the intersection over union value
-    return iou
-
-def bb_size(box):
-    return (box[2] - box[0]) * (box[3] - box[1])
-
-
-def bb_inside(boxA, boxB):  # return True if boxA is inside boxB
-    return boxA[0] >= boxB[0] and boxA[1] >= boxB[1] and boxA[2] <= boxB[2] and boxA[3] <= boxB[3]
-
-
-def bb_overlap(boxA, boxB):
-    return bb_intersection_over_union(boxA, boxB) > 0
-
-
-def extract_roi(detections, class_id, img_bbox, min_size, patch_size):
-    roi_candidates = []
-    for did, detection in enumerate(detections):
-        if int(detection[0]) != class_id:
-            continue
-        obj_bbox = tuple(map(int, detection[-4:]))
-        pat_bbox = (obj_bbox[0] + (obj_bbox[2] - obj_bbox[0]) // 2 - patch_size[1] // 2,
-                    obj_bbox[1] + (obj_bbox[3] - obj_bbox[1]) // 2 - patch_size[0] // 2,
-                    obj_bbox[0] + (obj_bbox[2] - obj_bbox[0]) // 2 + patch_size[1] // 2,
-                    obj_bbox[1] + (obj_bbox[3] - obj_bbox[1]) // 2 + patch_size[0] // 2)
-        if bb_size(obj_bbox) >= min_size and bb_inside(pat_bbox, img_bbox):
-            roi_candidates.append((float(detection[1]), obj_bbox, pat_bbox, did))
-
-    # Filter out rois with overlapped patches based on non-maximum suppression
-    roi_candidates = sorted(roi_candidates, key=lambda x: -x[0])
-    rois = []
-    for roi_candidate in roi_candidates:
-        if not np.any([bb_overlap(roi_candidate[2], roi[2]) for roi in rois]):
-            rois.append(roi_candidate)
-    return rois
-
-def single_image_det():
-    patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
-    im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/007039.jpg/"
-    img = cv2.imread(im)
-    # sized = cv2.resize(img, (width, height))
-    # sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
-
-    x_query, x_meta = letterbox_image_padded(im, size=416)
-    print(x_query)
-    # detections_query = detector.detect(x_query, conf_threshold=detector.confidence_thresh_default)
-
-    ## place the adversarial patch on a single image and check the detections made by yolo-v4
-    ##Check the TOG attack to see how to place the patch on the image
-
-    # for j in range(2):  # This 'for' loop is for speed check
-    #             # Because the first iteration is usually longer
-    #     boxes = do_detect(model, x_query, 0.4, 0.6, use_cuda)
-
-    # # Get roi candidates with an area higher than a predefined threshold to avoid trivial attacks
-    # rois = extract_roi(boxes, model.classes.index(SOURCE_CLASS), x_meta, min_size=MIN_ROI_SIZE, patch_size=PATCH_SIZE)
-
-    # # Apply adversarial patch to each of the rois
-    # x_adv = x_query.copy()
-    # # print(x_adv)
-    # for _, _, (xmin, ymin, xmax, ymax), did in rois:
-    #     x_adv[:, ymin:ymax, xmin:xmax, :] = patch
-
-    # imgfile = im.split('/')[9:]
-    # imgname = '/'.join(imgfile)
-    # sname = savename + imgname
-
-    # img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-
-    
-
-
 if __name__ == "__main__":
     import sys
     import cv2
@@ -1304,22 +1187,20 @@ if __name__ == "__main__":
     gt.append(np.load('/home/dissana8/LAB/data/LAB/cam3_coords__.npy', allow_pickle=True))
     gt.append(np.load('/home/dissana8/LAB/data/LAB/cam4_coords__.npy', allow_pickle=True))
 
-    single_image_det()
-
     # fig, a = plt.subplots(4, 1)
     # extract_frames(path, file_name, model, class_names, width, height, savename, gt)
 
-    # success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
+    success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
 
-    # f = open("success_rate_adv.txt", "a")
-    # f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
-    # f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
-    # f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
-    # f.write("Success rate of view 03" +": "+str(cam3_success_rate)+"\n")
-    # f.write("Success rate of view 04" +": "+str(cam4_success_rate)+"\n")
-    # f.write("\n")
-    # f.write("\n")
-    # f.close()
+    f = open("success_rate_adv.txt", "a")
+    f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
+    f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
+    f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
+    f.write("Success rate of view 03" +": "+str(cam3_success_rate)+"\n")
+    f.write("Success rate of view 04" +": "+str(cam4_success_rate)+"\n")
+    f.write("\n")
+    f.write("\n")
+    f.close()
     # root = "/home/dissana8/LAB/Visor/cam1"
     # files=[]
     # pattern = "*.jpg"
@@ -1378,4 +1259,3 @@ if __name__ == "__main__":
         
         # savename1 = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname
         # cv2.imwrite(savename1, img)
-
