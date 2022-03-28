@@ -201,8 +201,6 @@ def post_processing(img, conf_thresh, nms_thresh, output):
 
     # [batch, num, 4]
     box_array = box_array[:, :, 0]
-    print("box array")
-    print(box_array.shape[0])
 
     # [batch, num, num_classes] --> [batch, num]
     max_conf = np.max(confs, axis=2)
@@ -236,8 +234,6 @@ def post_processing(img, conf_thresh, nms_thresh, output):
 
                 for k in range(ll_box_array.shape[0]):
                     bboxes.append([ll_box_array[k, 0], ll_box_array[k, 1], ll_box_array[k, 2], ll_box_array[k, 3], ll_max_conf[k], ll_max_conf[k], ll_max_id[k]])
-        print("boxes")
-        print(bboxes)
         bboxes_batch.append(bboxes)
 
     t3 = time.time()

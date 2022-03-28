@@ -1210,41 +1210,24 @@ def extract_roi(detections, class_id, img_bbox, min_size, patch_size):
 
 def single_image_det():
     patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
-    ##read the correct image
     im = "/home/dissana8/LAB/Visor/cam3/000004/004012.jpg"
     img = cv2.imread(im)
-    # input_img = Image.open(im)
     sized = cv2.resize(img, (width, height))
     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
-
-    # x_query, x_meta = letterbox_image_padded(input_img, size=416)
-    # print(x_query)
-    boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
-    # detections_query = detector.detect(x_query, conf_threshold=detector.confidence_thresh_default)
-    print("boxes")
-    print(boxes)
 
     ## place the adversarial patch on a single image and check the detections made by yolo-v4
     ##Check the TOG attack to see how to place the patch on the image
 
-    # for j in range(2):  # This 'for' loop is for speed check
-    #             # Because the first iteration is usually longer
-    #     boxes = do_detect(model, x_query, 0.4, 0.6, use_cuda)
+    for j in range(2):  # This 'for' loop is for speed check
+                # Because the first iteration is usually longer
+        boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-    # # Get roi candidates with an area higher than a predefined threshold to avoid trivial attacks
-    # rois = extract_roi(boxes, model.classes.index(SOURCE_CLASS), x_meta, min_size=MIN_ROI_SIZE, patch_size=PATCH_SIZE)
+    imgfile = im.split('/')[9:]
+    imgname = '/'.join(imgfile)
+    sname = savename + imgname
 
-    # # Apply adversarial patch to each of the rois
-    # x_adv = x_query.copy()
-    # # print(x_adv)
-    # for _, _, (xmin, ymin, xmax, ymax), did in rois:
-    #     x_adv[:, ymin:ymax, xmin:xmax, :] = patch
-
-    # imgfile = im.split('/')[9:]
-    # imgname = '/'.join(imgfile)
-    # sname = savename + imgname
-
-    # img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    print(bbox)
 
     
 

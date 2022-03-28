@@ -98,7 +98,6 @@ def do_detect(model, img, conf_thresh, nms_thresh, use_cuda=1):
     t1 = time.time()
 
     output = model(img)
-    print(output)
 
     t2 = time.time()
 
