@@ -1234,6 +1234,7 @@ def single_image_det():
     print("resized patch ")
     print(resized_patch)
     replace = sized.copy()
+    print("replace")
     print(replace[8:100, 2:100])
     # for i in range(len(cbbox)):
     #     x = (cbbox[i][0]+cbbox[i][2])/2
