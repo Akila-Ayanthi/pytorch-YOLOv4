@@ -1247,7 +1247,7 @@ def single_image_det():
         print(x)
         print(y)
 
-        
+        print(replace[y: y +16, x : x + 16].shape)
         replace[y: y +16, x : x + 16] = resized_patch
     replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
     cv2.imwrite('boxed.png', img)
