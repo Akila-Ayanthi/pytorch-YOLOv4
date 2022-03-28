@@ -1247,11 +1247,11 @@ def single_image_det():
         print(x)
         print(y)
 
-        print(replace[y: y +16, x : x + 16].shape)
-        if (y+16)>416 or (x+16)>416:
+        print(replace[y-8: y +8, x-8 : x + 8].shape)
+        if (y+8)>416 or (x+8)>416 or (x-8)<0 or (y-8)<0:
             continue
         else:
-            replace[y: y +16, x : x + 16] = resized_patch
+            replace[y-8: y +8, x-8 : x + 8] = resized_patch
     replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
     cv2.imwrite('boxed.png', img)
     cv2.imwrite('replace.png', replace)
