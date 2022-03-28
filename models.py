@@ -1233,6 +1233,8 @@ def single_image_det():
 
     image, cbbox = custom_bbox(gt[2], img, imgname)
     print(cbbox)
+    img = cv2.rectangle(sized, (cbbox[0][0], cbbox[0][1]), (cbbox[0][2], cbbox[0][3]), (0, 0, 255), 2)
+    img = cv2.rectangle(img, (cbbox[1][0], cbbox[1][1]), (cbbox[1][2], cbbox[1][3]), (0, 0, 255), 2)
     # print("resized patch ")
     # print(resized_patch)
     replace = sized.copy()
@@ -1247,6 +1249,7 @@ def single_image_det():
         
         replace[y-8: y +8, x - 8: x + 8] = resized_patch
     replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
+    cv2.imwrite('boxed.png', img)
     cv2.imwrite('replace.png', replace)
     
 
