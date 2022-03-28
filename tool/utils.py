@@ -197,6 +197,7 @@ def post_processing(img, conf_thresh, nms_thresh, output):
         box_array = box_array.cpu().detach().numpy()
         confs = confs.cpu().detach().numpy()
 
+    print("box_array")
     print(box_array)
 
     num_classes = confs.shape[2]
