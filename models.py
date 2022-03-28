@@ -1231,6 +1231,7 @@ def single_image_det():
     # print(bbox)
 
     image, cbbox = custom_bbox(gt[3], img, imgname)
+    print(cbbox)
     # print("resized patch ")
     # print(resized_patch)
     replace = sized.copy()
@@ -1244,6 +1245,7 @@ def single_image_det():
 
         
         replace[y-8: y +8, x - 8: x + 8] = resized_patch
+    replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
     cv2.imwrite('replace.png', replace)
     
 
