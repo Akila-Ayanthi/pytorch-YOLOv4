@@ -1235,7 +1235,7 @@ def single_image_det():
     image, cbbox = custom_bbox(gt[1], img, imgname)
     print(cbbox)
     img = cv2.rectangle(sized, (cbbox[0][0], cbbox[0][1]), (cbbox[0][2], cbbox[0][3]), (0, 0, 255), 2)
-    # img = cv2.rectangle(img, (cbbox[1][0], cbbox[1][1]), (cbbox[1][2], cbbox[1][3]), (0, 0, 255), 2)
+    img = cv2.rectangle(img, (cbbox[1][0], cbbox[1][1]), (cbbox[1][2], cbbox[1][3]), (0, 0, 255), 2)
     # print("resized patch ")
     print(resized_patch.shape)
     replace = sized.copy()
