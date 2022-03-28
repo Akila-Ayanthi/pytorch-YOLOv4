@@ -1130,7 +1130,7 @@ def bbox_to_rect(bbox, color):
                              height=bbox[3] - bbox[1], fill=False,
                              edgecolor=color, linewidth=2)
 
-def letterbox_image_padded(image, size=(416, 416)):
+def letterbox_image_padded(image, size=416):
     """ Resize image with unchanged aspect ratio using padding """
     image_copy = image.copy()
     iw, ih = image_copy.size
