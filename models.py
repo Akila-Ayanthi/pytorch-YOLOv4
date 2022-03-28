@@ -1218,8 +1218,11 @@ def single_image_det():
     # sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
     x_query, x_meta = letterbox_image_padded(input_img, size=416)
-    print(x_query)
+    # print(x_query)
+    boxes = do_detect(model, x_query, 0.4, 0.6, use_cuda)
     # detections_query = detector.detect(x_query, conf_threshold=detector.confidence_thresh_default)
+    print("boxes")
+    print(boxes)
 
     ## place the adversarial patch on a single image and check the detections made by yolo-v4
     ##Check the TOG attack to see how to place the patch on the image
