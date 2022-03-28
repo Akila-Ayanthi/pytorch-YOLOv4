@@ -1215,7 +1215,7 @@ def single_image_det():
     # sized = cv2.resize(img, (width, height))
     # sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-    x_query, x_meta = letterbox_image_padded(im, size=416)
+    x_query, x_meta = letterbox_image_padded(input_img, size=416)
     print(x_query)
     # detections_query = detector.detect(x_query, conf_threshold=detector.confidence_thresh_default)
 
