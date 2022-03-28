@@ -1233,7 +1233,7 @@ def single_image_det():
     image, cbbox = custom_bbox(gt[3], img, imgname)
     print(cbbox)
     replace = sized.copy()
-    for i in len(cbbox):
+    for i in range(len(cbbox)):
         x = (cbbox[i][0]+cbbox[i][2])/2
         y = (cbbox[i][1]+cbbox[i][3])/2
         print(x)
