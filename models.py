@@ -1212,7 +1212,7 @@ def extract_roi(detections, class_id, img_bbox, min_size, patch_size):
 def single_image_det():
     patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
     resized_patch = cv2.resize(patch, (16, 16))
-    im = "/home/dissana8/LAB/Visor/cam4/000007/007293.jpg"
+    im = "/home/dissana8/LAB/Visor/cam2/000010/010022.jpg"
     img = cv2.imread(im)
     sized = cv2.resize(img, (width, height))
     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1232,7 +1232,7 @@ def single_image_det():
     # img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
     # print(bbox)
 
-    image, cbbox = custom_bbox(gt[3], img, imgname)
+    image, cbbox = custom_bbox(gt[1], img, imgname)
     print(cbbox)
     img = cv2.rectangle(sized, (cbbox[0][0], cbbox[0][1]), (cbbox[0][2], cbbox[0][3]), (0, 0, 255), 2)
     # img = cv2.rectangle(img, (cbbox[1][0], cbbox[1][1]), (cbbox[1][2], cbbox[1][3]), (0, 0, 255), 2)
