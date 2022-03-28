@@ -1225,12 +1225,13 @@ def single_image_det():
 
     imgfile = im.split('/')[6:]
     imgname = '/'.join(imgfile)
+    print(imgname)
     sname = savename + imgname
 
     # img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
     # print(bbox)
 
-    image, cbbox = custom_bbox(gt[3], img, imgname)
+    image, cbbox = custom_bbox(gt[2], img, imgname)
     print(cbbox)
     # print("resized patch ")
     # print(resized_patch)
