@@ -1231,17 +1231,19 @@ def single_image_det():
     # print(bbox)
 
     image, cbbox = custom_bbox(gt[3], img, imgname)
-    print(cbbox)
+    print("resized patch ")
+    print(resized_patch)
     replace = sized.copy()
-    for i in range(len(cbbox)):
-        x = (cbbox[i][0]+cbbox[i][2])/2
-        y = (cbbox[i][1]+cbbox[i][3])/2
-        print(x)
-        print(y)
+    print(replace[8:100, 2:100])
+    # for i in range(len(cbbox)):
+    #     x = (cbbox[i][0]+cbbox[i][2])/2
+    #     y = (cbbox[i][1]+cbbox[i][3])/2
+    #     print(x)
+    #     print(y)
 
         
-        replace[y: y + 16, x: x + 16] = resized_patch
-    cv2.imwrite('replace.png', replace)
+    #     replace[y-8: y +8, x - 8: x + 8] = resized_patch
+    # cv2.imwrite('replace.png', replace)
     
 
 
