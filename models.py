@@ -1240,7 +1240,7 @@ def single_image_det():
         print(y)
 
         
-        replace[y: y + resized_patch, x: x + resized_patch] = resized_patch
+        replace[y: y + 16, x: x + 16] = resized_patch
     cv2.imwrite('replace.png', replace)
     
 
