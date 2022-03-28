@@ -1209,7 +1209,8 @@ def extract_roi(detections, class_id, img_bbox, min_size, patch_size):
 def single_image_det():
     patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
     im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/007039.jpg/"
-    img = cv2.imread(im)
+    # img = cv2.imread(im)
+    input_img = Image.open(im)
     # sized = cv2.resize(img, (width, height))
     # sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
