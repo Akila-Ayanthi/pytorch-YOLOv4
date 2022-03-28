@@ -1212,14 +1212,14 @@ def single_image_det():
     patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
     ##read the correct image
     im = "/home/dissana8/LAB/Visor/cam3/000004/004012.jpg"
-    # img = cv2.imread(im)
-    input_img = Image.open(im)
-    # sized = cv2.resize(img, (width, height))
-    # sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+    img = cv2.imread(im)
+    # input_img = Image.open(im)
+    sized = cv2.resize(img, (width, height))
+    sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-    x_query, x_meta = letterbox_image_padded(input_img, size=416)
+    # x_query, x_meta = letterbox_image_padded(input_img, size=416)
     # print(x_query)
-    boxes = do_detect(model, x_query, 0.4, 0.6, use_cuda)
+    boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
     # detections_query = detector.detect(x_query, conf_threshold=detector.confidence_thresh_default)
     print("boxes")
     print(boxes)
