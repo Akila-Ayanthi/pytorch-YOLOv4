@@ -201,6 +201,8 @@ def post_processing(img, conf_thresh, nms_thresh, output):
 
     # [batch, num, 4]
     box_array = box_array[:, :, 0]
+    print("box array")
+    print(box_array)
 
     # [batch, num, num_classes] --> [batch, num]
     max_conf = np.max(confs, axis=2)
