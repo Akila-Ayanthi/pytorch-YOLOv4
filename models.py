@@ -1237,8 +1237,8 @@ def single_image_det():
     # print("replace")
     # print(replace[8:100, 2:100])
     for i in range(len(cbbox)):
-        x = int(cbbox[i][0]+cbbox[i][2])/2
-        y = int(cbbox[i][1]+cbbox[i][3])/2
+        x = int((cbbox[i][0]+cbbox[i][2])/2)
+        y = int((cbbox[i][1]+cbbox[i][3])/2)
         print(x)
         print(y)
 
