@@ -1222,7 +1222,7 @@ def single_image_det():
                 # Because the first iteration is usually longer
         boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-    imgfile = im.split('/')[9:]
+    imgfile = im.split('/')[6:]
     imgname = '/'.join(imgfile)
     sname = savename + imgname
 
