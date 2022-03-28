@@ -1226,8 +1226,11 @@ def single_image_det():
     imgname = '/'.join(imgfile)
     sname = savename + imgname
 
-    img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-    print(bbox)
+    # img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    # print(bbox)
+
+    image, cbbox = custom_bbox(gt[3], img, imgname)
+    print(cbbox)
 
     
 
