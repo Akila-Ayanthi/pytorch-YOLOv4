@@ -1237,10 +1237,10 @@ def single_image_det():
     img = cv2.rectangle(sized, (cbbox[0][0], cbbox[0][1]), (cbbox[0][2], cbbox[0][3]), (0, 0, 255), 2)
     # img = cv2.rectangle(img, (cbbox[1][0], cbbox[1][1]), (cbbox[1][2], cbbox[1][3]), (0, 0, 255), 2)
     # print("resized patch ")
-    # print(resized_patch)
+    print(resized_patch.shape)
     replace = sized.copy()
-    # print("replace")
-    # print(replace[8:100, 2:100])
+    print("replace")
+    print(replace.shape)
     for i in range(len(cbbox)):
         x = int((cbbox[i][0]+cbbox[i][2])/2)
         y = int((cbbox[i][1]+cbbox[i][3])/2)
