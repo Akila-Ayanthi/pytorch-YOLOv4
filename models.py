@@ -1213,7 +1213,7 @@ if __name__ == "__main__":
 
     success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
 
-    f = open("success_rate_adv.txt", "a")
+    f = open("success_rate_adv_Deadulus.txt", "a")
     f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
     f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
     f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
