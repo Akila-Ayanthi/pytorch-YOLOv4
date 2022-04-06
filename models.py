@@ -960,8 +960,11 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         #real images
         # imgfile = im.split('/')[6:]
 
-        #adv images
-        imgfile = im.split('/')[9:]
+        #adv images TOG
+        # imgfile = im.split('/')[9:]
+
+        #adv images Daedulus
+        imgfile = im.split('/')[6:]
 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
@@ -982,7 +985,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 if round(ious_actual[h], 3)>=0.0:
                     cam1_det+=1
 
-        cv2.imwrite("test.png", image)
+        # cv2.imwrite("test.png", image)
         
 
     # view 02 success rate
@@ -1002,8 +1005,12 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                     # Because the first iteration is usually longer
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
+        #adv images TOG
+        # imgfile = im.split('/')[9:]
 
-        imgfile = im.split('/')[9:]
+        #adv images Daedulus
+        imgfile = im.split('/')[6:]
+
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
@@ -1041,7 +1048,12 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
 
-        imgfile = im.split('/')[9:]
+        #adv images TOG
+        # imgfile = im.split('/')[9:]
+
+        #adv images Daedulus
+        imgfile = im.split('/')[6:]
+
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
@@ -1078,7 +1090,11 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
 
-        imgfile = im.split('/')[9:]
+        #adv images TOG
+        # imgfile = im.split('/')[9:]
+
+        #adv images Daedulus
+        imgfile = im.split('/')[6:]
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
