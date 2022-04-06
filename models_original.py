@@ -944,8 +944,11 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         #real images
         # im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
 
-        #adversarial images
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam1/"+ele[1]
+        #adversarial images TOG
+        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam1/"+ele[1]
+
+        #adversarial images Daedulus
+        im = "/home/dissana8/Daedalus-physical/Adv_Images/cam1/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -978,12 +981,19 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
                 text_c = cbbox[t]
                 if round(ious_actual[h], 3)>=0.0:
                     cam1_det+=1
+
+        cv2.imwrite("test.png", image)
         
 
-#     # view 02 success rate
-    print("View 01 success rate")
+    # view 02 success rate
+    print("View 02 success rate")
     for ele in enumerate(c2_frame_no):
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam2/"+ele[1]
+
+        #adv images TOG
+        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam2/"+ele[1]
+
+        #adversarial images Daedulus
+        im = "/home/dissana8/Daedalus-physical/Adv_Images/cam2/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1017,7 +1027,11 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 #     # view 03 success rate
     print("View 03 success rate")
     for ele in enumerate(c3_frame_no):
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/"+ele[1]
+        #adv images TOG
+        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/"+ele[1]
+
+        #adversarial images Daedulus
+        im = "/home/dissana8/Daedalus-physical/Adv_Images/cam3/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1050,7 +1064,11 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 #     # view 04 success rate
     print("View 04 success rate")
     for ele in enumerate(c4_frame_no):
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam4/"+ele[1]
+        #adv images TOG
+        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam4/"+ele[1]
+
+        #adversarial images Daedulus
+        im = "/home/dissana8/Daedalus-physical/Adv_Images/cam4/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1101,7 +1119,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
     return (tot_det/tot_gt)*100, (cam1_det/cam1_gt)*100, (cam2_det/cam2_gt)*100, (cam3_det/cam3_gt)*100, (cam4_det/cam4_gt)*100
     # return 0, (cam1_det/cam1_gt)*100, 0, 0, 0   
-# #     # return 0, 0, 0, 0, 0
+    # return 0, 0, 0, 0, 0
 
     
 
@@ -1163,8 +1181,11 @@ if __name__ == "__main__":
     #real images
     # path = "/home/dissana8/LAB/"
 
-    #adversarial images
-    path = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/"
+    #adversarial images TOG
+    # path = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/"
+
+    #adversarial images Daedulus
+    path = "/home/dissana8/Daedalus-physical/Adv_Images/"
 
     file_name = 'LAB-GROUNDTRUTH.ref'
 
