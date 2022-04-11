@@ -1224,7 +1224,7 @@ def single_image_det(height, width):
                 # Because the first iteration is usually longer
         boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-    # print(boxes)
+    print(boxes)
     # imgfile = im.split('/')[6:]
     # imgname = '/'.join(imgfile)
     # print(imgname)
@@ -1244,11 +1244,11 @@ def single_image_det(height, width):
     # print("replace")
     # print(replace.shape)
     for i in range(len(bbox)):
-        print(bbox[i])
+        # print(bbox[i])
         x = int((bbox[i][0]+bbox[i][2])/2)
         y = int((bbox[i][1]+bbox[i][3])/2)
-        print(x)
-        print(y)
+        # print(x)
+        # print(y)
 
     #     print(replace[y-8: y +8, x-8 : x + 8].shape)
         if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
@@ -1259,18 +1259,21 @@ def single_image_det(height, width):
     cv2.imwrite('boxed.png', img)
     cv2.imwrite('replace.png', replace)
 
+    sized_r = cv2.resize(replace, (width, height))
+    sized_r = cv2.cvtColor(sized_r, cv2.COLOR_BGR2RGB)
+
     for j in range(2):  # This 'for' loop is for speed check
                 # Because the first iteration is usually longer
-        boxes = do_detect(model, replace, 0.4, 0.6, use_cuda)
+        boxes = do_detect(model, sized_r, 0.4, 0.6, use_cuda)
 
-    # print(boxes)
+    print(boxes)
     # imgfile = im.split('/')[6:]
     # imgname = '/'.join(imgfile)
     # print(imgname)
     # sname = savename + imgname
 
     sname = 'test_bbox.png'
-    img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    img_, bbox = plot_boxes_cv2(replace, boxes[0], sname, class_names)
     cv2.imwrite('boxed__.png', img_)
 
 
