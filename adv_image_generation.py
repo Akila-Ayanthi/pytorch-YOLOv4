@@ -1254,7 +1254,7 @@ def single_image_det(height, width):
         if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
             continue
         else:
-            replace[y-8: y +8, x-8 : x + 8] = resized_patch
+            replace[y-10: y +10, x-10 : x + 10] = resized_patch
     # replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
     cv2.imwrite('boxed.png', img)
     cv2.imwrite('replace.png', replace)
