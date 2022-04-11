@@ -1224,7 +1224,7 @@ def single_image_det(height, width):
                 # Because the first iteration is usually longer
         boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-    print(boxes)
+    # print(boxes)
     # imgfile = im.split('/')[6:]
     # imgname = '/'.join(imgfile)
     # print(imgname)
@@ -1243,8 +1243,10 @@ def single_image_det(height, width):
     # replace = sized.copy()
     # print("replace")
     # print(replace.shape)
-    # for i in range(len(boxes)):
-    #     x = int((cbbox[i][0]+cbbox[i][2])/2)
+    boxes_ = boxes[0]
+    print(boxes_)
+    # for i in range(len(boxes[0])):
+    #     x = int((boxes[i][0]+boxes[i][2])/2)
     #     y = int((cbbox[i][1]+cbbox[i][3])/2)
     #     print(x)
     #     print(y)
