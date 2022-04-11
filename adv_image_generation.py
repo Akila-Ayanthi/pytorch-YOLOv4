@@ -1211,7 +1211,7 @@ def extract_roi(detections, class_id, img_bbox, min_size, patch_size):
 
 def single_image_det(height, width):
     patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
-    resized_patch = cv2.resize(patch, (16, 16))
+    resized_patch = cv2.resize(patch, (20, 20))
     im = "/home/dissana8/LAB/Visor/cam1/000005/005614.jpg"
     img = cv2.imread(im)
     sized = cv2.resize(img, (width, height))
