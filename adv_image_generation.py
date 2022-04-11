@@ -1258,7 +1258,20 @@ def single_image_det(height, width):
     # replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
     cv2.imwrite('boxed.png', img)
     cv2.imwrite('replace.png', replace)
-    
+
+    for j in range(2):  # This 'for' loop is for speed check
+                # Because the first iteration is usually longer
+        boxes = do_detect(model, replace, 0.4, 0.6, use_cuda)
+
+    # print(boxes)
+    # imgfile = im.split('/')[6:]
+    # imgname = '/'.join(imgfile)
+    # print(imgname)
+    # sname = savename + imgname
+
+    sname = 'test_bbox.png'
+    img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    cv2.imwrite('boxed__.png', img_)
 
 
 if __name__ == "__main__":
