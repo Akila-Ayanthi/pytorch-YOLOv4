@@ -1210,8 +1210,14 @@ def extract_roi(detections, class_id, img_bbox, min_size, patch_size):
     return rois
 
 def single_image_det(height, width):
-    patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.5 confidence/epoch8-iter4000-cw tanh perturbation.png")
-    resized_patch = cv2.resize(patch, (24, 24))
+    patch = np.load('/home/dissana8/TOG/Adv_images/vanishing/2022-03-09_14:51:18_person/Epoch-19_Loss-8.84_ASR-0.80.npy')
+    patch_rand = np.reshape(patch.copy(), newshape=(patch.shape[0]*patch.shape[1]*patch.shape[2], patch.shape[3]))
+    np.random.shuffle(patch_rand)
+    patch_rand = np.reshape(patch_rand, newshape=patch.shape)
+
+
+    # patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.5 confidence/epoch8-iter4000-cw tanh perturbation.png")
+    # resized_patch = cv2.resize(patch, (24, 24))
     im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
     img = cv2.imread(im)
     sized = cv2.resize(img, (width, height))
@@ -1255,7 +1261,8 @@ def single_image_det(height, width):
         if (y+12)>=480 or (x+12)>=640 or (x-12)<0 or (y-12)<0:
             continue
         else:
-            replace[y-12: y +12, x-12 : x + 12] = resized_patch
+            # replace[y-12: y +12, x-12 : x + 12] = resized_patch
+            replace[y-12: y +12, x-12 : x + 12] = patch
     # replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
     cv2.imwrite('boxed.png', img_)
     cv2.imwrite('replace_.png', replace)
