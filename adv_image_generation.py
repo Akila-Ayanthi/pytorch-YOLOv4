@@ -1245,10 +1245,10 @@ def single_image_det(height, width):
     # print(replace.shape)
     for i in range(len(bbox)):
         print(bbox[i])
-        # x = int((boxes_[i][0]+boxes_[i][2])/2)
-        # y = int((boxes_[i][1]+boxes_[i][3])/2)
-        # print(x)
-        # print(y)
+        x = int((bbox[i][0]+bbox[i][2])/2)
+        y = int((bbox[i][1]+bbox[i][3])/2)
+        print(x)
+        print(y)
 
     #     print(replace[y-8: y +8, x-8 : x + 8].shape)
     #     if (y+8)>416 or (x+8)>416 or (x-8)<0 or (y-8)<0:
