@@ -1257,10 +1257,10 @@ def single_image_det(height, width):
             replace[y-10: y +10, x-10 : x + 10] = resized_patch
     # replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
     cv2.imwrite('boxed.png', img)
-    cv2.imwrite('replace.png', replace)
+    cv2.imwrite('replace_.png', replace)
 
 
-    im = "/home/dissana8/pytorch-YOLOv4/replace.png"
+    im = "/home/dissana8/pytorch-YOLOv4/replace_.png"
     img = cv2.imread(im)
     sized = cv2.resize(img, (width, height))
     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
