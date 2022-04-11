@@ -1230,7 +1230,8 @@ def single_image_det(height, width):
     # print(imgname)
     # sname = savename + imgname
 
-    # img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    sname = 'test_bbox.png'
+    img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
     # print(bbox)
 
     # image, cbbox = custom_bbox(gt[0], img, imgname)
@@ -1254,7 +1255,7 @@ def single_image_det(height, width):
     #     else:
     #         replace[y-8: y +8, x-8 : x + 8] = resized_patch
     # replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
-    # cv2.imwrite('boxed.png', img)
+    cv2.imwrite('boxed.png', img)
     # cv2.imwrite('replace.png', replace)
     
 
