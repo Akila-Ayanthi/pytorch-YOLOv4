@@ -1209,7 +1209,7 @@ def extract_roi(detections, class_id, img_bbox, min_size, patch_size):
             rois.append(roi_candidate)
     return rois
 
-def single_image_det():
+def single_image_det(height, width):
     patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
     resized_patch = cv2.resize(patch, (16, 16))
     im = "/home/dissana8/LAB/Visor/cam1/000005/005614.jpg"
@@ -1224,37 +1224,38 @@ def single_image_det():
                 # Because the first iteration is usually longer
         boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-    imgfile = im.split('/')[6:]
-    imgname = '/'.join(imgfile)
-    print(imgname)
-    sname = savename + imgname
+    print(boxes)
+    # imgfile = im.split('/')[6:]
+    # imgname = '/'.join(imgfile)
+    # print(imgname)
+    # sname = savename + imgname
 
     # img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
     # print(bbox)
 
-    image, cbbox = custom_bbox(gt[0], img, imgname)
-    print(cbbox)
-    img = cv2.rectangle(sized, (cbbox[0][0], cbbox[0][1]), (cbbox[0][2], cbbox[0][3]), (0, 0, 255), 2)
-    img = cv2.rectangle(img, (cbbox[1][0], cbbox[1][1]), (cbbox[1][2], cbbox[1][3]), (0, 0, 255), 2)
+    # image, cbbox = custom_bbox(gt[0], img, imgname)
+    # print(cbbox)
+    # img = cv2.rectangle(sized, (cbbox[0][0], cbbox[0][1]), (cbbox[0][2], cbbox[0][3]), (0, 0, 255), 2)
+    # img = cv2.rectangle(img, (cbbox[1][0], cbbox[1][1]), (cbbox[1][2], cbbox[1][3]), (0, 0, 255), 2)
     # print("resized patch ")
-    print(resized_patch.shape)
-    replace = sized.copy()
-    print("replace")
-    print(replace.shape)
-    for i in range(len(cbbox)):
-        x = int((cbbox[i][0]+cbbox[i][2])/2)
-        y = int((cbbox[i][1]+cbbox[i][3])/2)
-        print(x)
-        print(y)
+    # print(resized_patch.shape)
+    # replace = sized.copy()
+    # print("replace")
+    # print(replace.shape)
+    # for i in range(len(boxes)):
+    #     x = int((cbbox[i][0]+cbbox[i][2])/2)
+    #     y = int((cbbox[i][1]+cbbox[i][3])/2)
+    #     print(x)
+    #     print(y)
 
-        print(replace[y-8: y +8, x-8 : x + 8].shape)
-        if (y+8)>416 or (x+8)>416 or (x-8)<0 or (y-8)<0:
-            continue
-        else:
-            replace[y-8: y +8, x-8 : x + 8] = resized_patch
-    replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
-    cv2.imwrite('boxed.png', img)
-    cv2.imwrite('replace.png', replace)
+    #     print(replace[y-8: y +8, x-8 : x + 8].shape)
+    #     if (y+8)>416 or (x+8)>416 or (x-8)<0 or (y-8)<0:
+    #         continue
+    #     else:
+    #         replace[y-8: y +8, x-8 : x + 8] = resized_patch
+    # replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
+    # cv2.imwrite('boxed.png', img)
+    # cv2.imwrite('replace.png', replace)
     
 
 
@@ -1320,7 +1321,9 @@ if __name__ == "__main__":
     gt.append(np.load('/home/dissana8/LAB/data/LAB/cam3_coords__.npy', allow_pickle=True))
     gt.append(np.load('/home/dissana8/LAB/data/LAB/cam4_coords__.npy', allow_pickle=True))
 
-    single_image_det()
+
+    height, width = 416, 416
+    single_image_det(height, width)
 
     # fig, a = plt.subplots(4, 1)
     # extract_frames(path, file_name, model, class_names, width, height, savename, gt)
