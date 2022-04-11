@@ -1231,7 +1231,7 @@ def single_image_det(height, width):
     # sname = savename + imgname
 
     sname = 'test_bbox.png'
-    img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
     # print(bbox)
 
     # image, cbbox = custom_bbox(gt[0], img, imgname)
