@@ -1259,12 +1259,15 @@ def single_image_det(height, width):
     cv2.imwrite('boxed.png', img)
     cv2.imwrite('replace.png', replace)
 
-    sized_r = cv2.resize(replace, (width, height))
-    sized_r = cv2.cvtColor(sized_r, cv2.COLOR_BGR2RGB)
+
+    im = "/home/dissana8/pytorch-YOLOv4/replace.png"
+    img = cv2.imread(im)
+    sized = cv2.resize(img, (width, height))
+    sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
     for j in range(2):  # This 'for' loop is for speed check
                 # Because the first iteration is usually longer
-        boxes = do_detect(model, sized_r, 0.4, 0.6, use_cuda)
+        boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
     print(boxes)
     # imgfile = im.split('/')[6:]
@@ -1273,7 +1276,7 @@ def single_image_det(height, width):
     # sname = savename + imgname
 
     sname = 'test_bbox.png'
-    img_, bbox = plot_boxes_cv2(replace, boxes[0], sname, class_names)
+    img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
     cv2.imwrite('boxed__.png', img_)
 
 
