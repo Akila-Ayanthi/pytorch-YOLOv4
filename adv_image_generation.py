@@ -1243,9 +1243,8 @@ def single_image_det(height, width):
     # replace = sized.copy()
     # print("replace")
     # print(replace.shape)
-    boxes_ = boxes[0]
-    for i in range(len(boxes_)):
-        print(boxes_[i])
+    for i in range(len(bbox)):
+        print(bbox[i])
         # x = int((boxes_[i][0]+boxes_[i][2])/2)
         # y = int((boxes_[i][1]+boxes_[i][3])/2)
         # print(x)
