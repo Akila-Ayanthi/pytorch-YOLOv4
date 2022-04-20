@@ -1217,7 +1217,7 @@ def single_image_det(height, width):
 
 
     patch = cv2.imread("/home/dissana8/pytorch-YOLOv4/patch.jpg")
-    resized_patch = cv2.resize(patch, (16, 16))
+    resized_patch = cv2.resize(patch, (20, 20))
     # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
     im = "/home/dissana8/LAB/Visor/cam3/000006/006025.jpg"
     
@@ -1260,11 +1260,11 @@ def single_image_det(height, width):
         # print(y)
 
     #     print(replace[y-8: y +8, x-8 : x + 8].shape)
-        if (y+8)>=480 or (x+8)>=640 or (x-8)<0 or (y-8)<0:
+        if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
             continue
         else:
             # replace[y-12: y +12, x-12 : x + 12] = resized_patch
-            replace[y-8: y +8, x-8 : x + 8] = resized_patch
+            replace[y-10: y +10, x-10 : x + 10] = resized_patch
     # replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
     cv2.imwrite('boxed.png', img_)
     cv2.imwrite('replace_.png', replace)
