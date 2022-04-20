@@ -1270,14 +1270,14 @@ def single_image_det(height, width):
     cv2.imwrite('replace_.png', replace)
 
 
-    # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/000006/006025.jpg"
-    # img = cv2.imread(im)
-    # sized = cv2.resize(img, (width, height))
-    # sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+    im = "replace_.png"
+    img = cv2.imread(im)
+    sized = cv2.resize(img, (width, height))
+    sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-    # for j in range(2):  # This 'for' loop is for speed check
-    #             # Because the first iteration is usually longer
-    #     boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
+    for j in range(2):  # This 'for' loop is for speed check
+                # Because the first iteration is usually longer
+        boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
 
     # print(boxes)
     # # imgfile = im.split('/')[6:]
@@ -1285,9 +1285,9 @@ def single_image_det(height, width):
     # # print(imgname)
     # # sname = savename + imgname
 
-    # sname = 'test_bbox.png'
-    # img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-    # cv2.imwrite('boxed__.png', img_)
+    sname = 'test_bbox.png'
+    img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    cv2.imwrite('boxed__.png', img_)
 
 
 if __name__ == "__main__":
