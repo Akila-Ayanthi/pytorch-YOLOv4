@@ -1216,7 +1216,7 @@ def single_image_det(height, width):
     # patch_rand = np.reshape(patch_rand, newshape=patch.shape)
 
 
-    patch = cv2.imread("/home/dissana8/pytorch-YOLOv4/patch.jpg")
+    patch = cv2.imread("/home/dissana8/pytorch-YOLOv4/object_upper.png")
     resized_patch = cv2.resize(patch, (20, 20))
     # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
     im = "/home/dissana8/LAB/Visor/cam3/000006/006025.jpg"
@@ -1287,7 +1287,7 @@ def single_image_det(height, width):
 
     sname = 'test_bbox.png'
     img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-    cv2.imwrite('boxed__.png', img_)
+    cv2.imwrite('boxed__1.png', img_)
 
 
 if __name__ == "__main__":
