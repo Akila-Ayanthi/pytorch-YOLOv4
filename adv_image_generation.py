@@ -1217,9 +1217,9 @@ def single_image_det(height, width):
 
 
     patch = cv2.imread("/home/dissana8/pytorch-YOLOv4/object_upper.png")
-    resized_patch = cv2.resize(patch, (20, 20))
+    resized_patch = cv2.resize(patch, (100, 100))
     # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
-    im = "/home/dissana8/pytorch-YOLOv4/person_038.jpg"
+    im = "/home/dissana8/pytorch-YOLOv4/person_026.jpg"
     
     img = cv2.imread(im)
     sized = cv2.resize(img, (width, height))
