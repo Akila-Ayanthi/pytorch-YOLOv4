@@ -853,7 +853,7 @@ def findClosest(time, camera_time_list):
 #     return detections/gt_actual*100, 0, 0, 0, 0
 
 
-def extract_frames(path,file_name, model, class_names, width, height, savename, gt, device):
+def adv_image_generation(path,file_name, model, class_names, width, height, savename, gt, device):
     cam1_det, cam2_det, cam3_det, cam4_det= 0, 0, 0, 0
     cam1_gt, cam2_gt, cam3_gt, cam4_gt = 0, 0, 0, 0
     # gt_actual=0
@@ -944,6 +944,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         frame_idx = findClosest(time, c4_times)  # we have to map the time to frame number
         c4_frame_no.append(c4_frames[frame_idx])
 
+
+    patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
+    resized_patch = cv2.resize(patch, (20, 20))
+
     # view 01 success rate
     print("View 01 success rate")
     for ele in enumerate(c1_frame_no):
@@ -958,36 +962,46 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
         for j in range(2):  # This 'for' loop is for speed check
                     # Because the first iteration is usually longer
-            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+            boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
 
-        #real images
-        # imgfile = im.split('/')[6:]
+        # print(boxes)
 
-        #adv images
-        imgfile = im.split('/')[9:]
+        imgfile = im.split('/')[6:]
+        imgfile_ = im.split('/')[5:]
 
         imgname = '/'.join(imgfile)
-        sname = savename + imgname
+        imgname_ = '/'.join(imgfile_)
+        sname = savename + imgname_
+        # imgname = '/'.join(sname)
+        sname_ = sname.split('/')[:7]
+        directory = '/'.join(sname_)
+        print(sname)
 
-        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
-        image, cbbox = custom_bbox(gt[0], img, imgname)
-        if cbbox:
-            cbbox = np.array(cbbox)
-            bbox = np.array(bbox)
-            idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-            cam1_gt+=len(cbbox)
-                
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 
-            for h in range(len(idx_gt_actual)):
-                t = idx_gt_actual[h]
-                text_c = cbbox[t]
-                if round(ious_actual[h], 3)>=0.0:
-                    cam1_det+=1
+        # sname = 'test_bbox.png'
+        img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        replace = img.copy()
+        for i in range(len(bbox)):
+            x = int((bbox[i][0]+bbox[i][2])/2)
+            # y = int((bbox[i][1]+bbox[i][3])/2)
+            y = int((bbox[i][3]-bbox[i][1])/3)+bbox[i][1]
+            # print(x)
+            # print(y)
+
+            if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
+                continue
+            else:
+                replace[y-10: y + 10, x-10 : x + 10] = resized_patch
+    
+        cv2.imwrite(sname, replace)
+
         
 
 #     # view 02 success rate
-    print("View 01 success rate")
+    print("View 02 success rate")
     for ele in enumerate(c2_frame_no):
         im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam2/"+ele[1]
         img = cv2.imread(im)
@@ -996,28 +1010,43 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
         for j in range(2):  # This 'for' loop is for speed check
                     # Because the first iteration is usually longer
-            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+            boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
 
+        # print(boxes)
 
-        imgfile = im.split('/')[9:]
+        imgfile = im.split('/')[6:]
+        imgfile_ = im.split('/')[5:]
+
         imgname = '/'.join(imgfile)
-        sname = savename + imgname
+        imgname_ = '/'.join(imgfile_)
+        sname = savename + imgname_
+        # imgname = '/'.join(sname)
+        sname_ = sname.split('/')[:7]
+        directory = '/'.join(sname_)
+        print(sname)
 
-        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
-        image, cbbox = custom_bbox(gt[1], img, imgname)
-        if cbbox:
-                cbbox = np.array(cbbox)
-                bbox = np.array(bbox)
-                idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-                cam2_gt+=len(cbbox)
-                
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 
-                for h in range(len(idx_gt_actual)):
-                    t = idx_gt_actual[h]
-                    text_c = cbbox[t]
-                    if round(ious_actual[h], 3)>=0.0:
-                        cam2_det+=1
+        # sname = 'test_bbox.png'
+        img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        print(bbox)
+        replace = img.copy()
+        for i in range(len(bbox)):
+            x = int((bbox[i][0]+bbox[i][2])/2)
+            # y = int((bbox[i][1]+bbox[i][3])/2)
+            y = int((bbox[i][3]-bbox[i][1])/3)+bbox[i][1]
+            # print(x)
+            # print(y)
+
+            if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
+                continue
+            else:
+                replace[y-10: y + 10, x-10 : x + 10] = resized_patch
+    
+        cv2.imwrite(sname, replace)
+
         
 
 #     # view 03 success rate
@@ -1030,29 +1059,44 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
         for j in range(2):  # This 'for' loop is for speed check
                     # Because the first iteration is usually longer
-            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+            boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
 
+        # print(boxes)
 
-        imgfile = im.split('/')[9:]
+        imgfile = im.split('/')[6:]
+        imgfile_ = im.split('/')[5:]
+
         imgname = '/'.join(imgfile)
-        sname = savename + imgname
+        imgname_ = '/'.join(imgfile_)
+        sname = savename + imgname_
+        # imgname = '/'.join(sname)
+        sname_ = sname.split('/')[:7]
+        directory = '/'.join(sname_)
+        print(sname)
 
-        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
-        image, cbbox = custom_bbox(gt[2], img, imgname)
-        if cbbox:
-                cbbox = np.array(cbbox)
-                bbox = np.array(bbox)
-                idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-                cam3_gt+=len(cbbox)
-                
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 
-                for h in range(len(idx_gt_actual)):
-                    t = idx_gt_actual[h]
-                    text_c = cbbox[t]
-                    if round(ious_actual[h], 3)>=0.0:
-                        cam3_det+=1
-        
+        # sname = 'test_bbox.png'
+        img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        print(bbox)
+        replace = img.copy()
+        for i in range(len(bbox)):
+            x = int((bbox[i][0]+bbox[i][2])/2)
+            # y = int((bbox[i][1]+bbox[i][3])/2)
+            y = int((bbox[i][3]-bbox[i][1])/3)+bbox[i][1]
+            # print(x)
+            # print(y)
+
+            if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
+                continue
+            else:
+                replace[y-10: y + 10, x-10 : x + 10] = resized_patch
+    
+        cv2.imwrite(sname, replace)
+
+
 #     # view 04 success rate
     print("View 04 success rate")
     for ele in enumerate(c4_frame_no):
@@ -1063,51 +1107,42 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
         for j in range(2):  # This 'for' loop is for speed check
                     # Because the first iteration is usually longer
-            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+            boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
 
+        # print(boxes)
 
-        imgfile = im.split('/')[9:]
+        imgfile = im.split('/')[6:]
+        imgfile_ = im.split('/')[5:]
+
         imgname = '/'.join(imgfile)
-        sname = savename + imgname
+        imgname_ = '/'.join(imgfile_)
+        sname = savename + imgname_
+        # imgname = '/'.join(sname)
+        sname_ = sname.split('/')[:7]
+        directory = '/'.join(sname_)
+        print(sname)
 
-        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
-        image, cbbox = custom_bbox(gt[3], img, imgname)
-        if cbbox:
-                cbbox = np.array(cbbox)
-                bbox = np.array(bbox)
-                idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-                cam4_gt+=len(cbbox)
-                
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 
-                for h in range(len(idx_gt_actual)):
-                    t = idx_gt_actual[h]
-                    text_c = cbbox[t]
-                    if round(ious_actual[h], 3)>=0.0:
-                        cam4_det+=1
+        # sname = 'test_bbox.png'
+        img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        print(bbox)
+        replace = img.copy()
+        for i in range(len(bbox)):
+            x = int((bbox[i][0]+bbox[i][2])/2)
+            # y = int((bbox[i][1]+bbox[i][3])/2)
+            y = int((bbox[i][3]-bbox[i][1])/3)+bbox[i][1]
+            # print(x)
+            # print(y)
 
-    tot_det = cam1_det+cam2_det+cam3_det+cam4_det
-    tot_gt = cam1_gt+cam2_gt+cam3_gt+cam4_gt
-
-    f = open("detections_adv.txt", "a")
-    f.write("total detections: " +str(tot_det)+"\n")
-    f.write("total gt : " +str(tot_gt)+"\n")
-    f.write("cam1 detections: " +str(cam1_det)+"\n")
-    f.write("cam1 gt: " +str(cam1_gt)+"\n")
-    f.write("cam2 detections: " +str(cam2_det)+"\n")
-    f.write("cam2 gt: " +str(cam2_gt)+"\n")
-    f.write("cam3 detections: " +str(cam3_det)+"\n")
-    f.write("cam3_gt: " +str(cam3_gt)+"\n")
-    f.write("cam4_detections: " +str(cam4_det)+"\n")
-    f.write("cam4_gt: " +str(cam4_gt)+"\n")
+            if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
+                continue
+            else:
+                replace[y-10: y + 10, x-10 : x + 10] = resized_patch
     
-    f.write("\n")
-    f.write("\n")
-    f.close()
-
-    return (tot_det/tot_gt)*100, (cam1_det/cam1_gt)*100, (cam2_det/cam2_gt)*100, (cam3_det/cam3_gt)*100, (cam4_det/cam4_gt)*100
-    # return 0, (cam1_det/cam1_gt)*100, 0, 0, 0   
-# #     # return 0, 0, 0, 0, 0
+        cv2.imwrite(sname, replace)
 
     
 
@@ -1349,7 +1384,8 @@ if __name__ == "__main__":
 
 
     height, width = 416, 416
-    single_image_det(height, width)
+    # single_image_det(height, width)
+    adv_image_generation(path, file_name, model, class_names, width, height,  savename, gt, device)
 
     # fig, a = plt.subplots(4, 1)
     # extract_frames(path, file_name, model, class_names, width, height, savename, gt)
