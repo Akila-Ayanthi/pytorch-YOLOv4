@@ -952,10 +952,10 @@ def adv_image_generation(path,file_name, model, class_names, width, height, save
     print("View 01 success rate")
     for ele in enumerate(c1_frame_no):
         #real images
-        # im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
+        im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
 
         #adversarial images
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam1/"+ele[1]
+        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam1/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1003,7 +1003,12 @@ def adv_image_generation(path,file_name, model, class_names, width, height, save
 #     # view 02 success rate
     print("View 02 success rate")
     for ele in enumerate(c2_frame_no):
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam2/"+ele[1]
+
+        #real images
+        im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
+
+
+        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam2/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1052,7 +1057,10 @@ def adv_image_generation(path,file_name, model, class_names, width, height, save
 #     # view 03 success rate
     print("View 03 success rate")
     for ele in enumerate(c3_frame_no):
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/"+ele[1]
+        #real images
+        im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
+
+        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1100,7 +1108,10 @@ def adv_image_generation(path,file_name, model, class_names, width, height, save
 #     # view 04 success rate
     print("View 04 success rate")
     for ele in enumerate(c4_frame_no):
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam4/"+ele[1]
+        #real images
+        im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
+
+        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam4/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
