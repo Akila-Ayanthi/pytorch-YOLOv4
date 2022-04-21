@@ -1246,7 +1246,7 @@ def single_image_det(height, width):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    sname = 'test_bbox.png'
+    # sname = 'test_bbox.png'
     img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
     print(bbox)
     replace = img.copy()
@@ -1261,9 +1261,8 @@ def single_image_det(height, width):
             continue
         else:
             replace[y-8: y +8, x-8 : x + 8] = resized_patch
-    print(replace)
-    print(str(sname))
-    cv2.imwrite(str(sname), replace)
+   
+    cv2.imwrite(sname, replace)
 
 
     # im = "replace_.png"
