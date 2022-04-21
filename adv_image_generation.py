@@ -1240,28 +1240,28 @@ def single_image_det(height, width):
     # imgname = '/'.join(sname)
     sname_ = sname.split('/')[:7]
     directory = '/'.join(sname_)
-    # print(directory)
+    print(sname)
 
 
-    if not os.path.exists(directory):
-        os.makedirs(directory)
+    # if not os.path.exists(directory):
+    #     os.makedirs(directory)
 
-    sname = 'test_bbox.png'
-    img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    # sname = 'test_bbox.png'
+    # img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
-    replace = img.copy()
-    for i in range(len(bbox)):
-        x = int((bbox[i][0]+bbox[i][2])/2)
-        # y = int((bbox[i][1]+bbox[i][3])/2)
-        y = int((bbox[i][3]-bbox[i][1])/3)+bbox[i][1]
-        # print(x)
-        # print(y)
+    # replace = img.copy()
+    # for i in range(len(bbox)):
+    #     x = int((bbox[i][0]+bbox[i][2])/2)
+    #     # y = int((bbox[i][1]+bbox[i][3])/2)
+    #     y = int((bbox[i][3]-bbox[i][1])/3)+bbox[i][1]
+    #     # print(x)
+    #     # print(y)
 
-        if (y+8)>=480 or (x+8)>=640 or (x-8)<0 or (y-8)<0:
-            continue
-        else:
-            replace[y-8: y +8, x-8 : x + 8] = resized_patch
-    cv2.imwrite(sname, replace)
+    #     if (y+8)>=480 or (x+8)>=640 or (x-8)<0 or (y-8)<0:
+    #         continue
+    #     else:
+    #         replace[y-8: y +8, x-8 : x + 8] = resized_patch
+    # cv2.imwrite(sname, replace)
 
 
     # im = "replace_.png"
