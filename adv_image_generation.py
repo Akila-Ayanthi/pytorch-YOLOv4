@@ -1216,78 +1216,72 @@ def single_image_det(height, width):
     # patch_rand = np.reshape(patch_rand, newshape=patch.shape)
 
 
-    patch = cv2.imread("/home/dissana8/pytorch-YOLOv4/patch.jpg")
-    resized_patch = cv2.resize(patch, (50, 50))
+    patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.5 confidence/epoch8-iter4000-cw tanh perturbation.png")
+    resized_patch = cv2.resize(patch, (16, 16))
     # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
-    im = "/home/dissana8/pytorch-YOLOv4/person_038.jpg"
+    im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
     
     img = cv2.imread(im)
     sized = cv2.resize(img, (width, height))
     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
-
-    ## place the adversarial patch on a single image and check the detections made by yolo-v4
-    ##Check the TOG attack to see how to place the patch on the image
 
     for j in range(2):  # This 'for' loop is for speed check
                 # Because the first iteration is usually longer
         boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
 
     print(boxes)
-    # imgfile = im.split('/')[6:]
-    # imgname = '/'.join(imgfile)
-    # print(imgname)
-    # sname = savename + imgname
 
-    sname = 'test_bbox.png'
-    img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-    # print(bbox)
+    imgfile = im.split('/')[6:]
+    imgfile_ = im.split('/')[5:]
 
-    # image, cbbox = custom_bbox(gt[0], img, imgname)
-    # print(cbbox)
-    # img = cv2.rectangle(sized, (cbbox[0][0], cbbox[0][1]), (cbbox[0][2], cbbox[0][3]), (0, 0, 255), 2)
-    # img = cv2.rectangle(img, (cbbox[1][0], cbbox[1][1]), (cbbox[1][2], cbbox[1][3]), (0, 0, 255), 2)
-    # print("resized patch ")
-    # print(resized_patch.shape)
-    replace = img.copy()
-    # print("replace")
-    # print(replace.shape)
-    for i in range(len(bbox)):
-        # print(bbox[i])
-        x = int((bbox[i][0]+bbox[i][2])/2)
-        # y = int((bbox[i][1]+bbox[i][3])/2)
-        y = int((bbox[i][3]-bbox[i][1])/3)+bbox[i][1]
-        # print(x)
-        # print(y)
-
-    #     print(replace[y-8: y +8, x-8 : x + 8].shape)
-        if (y+50)>=480 or (x+50)>=640 or (x-50)<0 or (y-50)<0:
-            continue
-        else:
-            # replace[y-12: y +12, x-12 : x + 12] = resized_patch
-            replace[y-25: y +25, x-25 : x + 25] = resized_patch
-    # replace = cv2.cvtColor(replace, cv2.COLOR_RGB2BGR)
-    cv2.imwrite('boxed.png', img_)
-    cv2.imwrite('replace_.png', replace)
+    imgname = '/'.join(imgfile)
+    imgname_ = '/'.join(imgfile_)
+    sname = savename + imgname_
+    # imgname = '/'.join(sname)
+    sname_ = sname.split('/')[:7]
+    directory = '/'.join(sname_)
+    print(directory)
 
 
-    im = "replace_.png"
-    img = cv2.imread(im)
-    sized = cv2.resize(img, (width, height))
-    sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+    # if not os.path.exists(directory):
+    #     os.makedirs(directory)
 
-    for j in range(2):  # This 'for' loop is for speed check
-                # Because the first iteration is usually longer
-        boxes = do_detect(model, sized, 0.4, 0.4, use_cuda)
+    # sname = 'test_bbox.png'
+    # img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
 
-    # print(boxes)
-    # # imgfile = im.split('/')[6:]
-    # # imgname = '/'.join(imgfile)
-    # # print(imgname)
-    # # sname = savename + imgname
+    # replace = img.copy()
+    # for i in range(len(bbox)):
+    #     x = int((bbox[i][0]+bbox[i][2])/2)
+    #     # y = int((bbox[i][1]+bbox[i][3])/2)
+    #     y = int((bbox[i][3]-bbox[i][1])/3)+bbox[i][1]
+    #     # print(x)
+    #     # print(y)
 
-    sname = 'test_bbox.png'
-    img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-    cv2.imwrite('boxed__1.png', img_)
+    #     if (y+8)>=480 or (x+8)>=640 or (x-8)<0 or (y-8)<0:
+    #         continue
+    #     else:
+    #         replace[y-8: y +8, x-8 : x + 8] = resized_patch
+    # cv2.imwrite(sname, replace)
+
+
+    # im = "replace_.png"
+    # img = cv2.imread(im)
+    # sized = cv2.resize(img, (width, height))
+    # sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+
+    # for j in range(2):  # This 'for' loop is for speed check
+    #             # Because the first iteration is usually longer
+    #     boxes = do_detect(model, sized, 0.4, 0.4, use_cuda)
+
+    # # print(boxes)
+    # # # imgfile = im.split('/')[6:]
+    # # # imgname = '/'.join(imgfile)
+    # # # print(imgname)
+    # # # sname = savename + imgname
+
+    # sname = 'test_bbox.png'
+    # img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    # cv2.imwrite('boxed__1.png', img_)
 
 
 if __name__ == "__main__":
