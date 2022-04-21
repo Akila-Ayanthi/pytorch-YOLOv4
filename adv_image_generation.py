@@ -1261,7 +1261,7 @@ def single_image_det(height, width):
             continue
         else:
             replace[y-8: y +8, x-8 : x + 8] = resized_patch
-    cv2.imwrite("replaced_test.jpg", replace)
+    cv2.imwrite(str(sname), replace)
 
 
     # im = "replace_.png"
