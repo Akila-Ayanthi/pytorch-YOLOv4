@@ -1005,7 +1005,7 @@ def adv_image_generation(path,file_name, model, class_names, width, height, save
     for ele in enumerate(c2_frame_no):
 
         #real images
-        im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
+        im = "/home/dissana8/LAB/Visor/cam2/"+ele[1]
 
 
         # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam2/"+ele[1]
@@ -1058,7 +1058,7 @@ def adv_image_generation(path,file_name, model, class_names, width, height, save
     print("View 03 success rate")
     for ele in enumerate(c3_frame_no):
         #real images
-        im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
+        im = "/home/dissana8/LAB/Visor/cam3/"+ele[1]
 
         # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/"+ele[1]
         img = cv2.imread(im)
@@ -1109,7 +1109,7 @@ def adv_image_generation(path,file_name, model, class_names, width, height, save
     print("View 04 success rate")
     for ele in enumerate(c4_frame_no):
         #real images
-        im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
+        im = "/home/dissana8/LAB/Visor/cam4/"+ele[1]
 
         # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam4/"+ele[1]
         img = cv2.imread(im)
