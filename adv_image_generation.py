@@ -1216,53 +1216,53 @@ def single_image_det(height, width):
     # patch_rand = np.reshape(patch_rand, newshape=patch.shape)
 
 
-    # patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.5 confidence/epoch8-iter4000-cw tanh perturbation.png")
-    # resized_patch = cv2.resize(patch, (16, 16))
-    # # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
-    # im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
+    patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.1 confidence/success_adv_pert.png")
+    resized_patch = cv2.resize(patch, (16, 16))
+    # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
+    im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
     
-    # img = cv2.imread(im)
-    # sized = cv2.resize(img, (width, height))
-    # sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+    img = cv2.imread(im)
+    sized = cv2.resize(img, (width, height))
+    sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-    # for j in range(2):  # This 'for' loop is for speed check
-    #             # Because the first iteration is usually longer
-    #     boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
+    for j in range(2):  # This 'for' loop is for speed check
+                # Because the first iteration is usually longer
+        boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
 
-    # # print(boxes)
+    # print(boxes)
 
-    # imgfile = im.split('/')[6:]
-    # imgfile_ = im.split('/')[5:]
+    imgfile = im.split('/')[6:]
+    imgfile_ = im.split('/')[5:]
 
-    # imgname = '/'.join(imgfile)
-    # imgname_ = '/'.join(imgfile_)
-    # sname = savename + imgname_
-    # # imgname = '/'.join(sname)
-    # sname_ = sname.split('/')[:7]
-    # directory = '/'.join(sname_)
-    # print(sname)
+    imgname = '/'.join(imgfile)
+    imgname_ = '/'.join(imgfile_)
+    sname = savename + imgname_
+    # imgname = '/'.join(sname)
+    sname_ = sname.split('/')[:7]
+    directory = '/'.join(sname_)
+    print(sname)
 
 
-    # if not os.path.exists(directory):
-    #     os.makedirs(directory)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
-    # # sname = 'test_bbox.png'
-    # img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-    # print(bbox)
-    # replace = img.copy()
-    # for i in range(len(bbox)):
-    #     x = int((bbox[i][0]+bbox[i][2])/2)
-    #     # y = int((bbox[i][1]+bbox[i][3])/2)
-    #     y = int((bbox[i][3]-bbox[i][1])/3)+bbox[i][1]
-    #     # print(x)
-    #     # print(y)
+    # sname = 'test_bbox.png'
+    img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    print(bbox)
+    replace = img.copy()
+    for i in range(len(bbox)):
+        x = int((bbox[i][0]+bbox[i][2])/2)
+        # y = int((bbox[i][1]+bbox[i][3])/2)
+        y = int((bbox[i][3]-bbox[i][1])/3)+bbox[i][1]
+        # print(x)
+        # print(y)
 
-    #     if (y+8)>=480 or (x+8)>=640 or (x-8)<0 or (y-8)<0:
-    #         continue
-    #     else:
-    #         replace[y-8: y +8, x-8 : x + 8] = resized_patch
+        if (y+8)>=480 or (x+8)>=640 or (x-8)<0 or (y-8)<0:
+            continue
+        else:
+            replace[y-8: y +8, x-8 : x + 8] = resized_patch
    
-    # cv2.imwrite(sname, replace)
+    cv2.imwrite(sname, replace)
 
 
     im = "/home/dissana8/pytorch-YOLOv4/output_adv/cam3/000005/005015.jpg"
@@ -1272,7 +1272,7 @@ def single_image_det(height, width):
 
     for j in range(2):  # This 'for' loop is for speed check
                 # Because the first iteration is usually longer
-        boxes = do_detect(model, sized, 0.9, 0.9, use_cuda)
+        boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
 
     # print(boxes)
     # # imgfile = im.split('/')[6:]
