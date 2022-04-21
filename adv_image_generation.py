@@ -1216,7 +1216,7 @@ def single_image_det(height, width):
     # patch_rand = np.reshape(patch_rand, newshape=patch.shape)
 
 
-    patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.1 confidence/success_adv_pert.png")
+    patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/Perturbation of 9 Distortion 10000000000.0.png")
     resized_patch = cv2.resize(patch, (16, 16))
     # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
     im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
