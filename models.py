@@ -945,10 +945,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
 
         #adversarial images TOG
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam1/"+ele[1]
+        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam1/"+ele[1]
 
         #adversarial images Daedulus
-        # im = "/home/dissana8/Daedalus-physical/Adv_Images/cam1/"+ele[1]
+        im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam1/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -961,10 +961,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # imgfile = im.split('/')[6:]
 
         #adv images TOG
-        imgfile = im.split('/')[9:]
+        # imgfile = im.split('/')[9:]
 
         #adv images Daedulus
-        # imgfile = im.split('/')[6:]
+        imgfile = im.split('/')[6:]
 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
@@ -993,10 +993,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     for ele in enumerate(c2_frame_no):
 
         #adv images TOG
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam2/"+ele[1]
+        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam2/"+ele[1]
 
         #adversarial images Daedulus
-        # im = "/home/dissana8/Daedalus-physical/Adv_Images/cam2/"+ele[1]
+        im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam2/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1006,10 +1006,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
         #adv images TOG
-        imgfile = im.split('/')[9:]
+        # imgfile = im.split('/')[9:]
 
         #adv images Daedulus
-        # imgfile = im.split('/')[6:]
+        imgfile = im.split('/')[6:]
 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
@@ -1035,10 +1035,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     print("View 03 success rate")
     for ele in enumerate(c3_frame_no):
         #adv images TOG
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/"+ele[1]
+        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/"+ele[1]
 
         #adversarial images Daedulus
-        # im = "/home/dissana8/Daedalus-physical/Adv_Images/cam3/"+ele[1]
+        im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam3/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1049,10 +1049,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
 
         #adv images TOG
-        imgfile = im.split('/')[9:]
+        # imgfile = im.split('/')[9:]
 
         #adv images Daedulus
-        # imgfile = im.split('/')[6:]
+        imgfile = im.split('/')[6:]
 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
@@ -1077,10 +1077,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     print("View 04 success rate")
     for ele in enumerate(c4_frame_no):
         #adv images TOG
-        im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam4/"+ele[1]
+        # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam4/"+ele[1]
 
         #adversarial images Daedulus
-        # im = "/home/dissana8/Daedalus-physical/Adv_Images/cam4/"+ele[1]
+        im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam4/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1091,10 +1091,10 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
 
         #adv images TOG
-        imgfile = im.split('/')[9:]
+        # imgfile = im.split('/')[9:]
 
         #adv images Daedulus
-        # imgfile = im.split('/')[6:]
+        imgfile = im.split('/')[6:]
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
@@ -1229,7 +1229,7 @@ if __name__ == "__main__":
 
     success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
 
-    f = open("success_rate_adv_TOG_new.txt", "a")
+    f = open("success_rate_adv_Daedulus_new.txt", "a")
     f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
     f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
     f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
