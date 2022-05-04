@@ -1263,7 +1263,8 @@ def single_image_det(height, width):
 
 
     patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
-    resized_patch = cv2.resize(patch, (100, 100))
+    resized_patch = cv2.resize(patch, (50, 50))
+
     # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
     im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
     # im = 'person_001.jpg'
@@ -1308,7 +1309,7 @@ def single_image_det(height, width):
         # if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
             # continue
         # else:
-        replace[y-50: y + 50, x-50 : x + 50] = resized_patch
+        replace[y-25: y + 25, x-25 : x + 25] = resized_patch
    
     cv2.imwrite(sname, replace)
 
