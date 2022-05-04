@@ -1266,7 +1266,7 @@ def single_image_det(im, height, width):
     resized_patch = cv2.resize(patch, (100, 100))
     # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
     # im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
-    
+    print(im)
     img = cv2.imread(im)
     sized = cv2.resize(img, (width, height))
     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
