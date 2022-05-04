@@ -476,6 +476,7 @@ if __name__ == "__main__":
     pretrained_dict = torch.load(weightfile, map_location=torch.device('cuda'))
     model.load_state_dict(pretrained_dict)
 
+
     use_cuda = True
     if use_cuda:
         model.cuda()

@@ -1170,6 +1170,7 @@ if __name__ == "__main__":
         # imgfile = sys.argv[3]
         height = int(sys.argv[3])
         width = int(sys.argv[4])
+        imgfile = sys.argv[5]
     elif len(sys.argv) == 6:
         n_classes = int(sys.argv[1])
         weightfile = sys.argv[2]
@@ -1194,50 +1195,50 @@ if __name__ == "__main__":
     if use_cuda:
         model.cuda()
 
-    #real images
-    # path = "/home/dissana8/LAB/"
+    # #real images
+    # # path = "/home/dissana8/LAB/"
 
-    #adversarial images TOG
-    path = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/"
+    # #adversarial images TOG
+    # path = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/"
 
-    #adversarial images Daedulus
-    # path = "/home/dissana8/Daedalus-physical/Adv_Images/"
+    # #adversarial images Daedulus
+    # # path = "/home/dissana8/Daedalus-physical/Adv_Images/"
 
-    file_name = 'LAB-GROUNDTRUTH.ref'
+    # file_name = 'LAB-GROUNDTRUTH.ref'
 
-    if namesfile == None:
-            if n_classes == 20:
-                namesfile = '/home/dissana8/pytorch-YOLOv4/data/voc.names'
-            elif n_classes == 80:
-                namesfile = '/home/dissana8/pytorch-YOLOv4/data/coco.names'
-            else:
-                print("please give namefile")
+    # if namesfile == None:
+    #         if n_classes == 20:
+    #             namesfile = '/home/dissana8/pytorch-YOLOv4/data/voc.names'
+    #         elif n_classes == 80:
+    #             namesfile = '/home/dissana8/pytorch-YOLOv4/data/coco.names'
+    #         else:
+    #             print("please give namefile")
 
-    class_names = load_class_names(namesfile)
+    # class_names = load_class_names(namesfile)
 
-    savename = '/home/dissana8/pytorch-YOLOv4/output_adv/'
+    # savename = '/home/dissana8/pytorch-YOLOv4/output_adv/'
 
 
-    gt = []
-    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True))
-    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam2_coords__.npy', allow_pickle=True))
-    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam3_coords__.npy', allow_pickle=True))
-    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam4_coords__.npy', allow_pickle=True))
+    # gt = []
+    # gt.append(np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True))
+    # gt.append(np.load('/home/dissana8/LAB/data/LAB/cam2_coords__.npy', allow_pickle=True))
+    # gt.append(np.load('/home/dissana8/LAB/data/LAB/cam3_coords__.npy', allow_pickle=True))
+    # gt.append(np.load('/home/dissana8/LAB/data/LAB/cam4_coords__.npy', allow_pickle=True))
 
-    # fig, a = plt.subplots(4, 1)
-    # extract_frames(path, file_name, model, class_names, width, height, savename, gt)
+    # # fig, a = plt.subplots(4, 1)
+    # # extract_frames(path, file_name, model, class_names, width, height, savename, gt)
 
-    success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
+    # success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
 
-    f = open("success_rate_adv_Daedulus_new.txt", "a")
-    f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
-    f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
-    f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
-    f.write("Success rate of view 03" +": "+str(cam3_success_rate)+"\n")
-    f.write("Success rate of view 04" +": "+str(cam4_success_rate)+"\n")
-    f.write("\n")
-    f.write("\n")
-    f.close()
+    # f = open("success_rate_adv_Daedulus_new.txt", "a")
+    # f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
+    # f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
+    # f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
+    # f.write("Success rate of view 03" +": "+str(cam3_success_rate)+"\n")
+    # f.write("Success rate of view 04" +": "+str(cam4_success_rate)+"\n")
+    # f.write("\n")
+    # f.write("\n")
+    # f.close()
     # root = "/home/dissana8/LAB/Visor/cam1"
     # files=[]
     # pattern = "*.jpg"
@@ -1296,3 +1297,31 @@ if __name__ == "__main__":
         
         # savename1 = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname
         # cv2.imwrite(savename1, img)
+
+    img = cv2.imread(imgfile)
+
+    # Inference input size is 416*416 does not mean training size is the same
+    # Training size could be 608*608 or even other sizes
+    # Optional inference sizes:
+    #   Hight in {320, 416, 512, 608, ... 320 + 96 * n}
+    #   Width in {320, 416, 512, 608, ... 320 + 96 * m}
+    sized = cv2.resize(img, (width, height))
+    sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+
+    from tool.utils import load_class_names, plot_boxes_cv2
+    from tool.torch_utils import do_detect
+
+    for i in range(2):  # This 'for' loop is for speed check
+                        # Because the first iteration is usually longer
+        boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+
+    if namesfile == None:
+        if n_classes == 20:
+            namesfile = 'data/voc.names'
+        elif n_classes == 80:
+            namesfile = 'data/coco.names'
+        else:
+            print("please give namefile")
+
+    class_names = load_class_names(namesfile)
+    plot_boxes_cv2(img, boxes[0], 'predictions.jpg', class_names)
