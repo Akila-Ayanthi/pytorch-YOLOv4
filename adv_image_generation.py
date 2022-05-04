@@ -1263,7 +1263,7 @@ def single_image_det(im, height, width):
 
     patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
     print(patch.shape)
-    resized_patch = cv2.resize(patch, (64, 64))
+    resized_patch = cv2.resize(patch, (128, 128))
 
     # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
     # im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
@@ -1310,7 +1310,7 @@ def single_image_det(im, height, width):
             # continue
         # else:
         try:
-            replace[y-32: y + 32, x-32 : x + 32] = resized_patch
+            replace[y-64: y + 64, x-64 : x + 64] = resized_patch
         except:
             continue
    
