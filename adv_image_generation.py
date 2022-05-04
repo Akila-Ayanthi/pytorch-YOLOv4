@@ -1255,7 +1255,7 @@ def extract_roi(detections, class_id, img_bbox, min_size, patch_size):
             rois.append(roi_candidate)
     return rois
 
-def single_image_det(height, width):
+def single_image_det(im, height, width):
     # patch = np.load('/home/dissana8/TOG/Adv_images/vanishing/2022-03-09_14:51:18_person/Epoch-19_Loss-8.84_ASR-0.80.npy')
     # patch_rand = np.reshape(patch.copy(), newshape=(patch.shape[0]*patch.shape[1]*patch.shape[2], patch.shape[3]))
     # np.random.shuffle(patch_rand)
@@ -1263,9 +1263,9 @@ def single_image_det(height, width):
 
 
     patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
-    resized_patch = cv2.resize(patch, (20, 20))
+    resized_patch = cv2.resize(patch, (100, 100))
     # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
-    im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
+    # im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
     
     img = cv2.imread(im)
     sized = cv2.resize(img, (width, height))
@@ -1286,7 +1286,7 @@ def single_image_det(height, width):
     # imgname = '/'.join(sname)
     sname_ = sname.split('/')[:7]
     directory = '/'.join(sname_)
-    print(sname)
+    # print(sname)
 
 
     if not os.path.exists(directory):
@@ -1294,7 +1294,7 @@ def single_image_det(height, width):
 
     # sname = 'test_bbox.png'
     img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-    print(bbox)
+    # print(bbox)
     replace = img.copy()
     for i in range(len(bbox)):
         x = int((bbox[i][0]+bbox[i][2])/2)
@@ -1303,10 +1303,10 @@ def single_image_det(height, width):
         # print(x)
         # print(y)
 
-        if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
-            continue
-        else:
-            replace[y-10: y + 10, x-10 : x + 10] = resized_patch
+        # if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
+            # continue
+        # else:
+        replace[y-50: y + 50, x-50 : x + 50] = resized_patch
    
     cv2.imwrite(sname, replace)
 
@@ -1384,7 +1384,7 @@ if __name__ == "__main__":
 
     class_names = load_class_names(namesfile)
 
-    savename = '/home/dissana8/pytorch-YOLOv4/output_adv/'
+    savename = '/home/dissana8/pytorch-YOLOv4/output_adv_single_images/'
 
 
     gt = []
@@ -1395,8 +1395,11 @@ if __name__ == "__main__":
 
 
     height, width = 416, 416
-    # single_image_det(height, width)
-    adv_image_generation(path, file_name, model, class_names, width, height,  savename, gt, device)
+
+    imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
+    for image in imgfile:
+        single_image_det(image, height, width)
+    # adv_image_generation(path, file_name, model, class_names, width, height,  savename, gt, device)
 
     # fig, a = plt.subplots(4, 1)
     # extract_frames(path, file_name, model, class_names, width, height, savename, gt)
