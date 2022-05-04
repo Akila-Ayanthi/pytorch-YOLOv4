@@ -1277,17 +1277,18 @@ def single_image_det(im, height, width):
 
     # print(boxes)
 
-    imgfile = im.split('/')[6:]
-    imgfile_ = im.split('/')[5:]
+    # imgfile = im.split('/')[6:]
+    # imgfile_ = im.split('/')[5:]
 
-    imgname = '/'.join(imgfile)
-    imgname_ = '/'.join(imgfile_)
-    sname = savename + imgname_
-    # imgname = '/'.join(sname)
-    sname_ = sname.split('/')[:7]
-    directory = '/'.join(sname_)
+    # imgname = '/'.join(imgfile)
+    # imgname_ = '/'.join(imgfile_)
+    # sname = savename + imgname_
+    # # imgname = '/'.join(sname)
+    # sname_ = sname.split('/')[:7]
+    # directory = '/'.join(sname_)
     # print(sname)
-
+    sname = "adv_"+im.split('_')[-1]
+    directory = 'adv_output'
 
     if not os.path.exists(directory):
         os.makedirs(directory)
