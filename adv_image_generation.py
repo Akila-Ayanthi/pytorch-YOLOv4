@@ -1255,7 +1255,7 @@ def extract_roi(detections, class_id, img_bbox, min_size, patch_size):
             rois.append(roi_candidate)
     return rois
 
-def single_image_det(height, width):
+def single_image_det(im, height, width):
     # patch = np.load('/home/dissana8/TOG/Adv_images/vanishing/2022-03-09_14:51:18_person/Epoch-19_Loss-8.84_ASR-0.80.npy')
     # patch_rand = np.reshape(patch.copy(), newshape=(patch.shape[0]*patch.shape[1]*patch.shape[2], patch.shape[3]))
     # np.random.shuffle(patch_rand)
@@ -1263,10 +1263,11 @@ def single_image_det(height, width):
 
 
     patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
+    print(patch.shape)
     resized_patch = cv2.resize(patch, (32, 32))
 
     # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
-    im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
+    # im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
     # im = 'person_001.jpg'
     print(im)
     img = cv2.imread(im)
@@ -1400,8 +1401,8 @@ if __name__ == "__main__":
     height, width = 416, 416
 
     imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
-    # for image in imgfile:
-    single_image_det(height, width)
+    for image in imgfile:
+        single_image_det(image, height, width)
     # adv_image_generation(path, file_name, model, class_names, width, height,  savename, gt, device)
 
     # fig, a = plt.subplots(4, 1)
