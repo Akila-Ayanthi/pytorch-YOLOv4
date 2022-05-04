@@ -946,7 +946,7 @@ def adv_image_generation(path,file_name, model, class_names, width, height, save
 
 
     patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
-    resized_patch = cv2.resize(patch, (20, 20))
+    resized_patch = cv2.resize(patch, (32, 32))
 
     # view 01 success rate
     print("View 01 success rate")
@@ -991,10 +991,10 @@ def adv_image_generation(path,file_name, model, class_names, width, height, save
             # print(x)
             # print(y)
 
-            if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
+            if (y+16)>=480 or (x+16)>=640 or (x-16)<0 or (y-16)<0:
                 continue
             else:
-                replace[y-10: y + 10, x-10 : x + 10] = resized_patch
+                replace[y-16: y + 16, x-16 : x + 16] = resized_patch
     
         cv2.imwrite(sname, replace)
 
@@ -1045,10 +1045,10 @@ def adv_image_generation(path,file_name, model, class_names, width, height, save
             # print(x)
             # print(y)
 
-            if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
+            if (y+16)>=480 or (x+16)>=640 or (x-16)<0 or (y-16)<0:
                 continue
             else:
-                replace[y-10: y + 10, x-10 : x + 10] = resized_patch
+                replace[y-16: y + 16, x-16 : x + 16] = resized_patch
     
         cv2.imwrite(sname, replace)
 
@@ -1097,10 +1097,10 @@ def adv_image_generation(path,file_name, model, class_names, width, height, save
             # print(x)
             # print(y)
 
-            if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
+            if (y+16)>=480 or (x+16)>=640 or (x-16)<0 or (y-16)<0:
                 continue
             else:
-                replace[y-10: y + 10, x-10 : x + 10] = resized_patch
+                replace[y-16: y + 16, x-16 : x + 16] = resized_patch
     
         cv2.imwrite(sname, replace)
 
@@ -1148,10 +1148,10 @@ def adv_image_generation(path,file_name, model, class_names, width, height, save
             # print(x)
             # print(y)
 
-            if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
+            if (y+16)>=480 or (x+16)>=640 or (x-16)<0 or (y-16)<0:
                 continue
             else:
-                replace[y-10: y + 10, x-10 : x + 10] = resized_patch
+                replace[y-16: y + 16, x-16 : x + 16] = resized_patch
     
         cv2.imwrite(sname, replace)
 
