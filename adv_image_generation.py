@@ -1399,8 +1399,8 @@ if __name__ == "__main__":
     height, width = 416, 416
 
     imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
-    for image in imgfile:
-        single_image_det(image, height, width)
+    # for image in imgfile:
+    single_image_det(height, width)
     # adv_image_generation(path, file_name, model, class_names, width, height,  savename, gt, device)
 
     # fig, a = plt.subplots(4, 1)
