@@ -1299,6 +1299,7 @@ if __name__ == "__main__":
         # cv2.imwrite(savename1, img)
     imgfile = ['person_001.jpg', 'person_025.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
     for image in imgfile:
+        print(image)
         img = cv2.imread(image)
 
         # Inference input size is 416*416 does not mean training size is the same
