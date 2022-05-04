@@ -1164,6 +1164,7 @@ if __name__ == "__main__":
     import cv2
 
     namesfile = None
+    print(len(sys.argv))
     if len(sys.argv) == 5:
         n_classes = int(sys.argv[1])
         weightfile = sys.argv[2]
