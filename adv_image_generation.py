@@ -1309,7 +1309,10 @@ def single_image_det(im, height, width):
         # if (y+10)>=480 or (x+10)>=640 or (x-10)<0 or (y-10)<0:
             # continue
         # else:
-        replace[y-32: y + 32, x-32 : x + 32] = resized_patch
+        try:
+            replace[y-32: y + 32, x-32 : x + 32] = resized_patch
+        except:
+            continue
    
     cv2.imwrite(sname, replace)
 
