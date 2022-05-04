@@ -1171,7 +1171,6 @@ if __name__ == "__main__":
         # imgfile = sys.argv[3]
         height = int(sys.argv[3])
         width = int(sys.argv[4])
-        imgfile = sys.argv[5]
     elif len(sys.argv) == 6:
         n_classes = int(sys.argv[1])
         weightfile = sys.argv[2]
@@ -1298,7 +1297,7 @@ if __name__ == "__main__":
         
         # savename1 = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname
         # cv2.imwrite(savename1, img)
-
+    imgfile = 'person_001.jpg'
     img = cv2.imread(imgfile)
 
     # Inference input size is 416*416 does not mean training size is the same
