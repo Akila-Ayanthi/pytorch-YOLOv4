@@ -1268,6 +1268,7 @@ def single_image_det(im, height, width):
     # im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
     print(im)
     img = cv2.imread(im)
+    img = img.astype('uint8')
     print(img)
     sized = cv2.resize(img, (width, height))
     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
