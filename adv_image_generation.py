@@ -1261,6 +1261,9 @@ def single_image_det(im, height, width):
     # np.random.shuffle(patch_rand)
     # patch_rand = np.reshape(patch_rand, newshape=patch.shape)
 
+    patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
+    print(patch.shape)
+    resized_patch = cv2.resize(patch, (32, 32))
 
     # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
     # im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
@@ -1292,10 +1295,6 @@ def single_image_det(im, height, width):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
-    print(patch.shape)
-    resized_patch = cv2.resize(patch, (32, 32))
-
     # sname = 'test_bbox.png'
     img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
     # print(bbox)
@@ -1315,24 +1314,24 @@ def single_image_det(im, height, width):
     cv2.imwrite(sname, replace)
 
 
-    im = "/home/dissana8/pytorch-YOLOv4/output_adv/cam3/000005/005015.jpg"
-    img = cv2.imread(im)
-    sized = cv2.resize(img, (width, height))
-    sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+    # im = "/home/dissana8/pytorch-YOLOv4/output_adv/cam3/000005/005015.jpg"
+    # img = cv2.imread(im)
+    # sized = cv2.resize(img, (width, height))
+    # sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-    for j in range(2):  # This 'for' loop is for speed check
-                # Because the first iteration is usually longer
-        boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
+    # for j in range(2):  # This 'for' loop is for speed check
+    #             # Because the first iteration is usually longer
+    #     boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
 
-    # print(boxes)
-    # # imgfile = im.split('/')[6:]
-    # # imgname = '/'.join(imgfile)
-    # # print(imgname)
-    # # sname = savename + imgname
+    # # print(boxes)
+    # # # imgfile = im.split('/')[6:]
+    # # # imgname = '/'.join(imgfile)
+    # # # print(imgname)
+    # # # sname = savename + imgname
 
-    sname = 'test_bbox.png'
-    img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
-    cv2.imwrite('boxed__1.png', img_)
+    # sname = 'test_bbox.png'
+    # img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+    # cv2.imwrite('boxed__1.png', img_)
 
 
 if __name__ == "__main__":
