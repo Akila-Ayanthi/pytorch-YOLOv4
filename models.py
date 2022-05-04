@@ -1297,7 +1297,7 @@ if __name__ == "__main__":
         
         # savename1 = '/home/dissana8/pytorch-YOLOv4/custom_bbox/'+imgname
         # cv2.imwrite(savename1, img)
-    imgfile = ['person_001.jpg', 'person_025.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
+    imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
     for image in imgfile:
         print(image)
         img = cv2.imread(image)
