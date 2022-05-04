@@ -1261,10 +1261,6 @@ def single_image_det(height, width):
     # np.random.shuffle(patch_rand)
     # patch_rand = np.reshape(patch_rand, newshape=patch.shape)
 
-
-    patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
-    resized_patch = cv2.resize(patch, (50, 50))
-
     # im = "/home/dissana8/pytorch-YOLOv4/images-6.jpg"
     im = "/home/dissana8/LAB/Visor/cam3/000005/005015.jpg"
     # im = 'person_001.jpg'
@@ -1295,6 +1291,9 @@ def single_image_det(height, width):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
+    patch = cv2.imread("/home/dissana8/Daedalus-physical/physical_examples/0.3 confidence__/adv_poster.png")
+    resized_patch = cv2.resize(patch, (50, 50))
+    
     # sname = 'test_bbox.png'
     img_, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
     # print(bbox)
