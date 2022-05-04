@@ -1275,7 +1275,7 @@ def single_image_det(im, height, width):
 
     for j in range(2):  # This 'for' loop is for speed check
                 # Because the first iteration is usually longer
-        boxes = do_detect(model, sized, 0.7, 0.6, use_cuda)
+        boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
     # print(boxes)
 
