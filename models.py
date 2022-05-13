@@ -461,16 +461,20 @@ class Yolov4(nn.Module):
 
 def custom_bbox(gt_coords, img, imgname):
     cbbox_coords = []
+
+    width = img.shape[1]
+    height = img.shape[0]
+
     for k in range(len(gt_coords)):
         if gt_coords[k][0] == imgname:
             box = [float(gt_coords[k][2]), float(gt_coords[k][3]), 50, 80]
             box = torch.tensor(box)
             bbox = box_center_to_corner(box)
 
-            x1 = int(bbox[0].item())
-            y1 = int(bbox[1].item())
-            x2 = int(bbox[2].item())
-            y2 = int(bbox[3].item())
+            x1 = int(bbox[0].item() * width)
+            y1 = int(bbox[1].item() * height)
+            x2 = int(bbox[2].item() * width)
+            y2 = int(bbox[3].item() * height)
 
             coords = [x1, y1, x2, y2]
             cbbox_coords.append(coords)
@@ -942,13 +946,13 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     print("View 01 success rate")
     for ele in enumerate(c1_frame_no):
         #real images
-        # im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
+        im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
 
         #adversarial images TOG
         # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam1/"+ele[1]
 
         #adversarial images Daedulus
-        im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam1/"+ele[1]
+        # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam1/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -958,7 +962,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
         #real images
-        # imgfile = im.split('/')[6:]
+        imgfile = im.split('/')[6:]
 
         #adv images TOG
         # imgfile = im.split('/')[9:]
@@ -969,7 +973,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
-        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        img, bbox = plot_boxes_cv2(sized, boxes[0], sname, class_names)
 
         image, cbbox = custom_bbox(gt[0], img, imgname)
         if cbbox:
@@ -992,11 +996,14 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     print("View 02 success rate")
     for ele in enumerate(c2_frame_no):
 
+        #real images
+        im = "/home/dissana8/LAB/Visor/cam2/"+ele[1]
+
         #adv images TOG
         # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam2/"+ele[1]
 
         #adversarial images Daedulus
-        im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam2/"+ele[1]
+        # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam2/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1004,6 +1011,9 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         for j in range(2):  # This 'for' loop is for speed check
                     # Because the first iteration is usually longer
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+
+        #real images
+        imgfile = im.split('/')[6:]
 
         #adv images TOG
         # imgfile = im.split('/')[9:]
@@ -1014,7 +1024,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
-        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        img, bbox = plot_boxes_cv2(sized, boxes[0], sname, class_names)
 
         image, cbbox = custom_bbox(gt[1], img, imgname)
         if cbbox:
@@ -1034,11 +1044,17 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 #     # view 03 success rate
     print("View 03 success rate")
     for ele in enumerate(c3_frame_no):
+        #real images
+        im = "/home/dissana8/LAB/Visor/cam3/"+ele[1]
+
+        #real images
+        imgfile = im.split('/')[6:]
+
         #adv images TOG
         # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/"+ele[1]
 
         #adversarial images Daedulus
-        im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam3/"+ele[1]
+        # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam3/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1057,7 +1073,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
-        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        img, bbox = plot_boxes_cv2(sized, boxes[0], sname, class_names)
 
         image, cbbox = custom_bbox(gt[2], img, imgname)
         if cbbox:
@@ -1076,11 +1092,17 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 #     # view 04 success rate
     print("View 04 success rate")
     for ele in enumerate(c4_frame_no):
+        #real images
+        im = "/home/dissana8/LAB/Visor/cam4/"+ele[1]
+
+        #real images
+        imgfile = im.split('/')[6:]
+
         #adv images TOG
         # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam4/"+ele[1]
 
         #adversarial images Daedulus
-        im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam4/"+ele[1]
+        # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam4/"+ele[1]
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1098,7 +1120,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
 
-        img, bbox = plot_boxes_cv2(img, boxes[0], sname, class_names)
+        img, bbox = plot_boxes_cv2(sized, boxes[0], sname, class_names)
 
         image, cbbox = custom_bbox(gt[3], img, imgname)
         if cbbox:
@@ -1195,8 +1217,8 @@ if __name__ == "__main__":
     if use_cuda:
         model.cuda()
 
-    # #real images
-    # # path = "/home/dissana8/LAB/"
+    #real images
+    path = "/home/dissana8/LAB/"
 
     # #adversarial images TOG
     # path = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/"
@@ -1204,41 +1226,42 @@ if __name__ == "__main__":
     # #adversarial images Daedulus
     # # path = "/home/dissana8/Daedalus-physical/Adv_Images/"
 
-    # file_name = 'LAB-GROUNDTRUTH.ref'
+    file_name = 'LAB-GROUNDTRUTH.ref'
 
-    # if namesfile == None:
-    #         if n_classes == 20:
-    #             namesfile = '/home/dissana8/pytorch-YOLOv4/data/voc.names'
-    #         elif n_classes == 80:
-    #             namesfile = '/home/dissana8/pytorch-YOLOv4/data/coco.names'
-    #         else:
-    #             print("please give namefile")
+    if namesfile == None:
+            if n_classes == 20:
+                namesfile = '/home/dissana8/pytorch-YOLOv4/data/voc.names'
+            elif n_classes == 80:
+                namesfile = '/home/dissana8/pytorch-YOLOv4/data/coco.names'
+            else:
+                print("please give namefile")
 
-    # class_names = load_class_names(namesfile)
+    class_names = load_class_names(namesfile)
 
-    # savename = '/home/dissana8/pytorch-YOLOv4/output_adv/'
+    savename = '/home/dissana8/pytorch-YOLOv4/output_adv/'
 
 
-    # gt = []
-    # gt.append(np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True))
-    # gt.append(np.load('/home/dissana8/LAB/data/LAB/cam2_coords__.npy', allow_pickle=True))
-    # gt.append(np.load('/home/dissana8/LAB/data/LAB/cam3_coords__.npy', allow_pickle=True))
-    # gt.append(np.load('/home/dissana8/LAB/data/LAB/cam4_coords__.npy', allow_pickle=True))
+    gt = []
+    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True))
+    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam2_coords__.npy', allow_pickle=True))
+    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam3_coords__.npy', allow_pickle=True))
+    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam4_coords__.npy', allow_pickle=True))
 
-    # # fig, a = plt.subplots(4, 1)
-    # # extract_frames(path, file_name, model, class_names, width, height, savename, gt)
+    # fig, a = plt.subplots(4, 1)
+    # extract_frames(path, file_name, model, class_names, width, height, savename, gt)
 
-    # success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
+    success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
 
-    # f = open("success_rate_adv_Daedulus_new.txt", "a")
-    # f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
-    # f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
-    # f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
-    # f.write("Success rate of view 03" +": "+str(cam3_success_rate)+"\n")
-    # f.write("Success rate of view 04" +": "+str(cam4_success_rate)+"\n")
-    # f.write("\n")
-    # f.write("\n")
-    # f.close()
+    f = open("success_rate_real_new.txt", "a")
+    f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
+    f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
+    f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
+    f.write("Success rate of view 03" +": "+str(cam3_success_rate)+"\n")
+    f.write("Success rate of view 04" +": "+str(cam4_success_rate)+"\n")
+    f.write("\n")
+    f.write("\n")
+    f.close()
+
     # root = "/home/dissana8/LAB/Visor/cam1"
     # files=[]
     # pattern = "*.jpg"
@@ -1301,35 +1324,35 @@ if __name__ == "__main__":
 
 
 
-    imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
-    # imgfile = ['adv_001.jpg', 'adv_026.jpg', 'adv_038.jpg', 'adv_058.jpg', 'adv_073.jpg']
-    for image in imgfile:
-        print(image)
-        img = cv2.imread(image)
+    # imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
+    # # imgfile = ['adv_001.jpg', 'adv_026.jpg', 'adv_038.jpg', 'adv_058.jpg', 'adv_073.jpg']
+    # for image in imgfile:
+    #     print(image)
+    #     img = cv2.imread(image)
 
-        # Inference input size is 416*416 does not mean training size is the same
-        # Training size could be 608*608 or even other sizes
-        # Optional inference sizes:
-        #   Hight in {320, 416, 512, 608, ... 320 + 96 * n}
-        #   Width in {320, 416, 512, 608, ... 320 + 96 * m}
-        sized = cv2.resize(img, (width, height))
-        sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+    #     # Inference input size is 416*416 does not mean training size is the same
+    #     # Training size could be 608*608 or even other sizes
+    #     # Optional inference sizes:
+    #     #   Hight in {320, 416, 512, 608, ... 320 + 96 * n}
+    #     #   Width in {320, 416, 512, 608, ... 320 + 96 * m}
+    #     sized = cv2.resize(img, (width, height))
+    #     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-        from tool.utils import load_class_names, plot_boxes_cv2
-        from tool.torch_utils import do_detect
+    #     from tool.utils import load_class_names, plot_boxes_cv2
+    #     from tool.torch_utils import do_detect
 
-        for i in range(2):  # This 'for' loop is for speed check
-                            # Because the first iteration is usually longer
-            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+    #     for i in range(2):  # This 'for' loop is for speed check
+    #                         # Because the first iteration is usually longer
+    #         boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-        if namesfile == None:
-            if n_classes == 20:
-                namesfile = 'data/voc.names'
-            elif n_classes == 80:
-                namesfile = 'data/coco.names'
-            else:
-                print("please give namefile")
+    #     if namesfile == None:
+    #         if n_classes == 20:
+    #             namesfile = 'data/voc.names'
+    #         elif n_classes == 80:
+    #             namesfile = 'data/coco.names'
+    #         else:
+    #             print("please give namefile")
 
-        savename = 'adv_predictions_'+image.split('_')[-1]
-        class_names = load_class_names(namesfile)
-        plot_boxes_cv2(img, boxes[0], savename, class_names)
+    #     savename = 'adv_predictions_'+image.split('_')[-1]
+    #     class_names = load_class_names(namesfile)
+    #     plot_boxes_cv2(img, boxes[0], savename, class_names)
