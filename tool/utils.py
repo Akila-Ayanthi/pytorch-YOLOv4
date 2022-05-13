@@ -121,6 +121,7 @@ def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
         y2 = int(box[3] * height)
 
         coords = [x1, y1, x2, y2]
+        
 
 
         if color:
@@ -145,11 +146,13 @@ def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
         cls_id = box[6]
         if str(class_names[cls_id])=='person':
             # print('%s: %f' % (class_names[cls_id], cls_conf))
-            text = str(class_names[cls_id]) + str(round(cls_conf, 3))
-            img = cv2.putText(img, text, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1.2, rgb, 2)
-            img = cv2.rectangle(img, (x1, y1), (x2, y2), rgb, 2)
+            # text = str(class_names[cls_id]) + str(round(cls_conf, 3))
+            # img = cv2.putText(img, text, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1.2, rgb, 2)
+            # img = cv2.rectangle(img, (x1, y1), (x2, y2), rgb, 2)
             bbox_coords.append(coords)
 
+        print("plot box")
+        print(bbox_coords)
     # if savename:
     # # #     print("save plot results to %s" % savename)
     #     cv2.imwrite(savename, img)

@@ -471,17 +471,17 @@ def custom_bbox(gt_coords, img, imgname):
             box = torch.tensor(box)
             bbox = box_center_to_corner(box)
 
-            x1 = int(bbox[0].item() * width)
-            y1 = int(bbox[1].item() * height)
-            x2 = int(bbox[2].item() * width)
-            y2 = int(bbox[3].item() * height)
+            x1 = int(bbox[0].item())
+            y1 = int(bbox[1].item())
+            x2 = int(bbox[2].item())
+            y2 = int(bbox[3].item())
 
             coords = [x1, y1, x2, y2]
-            print(coords)
             cbbox_coords.append(coords)
                 
-            img = cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
-                
+            # img = cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
+    print("cbbox coords")
+    print(cbbox_coords)           
     return img, cbbox_coords
 
 # def get_iou(a, b, epsilon=1e-5):
