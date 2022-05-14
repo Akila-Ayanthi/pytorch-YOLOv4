@@ -641,8 +641,8 @@ def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.3):
     n_true = bbox_gt.shape[0]
     n_pred = bbox_pred.shape[0]
 
-    print(bbox_gt)
-    print(bbox_pred)
+    # print(bbox_gt)
+    # print(bbox_pred)
     
     MAX_DIST = 1.0
     MIN_IOU = 0.0
@@ -652,7 +652,7 @@ def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.3):
     for i in range(n_true):
         for j in range(n_pred):
             iou_matrix[i, j] = bbox_iou(bbox_gt[i,:], bbox_pred[j,:])
-    print(iou_matrix)
+    # print(iou_matrix)
 
     if n_pred > n_true:
       # there are more predictions than ground-truth - add dummy rows
@@ -683,7 +683,7 @@ def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.3):
     idx_gt_actual = idxs_true[sel_pred]
     ious_actual = iou_matrix[idx_gt_actual, idx_pred_actual]
     sel_valid = (ious_actual > IOU_THRESH)
-    print(sel_valid)
+    # print(sel_valid)
     label = sel_valid.astype(int)
 
     return idx_gt_actual[sel_valid], idx_pred_actual[sel_valid], ious_actual[sel_valid], label 
