@@ -1365,6 +1365,6 @@ if __name__ == "__main__":
             cbbox = np.array(cbbox)
             bbox = np.array(bbox)
             idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-        print(idx_pred_actual)
+        print(ious_actual)
     
     
