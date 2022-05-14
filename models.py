@@ -1250,17 +1250,17 @@ if __name__ == "__main__":
     # fig, a = plt.subplots(4, 1)
     # extract_frames(path, file_name, model, class_names, width, height, savename, gt)
 
-    success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
+    # success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
 
-    f = open("success_rate_real_new.txt", "a")
-    f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
-    f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
-    f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
-    f.write("Success rate of view 03" +": "+str(cam3_success_rate)+"\n")
-    f.write("Success rate of view 04" +": "+str(cam4_success_rate)+"\n")
-    f.write("\n")
-    f.write("\n")
-    f.close()
+    # f = open("success_rate_real_new.txt", "a")
+    # f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
+    # f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
+    # f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
+    # f.write("Success rate of view 03" +": "+str(cam3_success_rate)+"\n")
+    # f.write("Success rate of view 04" +": "+str(cam4_success_rate)+"\n")
+    # f.write("\n")
+    # f.write("\n")
+    # f.close()
 
     # root = "/home/dissana8/LAB/Visor/cam1"
     # files=[]
@@ -1323,36 +1323,43 @@ if __name__ == "__main__":
 
 
 
-
+    imgfile = '/home/dissana8/LAB/Visor/cam1/000003/003978.jpg'
     # imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
-    # # imgfile = ['adv_001.jpg', 'adv_026.jpg', 'adv_038.jpg', 'adv_058.jpg', 'adv_073.jpg']
-    # for image in imgfile:
-    #     print(image)
-    #     img = cv2.imread(image)
+    # imgfile = ['adv_001.jpg', 'adv_026.jpg', 'adv_038.jpg', 'adv_058.jpg', 'adv_073.jpg']
+    gt = []
+    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True))
+    for image in imgfile:
+        print(image)
+        img = cv2.imread(image)
 
-    #     # Inference input size is 416*416 does not mean training size is the same
-    #     # Training size could be 608*608 or even other sizes
-    #     # Optional inference sizes:
-    #     #   Hight in {320, 416, 512, 608, ... 320 + 96 * n}
-    #     #   Width in {320, 416, 512, 608, ... 320 + 96 * m}
-    #     sized = cv2.resize(img, (width, height))
-    #     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+        # Inference input size is 416*416 does not mean training size is the same
+        # Training size could be 608*608 or even other sizes
+        # Optional inference sizes:
+        #   Hight in {320, 416, 512, 608, ... 320 + 96 * n}
+        #   Width in {320, 416, 512, 608, ... 320 + 96 * m}
+        sized = cv2.resize(img, (width, height))
+        sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-    #     from tool.utils import load_class_names, plot_boxes_cv2
-    #     from tool.torch_utils import do_detect
+        from tool.utils import load_class_names, plot_boxes_cv2
+        from tool.torch_utils import do_detect
 
-    #     for i in range(2):  # This 'for' loop is for speed check
-    #                         # Because the first iteration is usually longer
-    #         boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+        for i in range(2):  # This 'for' loop is for speed check
+                            # Because the first iteration is usually longer
+            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-    #     if namesfile == None:
-    #         if n_classes == 20:
-    #             namesfile = 'data/voc.names'
-    #         elif n_classes == 80:
-    #             namesfile = 'data/coco.names'
-    #         else:
-    #             print("please give namefile")
+        if namesfile == None:
+            if n_classes == 20:
+                namesfile = 'data/voc.names'
+            elif n_classes == 80:
+                namesfile = 'data/coco.names'
+            else:
+                print("please give namefile")
+        
+        imgfile = imgfile.split('/')[6:]
+        imgname = '/'.join(imgfile)
+        savename = 'adv_predictions_'+image.split('_')[-1]
+        class_names = load_class_names(namesfile)
+        plot_boxes_cv2(img, boxes[0], savename, class_names)
 
-    #     savename = 'adv_predictions_'+image.split('_')[-1]
-    #     class_names = load_class_names(namesfile)
-    #     plot_boxes_cv2(img, boxes[0], savename, class_names)
+    
+    
