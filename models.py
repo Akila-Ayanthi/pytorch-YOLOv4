@@ -987,7 +987,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
             cam1_gt+=len(cbbox)
                 
-            print(len(idx_gt_actual))
+            # print(len(idx_gt_actual))
             for h in range(len(idx_gt_actual)):
                 t = idx_gt_actual[h]
                 text_c = cbbox[t]
