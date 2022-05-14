@@ -622,7 +622,7 @@ def bbox_iou(boxA, boxB):
 
 
 
-def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.3):
+def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.2):
     '''
     Given sets of true and predicted bounding-boxes,
     determine the best possible match.
