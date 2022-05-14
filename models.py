@@ -479,9 +479,8 @@ def custom_bbox(gt_coords, img, imgname):
             coords = [x1, y1, x2, y2]
             cbbox_coords.append(coords)
                 
-            # img = cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
-    print("cbbox coords")
-    print(cbbox_coords)           
+            img = cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)  
+            cv2.imwrite("gt.jpg", img)  
     return img, cbbox_coords
 
 # def get_iou(a, b, epsilon=1e-5):

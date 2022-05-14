@@ -493,6 +493,7 @@ if __name__ == "__main__":
 
     from tool.utils import load_class_names, plot_boxes_cv2
     from tool.torch_utils import do_detect
+    from models import custom_bbox
 
     for i in range(2):  # This 'for' loop is for speed check
                         # Because the first iteration is usually longer
@@ -505,6 +506,12 @@ if __name__ == "__main__":
             namesfile = 'data/coco.names'
         else:
             print("please give namefile")
+            
+    gt = []
+    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True))
+    imgfile = imgfile.split('/')[6:]
+    imgname = '/'.join(imgfile)
 
     class_names = load_class_names(namesfile)
     plot_boxes_cv2(img, boxes[0], 'predictions.jpg', class_names)
+    image, cbbox = custom_bbox(gt[0], sized, imgname)
