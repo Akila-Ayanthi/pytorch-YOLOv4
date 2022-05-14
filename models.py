@@ -683,6 +683,7 @@ def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.0):
     idx_gt_actual = idxs_true[sel_pred]
     ious_actual = iou_matrix[idx_gt_actual, idx_pred_actual]
     sel_valid = (ious_actual > IOU_THRESH)
+    print(sel_valid)
     label = sel_valid.astype(int)
 
     return idx_gt_actual[sel_valid], idx_pred_actual[sel_valid], ious_actual[sel_valid], label 
