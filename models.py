@@ -649,7 +649,7 @@ def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.0):
     for i in range(n_true):
         for j in range(n_pred):
             iou_matrix[i, j] = bbox_iou(bbox_gt[i,:], bbox_pred[j,:])
-    
+    print(iou_matrix)
 
     if n_pred > n_true:
       # there are more predictions than ground-truth - add dummy rows
