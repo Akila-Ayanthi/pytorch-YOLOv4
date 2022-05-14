@@ -471,10 +471,10 @@ def custom_bbox(gt_coords, img, imgname):
             box = torch.tensor(box)
             bbox = box_center_to_corner(box)
 
-            x1 = int(bbox[0].item())
-            y1 = int(bbox[1].item())
-            x2 = int(bbox[2].item())
-            y2 = int(bbox[3].item())
+            x1 = int(bbox[0].item()*width/640)
+            y1 = int(bbox[1].item()*height/480)
+            x2 = int(bbox[2].item()*width/640)
+            y2 = int(bbox[3].item()*height/480)
 
             coords = [x1, y1, x2, y2]
             cbbox_coords.append(coords)
@@ -976,7 +976,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
 
         img, bbox = plot_boxes_cv2(sized, boxes[0], sname, class_names)
 
-        image, cbbox = custom_bbox(gt[0], img, imgname)
+        image, cbbox = custom_bbox(gt[0], sized, imgname)
     
         if cbbox:
             cbbox = np.array(cbbox)
