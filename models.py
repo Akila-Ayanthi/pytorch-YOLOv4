@@ -1355,7 +1355,7 @@ if __name__ == "__main__":
             else:
                 print("please give namefile")
         
-        imgfile = imgfile.split('/')[6:]
+        imgfile = image.split('/')[6:]
         imgname = '/'.join(imgfile)
         savename = 'adv_predictions_'+image.split('_')[-1]
         class_names = load_class_names(namesfile)
