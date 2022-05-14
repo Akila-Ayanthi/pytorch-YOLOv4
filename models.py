@@ -1360,7 +1360,7 @@ if __name__ == "__main__":
         savename = 'adv_predictions.jpg'
         class_names = load_class_names(namesfile)
         image_, bbox = plot_boxes_cv2(sized, boxes[0], savename, class_names)
-        image, cbbox = custom_bbox(gt[0], image_, imgname)
+        image, cbbox = custom_bbox(gt[0], sized, imgname)
         if cbbox:
             cbbox = np.array(cbbox)
             bbox = np.array(bbox)
