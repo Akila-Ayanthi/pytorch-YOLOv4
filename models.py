@@ -1359,8 +1359,8 @@ if __name__ == "__main__":
         imgname = '/'.join(imgfile)
         savename = 'adv_predictions.jpg'
         class_names = load_class_names(namesfile)
-        plot_boxes_cv2(sized, boxes[0], savename, class_names)
-        image, cbbox = custom_bbox(gt[0], sized, imgname)
+        image_, bbox = plot_boxes_cv2(sized, boxes[0], savename, class_names)
+        image, cbbox = custom_bbox(gt[0], image_, imgname)
 
     
     
