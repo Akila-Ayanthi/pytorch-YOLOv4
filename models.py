@@ -1323,7 +1323,7 @@ if __name__ == "__main__":
 
 
 
-    imgfile = ['/home/dissana8/LAB/Visor/cam1/000006/006159.jpg']
+    imgfile = ['/home/dissana8/LAB/Visor/cam1/000006/008245.jpg']
     # imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
     # imgfile = ['adv_001.jpg', 'adv_026.jpg', 'adv_038.jpg', 'adv_058.jpg', 'adv_073.jpg']
     gt = []
