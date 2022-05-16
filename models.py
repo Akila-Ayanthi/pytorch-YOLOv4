@@ -950,13 +950,17 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     print("View 01 success rate")
     for ele in enumerate(c1_frame_no):
         #real images
-        im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
+        # im = "/home/dissana8/LAB/Visor/cam1/"+ele[1]
 
         #adversarial images TOG
         # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam1/"+ele[1]
 
         #adversarial images Daedulus
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam1/"+ele[1]
+
+        #adversarial images Naturalistic patch
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_0.2/cam1/"+ele[1]
+
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -966,13 +970,16 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
         #real images
-        imgfile = im.split('/')[6:]
+        # imgfile = im.split('/')[6:]
 
         #adv images TOG
         # imgfile = im.split('/')[9:]
 
-        #adv images Daedulus
+        #adv images Daedulus 
         # imgfile = im.split('/')[6:]
+
+        #adv images Naturalisitc patch
+        imgfile = im.split('/')[7:]
 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
@@ -1002,13 +1009,17 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     for ele in enumerate(c2_frame_no):
 
         #real images
-        im = "/home/dissana8/LAB/Visor/cam2/"+ele[1]
+        # im = "/home/dissana8/LAB/Visor/cam2/"+ele[1]
 
         #adv images TOG
         # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam2/"+ele[1]
 
         #adversarial images Daedulus
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam2/"+ele[1]
+
+        #adversarial images Naturalistic patch
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_0.2/cam2/"+ele[1]
+
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1018,13 +1029,16 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
         #real images
-        imgfile = im.split('/')[6:]
+        # imgfile = im.split('/')[6:]
 
         #adv images TOG
         # imgfile = im.split('/')[9:]
 
         #adv images Daedulus
         # imgfile = im.split('/')[6:]
+
+        #adv images Naturalisitc patch
+        imgfile = im.split('/')[7:]
 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
@@ -1050,13 +1064,17 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     print("View 03 success rate")
     for ele in enumerate(c3_frame_no):
         #real images
-        im = "/home/dissana8/LAB/Visor/cam3/"+ele[1]
+        # im = "/home/dissana8/LAB/Visor/cam3/"+ele[1]
 
         #adv images TOG
         # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam3/"+ele[1]
 
         #adversarial images Daedulus
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam3/"+ele[1]
+
+        #adversarial images Naturalistic patch
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_0.2/cam3/"+ele[1]
+
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1066,13 +1084,16 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
         #real images
-        imgfile = im.split('/')[6:]
+        # imgfile = im.split('/')[6:]
 
         #adv images TOG
         # imgfile = im.split('/')[9:]
 
         #adv images Daedulus
         # imgfile = im.split('/')[6:]
+
+        #adv images Naturalisitc patch
+        imgfile = im.split('/')[7:]
 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
@@ -1097,13 +1118,17 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     print("View 04 success rate")
     for ele in enumerate(c4_frame_no):
         #real images
-        im = "/home/dissana8/LAB/Visor/cam4/"+ele[1]
+        # im = "/home/dissana8/LAB/Visor/cam4/"+ele[1]
 
         #adv images TOG
         # im = "/home/dissana8/TOG/Adv_images/vanishing/LAB/Visor/cam4/"+ele[1]
 
         #adversarial images Daedulus
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam4/"+ele[1]
+
+        #adversarial images Naturalistic patch
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_0.2/cam4/"+ele[1]
+
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
         sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
@@ -1113,13 +1138,16 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
             boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
         #real images
-        imgfile = im.split('/')[6:]
+        # imgfile = im.split('/')[6:]
 
         #adv images TOG
         # imgfile = im.split('/')[9:]
 
         #adv images Daedulus
         # imgfile = im.split('/')[6:]
+
+        #adv images Naturalisitc patch
+        imgfile = im.split('/')[7:]
 
         imgname = '/'.join(imgfile)
         sname = savename + imgname
@@ -1143,7 +1171,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     tot_det = cam1_det+cam2_det+cam3_det+cam4_det
     tot_gt = cam1_gt+cam2_gt+cam3_gt+cam4_gt
 
-    f = open("detections_adv1.txt", "a")
+    f = open("detections_adv_naturalistic.txt", "a")
     f.write("total detections: " +str(tot_det)+"\n")
     f.write("total gt : " +str(tot_gt)+"\n")
     f.write("cam1 detections: " +str(cam1_det)+"\n")
