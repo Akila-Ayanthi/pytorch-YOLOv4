@@ -959,6 +959,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam1/"+ele[1]
 
         #adversarial images Naturalistic patch
+        print(ele[1])
         im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_0.2/cam1/"+ele[1]
 
         img = cv2.imread(im)
