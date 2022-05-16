@@ -622,7 +622,7 @@ def bbox_iou(boxA, boxB):
 
 
 
-def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.1):
+def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.0):
     '''
     Given sets of true and predicted bounding-boxes,
     determine the best possible match.
@@ -1170,7 +1170,7 @@ def box_center_to_corner(boxes):
     """Convert from (center, width, height) to (upper-left, lower-right)."""
     cx, cy, w, h = boxes[0], boxes[1], boxes[2], boxes[3]
     x1 = cx - 0.5 * w
-    y1 = cy - 1.2 * h
+    y1 = cy - 0.8 * h
     x2 = cx + 0.5 * w
     y2 = cy + 0.2 * h
     boxes = torch.stack((x1, y1, x2, y2), axis=-1)
