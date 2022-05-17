@@ -1251,13 +1251,16 @@ if __name__ == "__main__":
         model.cuda()
 
     #real images
-    path = "/home/dissana8/LAB/"
+    # path = "/home/dissana8/LAB/"
 
     # #adversarial images TOG
     # path = "/home/dissana8/TOG/Adv_images/vanishing/LAB_16x16/"
 
     # #adversarial images Daedulus
     # # path = "/home/dissana8/Daedalus-physical/Adv_Images/"
+
+    #adversarial images Naturalistic patch
+    path = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.1/"
 
     file_name = 'LAB-GROUNDTRUTH.ref'
 
