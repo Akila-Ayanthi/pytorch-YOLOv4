@@ -480,7 +480,7 @@ def custom_bbox(gt_coords, img, imgname):
             cbbox_coords.append(coords)
                 
             img = cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)  
-            # cv2.imwrite("gt.jpg", img)  
+            cv2.imwrite("gt.jpg", img)  
     return img, cbbox_coords
 
 # def get_iou(a, b, epsilon=1e-5):
@@ -683,7 +683,7 @@ def match_bboxes(bbox_gt, bbox_pred, IOU_THRESH=0.0):
     idx_gt_actual = idxs_true[sel_pred]
     ious_actual = iou_matrix[idx_gt_actual, idx_pred_actual]
     sel_valid = (ious_actual > IOU_THRESH)
-    # print(sel_valid)
+    print(sel_valid)
     label = sel_valid.astype(int)
 
     return idx_gt_actual[sel_valid], idx_pred_actual[sel_valid], ious_actual[sel_valid], label 
@@ -959,8 +959,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam1/"+ele[1]
 
         #adversarial images Naturalistic patch
-        print(ele[1])
-        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.1/cam1/"+ele[1]
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam1/"+ele[1]
 
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
@@ -1019,7 +1018,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam2/"+ele[1]
 
         #adversarial images Naturalistic patch
-        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.1/cam2/"+ele[1]
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam2/"+ele[1]
 
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
@@ -1074,7 +1073,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam3/"+ele[1]
 
         #adversarial images Naturalistic patch
-        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.1/cam3/"+ele[1]
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam3/"+ele[1]
 
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
@@ -1128,7 +1127,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam4/"+ele[1]
 
         #adversarial images Naturalistic patch
-        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.1/cam4/"+ele[1]
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam4/"+ele[1]
 
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
@@ -1260,7 +1259,7 @@ if __name__ == "__main__":
     # # path = "/home/dissana8/Daedalus-physical/Adv_Images/"
 
     #adversarial images Naturalistic patch
-    path = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.1/"
+    path = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/"
 
     file_name = 'LAB-GROUNDTRUTH.ref'
 
@@ -1286,17 +1285,17 @@ if __name__ == "__main__":
     # fig, a = plt.subplots(4, 1)
     # extract_frames(path, file_name, model, class_names, width, height, savename, gt)
 
-    success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
+    # success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
 
-    f = open("success_rate_natural_patch_0.1.txt", "a")
-    f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
-    f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
-    f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
-    f.write("Success rate of view 03" +": "+str(cam3_success_rate)+"\n")
-    f.write("Success rate of view 04" +": "+str(cam4_success_rate)+"\n")
-    f.write("\n")
-    f.write("\n")
-    f.close()
+    # f = open("success_rate_natural_patch_0.2.txt", "a")
+    # f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
+    # f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
+    # f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
+    # f.write("Success rate of view 03" +": "+str(cam3_success_rate)+"\n")
+    # f.write("Success rate of view 04" +": "+str(cam4_success_rate)+"\n")
+    # f.write("\n")
+    # f.write("\n")
+    # f.close()
 
     # root = "/home/dissana8/LAB/Visor/cam1"
     # files=[]
@@ -1359,48 +1358,50 @@ if __name__ == "__main__":
 
 
 
-    # imgfile = ['/home/dissana8/LAB/Visor/cam1/000008/008922.jpg']
-    # # imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
-    # # imgfile = ['adv_001.jpg', 'adv_026.jpg', 'adv_038.jpg', 'adv_058.jpg', 'adv_073.jpg']
-    # gt = []
-    # gt.append(np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True))
-    # for image in imgfile:
-    #     print(image)
-    #     img = cv2.imread(image)
+    imgfile = ['/home/dissana8/LAB/Visor/cam1/000008/008922.jpg']
+    # imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
+    # imgfile = ['adv_001.jpg', 'adv_026.jpg', 'adv_038.jpg', 'adv_058.jpg', 'adv_073.jpg']
+    gt = []
+    gt.append(np.load('/home/dissana8/LAB/data/LAB/cam1_coords__.npy', allow_pickle=True))
+    for image in imgfile:
+        print(image)
+        img = cv2.imread(image)
 
-    #     # Inference input size is 416*416 does not mean training size is the same
-    #     # Training size could be 608*608 or even other sizes
-    #     # Optional inference sizes:
-    #     #   Hight in {320, 416, 512, 608, ... 320 + 96 * n}
-    #     #   Width in {320, 416, 512, 608, ... 320 + 96 * m}
-    #     sized = cv2.resize(img, (width, height))
-    #     sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
+        # Inference input size is 416*416 does not mean training size is the same
+        # Training size could be 608*608 or even other sizes
+        # Optional inference sizes:
+        #   Hight in {320, 416, 512, 608, ... 320 + 96 * n}
+        #   Width in {320, 416, 512, 608, ... 320 + 96 * m}
+        sized = cv2.resize(img, (width, height))
+        sized = cv2.cvtColor(sized, cv2.COLOR_BGR2RGB)
 
-    #     from tool.utils import load_class_names, plot_boxes_cv2
-    #     from tool.torch_utils import do_detect
+        from tool.utils import load_class_names, plot_boxes_cv2
+        from tool.torch_utils import do_detect
 
-    #     for i in range(2):  # This 'for' loop is for speed check
-    #                         # Because the first iteration is usually longer
-    #         boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
+        for i in range(2):  # This 'for' loop is for speed check
+                            # Because the first iteration is usually longer
+            boxes = do_detect(model, sized, 0.4, 0.6, use_cuda)
 
-    #     if namesfile == None:
-    #         if n_classes == 20:
-    #             namesfile = 'data/voc.names'
-    #         elif n_classes == 80:
-    #             namesfile = 'data/coco.names'
-    #         else:
-    #             print("please give namefile")
+        if namesfile == None:
+            if n_classes == 20:
+                namesfile = 'data/voc.names'
+            elif n_classes == 80:
+                namesfile = 'data/coco.names'
+            else:
+                print("please give namefile")
         
-    #     imgfile = image.split('/')[6:]
-    #     imgname = '/'.join(imgfile)
-    #     savename = 'adv_predictions.jpg'
-    #     class_names = load_class_names(namesfile)
-    #     image_, bbox = plot_boxes_cv2(sized, boxes[0], savename, class_names)
-    #     image, cbbox = custom_bbox(gt[0], image_, imgname)
-    #     if cbbox:
-    #         cbbox = np.array(cbbox)
-    #         bbox = np.array(bbox)
-    #         idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
-    #     print(ious_actual)
+        imgfile = image.split('/')[6:]
+        imgname = '/'.join(imgfile)
+        savename = 'adv_predictions.jpg'
+        class_names = load_class_names(namesfile)
+        image_, bbox = plot_boxes_cv2(sized, boxes[0], savename, class_names)
+        image, cbbox = custom_bbox(gt[0], image_, imgname)
+        if cbbox:
+            cbbox = np.array(cbbox)
+            bbox = np.array(bbox)
+            idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+        print(idx_gt_actual)
+        print(idx_pred_actual)
+        print(ious_actual)
     
     
