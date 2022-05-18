@@ -479,6 +479,8 @@ def custom_bbox(gt_coords, img, imgname):
             coords = [x1, y1, x2, y2]
             cbbox_coords.append(coords)
                 
+            text = str(k)
+            img = cv2.putText(img, text, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 1)
             img = cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 2)  
             cv2.imwrite("gt.jpg", img)  
     return img, cbbox_coords
