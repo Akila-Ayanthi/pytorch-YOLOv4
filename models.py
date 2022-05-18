@@ -1361,7 +1361,7 @@ if __name__ == "__main__":
 
 
     # imgfile = ['/home/dissana8/LAB/Visor/cam1/000005/005565.jpg']
-    imgfile = ['/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.1/cam1/000005/005565.jpg']
+    imgfile = ['/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam1/000005/005565.jpg']
     
     # imgfile = ['/home/dissana8/LAB/Visor/cam1/000008/008922.jpg']
     # imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
