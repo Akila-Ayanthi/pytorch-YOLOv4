@@ -1360,8 +1360,8 @@ if __name__ == "__main__":
 
 
 
-    imgfile = ['/home/dissana8/LAB/Visor/cam1/000005/005565.jpg']
-    # imgfile = ['/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam1/000005/005565.jpg']
+    # imgfile = ['/home/dissana8/LAB/Visor/cam1/000005/005565.jpg']
+    imgfile = ['/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam1/000005/005565.jpg']
     
     # imgfile = ['/home/dissana8/LAB/Visor/cam1/000008/008922.jpg']
     # imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
@@ -1396,7 +1396,7 @@ if __name__ == "__main__":
                 print("please give namefile")
         
         cam_det = 0
-        imgfile = image.split('/')[6:]
+        imgfile = image.split('/')[7:]
         imgname = '/'.join(imgfile)
         savename = 'adv_predictions.jpg'
         class_names = load_class_names(namesfile)
