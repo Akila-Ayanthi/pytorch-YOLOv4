@@ -1200,7 +1200,7 @@ def box_center_to_corner(boxes):
     """Convert from (center, width, height) to (upper-left, lower-right)."""
     cx, cy, w, h = boxes[0], boxes[1], boxes[2], boxes[3]
     x1 = cx - 0.5 * w
-    y1 = cy - 1.2 * h
+    y1 = cy - 0.8 * h
     x2 = cx + 0.5 * w
     y2 = cy + 0.2 * h
     boxes = torch.stack((x1, y1, x2, y2), axis=-1)
@@ -1360,8 +1360,8 @@ if __name__ == "__main__":
 
 
 
-    # imgfile = ['/home/dissana8/LAB/Visor/cam1/000005/005565.jpg']
-    imgfile = ['/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam1/000005/005565.jpg']
+    imgfile = ['/home/dissana8/LAB/Visor/cam1/000005/005565.jpg']
+    # imgfile = ['/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam1/000005/005565.jpg']
     
     # imgfile = ['/home/dissana8/LAB/Visor/cam1/000008/008922.jpg']
     # imgfile = ['person_001.jpg', 'person_026.jpg', 'person_038.jpg', 'person_058.jpg', 'person_073.jpg']
@@ -1396,7 +1396,7 @@ if __name__ == "__main__":
                 print("please give namefile")
         
         cam_det = 0
-        imgfile = image.split('/')[7:]
+        imgfile = image.split('/')[6:]
         imgname = '/'.join(imgfile)
         savename = 'adv_predictions.jpg'
         class_names = load_class_names(namesfile)
