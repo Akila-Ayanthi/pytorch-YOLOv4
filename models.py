@@ -1390,6 +1390,7 @@ if __name__ == "__main__":
             else:
                 print("please give namefile")
         
+        cam_det = 0
         imgfile = image.split('/')[6:]
         imgname = '/'.join(imgfile)
         savename = 'adv_predictions.jpg'
@@ -1400,8 +1401,15 @@ if __name__ == "__main__":
             cbbox = np.array(cbbox)
             bbox = np.array(bbox)
             idx_gt_actual, idx_pred_actual, ious_actual, label = match_bboxes(cbbox, bbox)
+
+            for h in range(len(idx_gt_actual)):
+                    t = idx_gt_actual[h]
+                    text_c = cbbox[t]
+                    if round(ious_actual[h], 3)>=0.0:
+                        cam_det+=1
         print(idx_gt_actual)
         print(idx_pred_actual)
         print(ious_actual)
+        print(cam_det)
     
     
