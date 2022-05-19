@@ -961,7 +961,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam1/"+ele[1]
 
         #adversarial images Naturalistic patch
-        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.1/cam1/"+ele[1]
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam1/"+ele[1]
 
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
@@ -1020,7 +1020,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam2/"+ele[1]
 
         #adversarial images Naturalistic patch
-        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.1/cam2/"+ele[1]
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam2/"+ele[1]
 
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
@@ -1075,7 +1075,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam3/"+ele[1]
 
         #adversarial images Naturalistic patch
-        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.1/cam3/"+ele[1]
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam3/"+ele[1]
 
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
@@ -1129,7 +1129,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam4/"+ele[1]
 
         #adversarial images Naturalistic patch
-        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.1/cam4/"+ele[1]
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam4/"+ele[1]
 
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
@@ -1173,7 +1173,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
     tot_det = cam1_det+cam2_det+cam3_det+cam4_det
     tot_gt = cam1_gt+cam2_gt+cam3_gt+cam4_gt
 
-    f = open("detections_adv_daedalus_yolov4_0.1.txt", "a")
+    f = open("detections_adv_daedalus_yolov4_0.2.txt", "a")
     f.write("total detections: " +str(tot_det)+"\n")
     f.write("total gt : " +str(tot_gt)+"\n")
     f.write("cam1 detections: " +str(cam1_det)+"\n")
@@ -1261,7 +1261,7 @@ if __name__ == "__main__":
     # # path = "/home/dissana8/Daedalus-physical/Adv_Images/"
 
     #adversarial images Naturalistic patch
-    path = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.1/"
+    path = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/"
 
     file_name = 'LAB-GROUNDTRUTH.ref'
 
@@ -1289,7 +1289,7 @@ if __name__ == "__main__":
 
     success_rate, cam1_success_rate, cam2_success_rate, cam3_success_rate, cam4_success_rate = extract_frames(path, file_name, model, class_names, width, height,  savename, gt, device)
 
-    f = open("success_rate_Deadalus_0.1.txt", "a")
+    f = open("success_rate_Deadalus_0.2.txt", "a")
     f.write("Success rate of Yolo-V4 : " +str(success_rate)+"\n")
     f.write("Success rate of view 01" +": "+str(cam1_success_rate)+"\n")
     f.write("Success rate of view 02" +": "+str(cam2_success_rate)+"\n")
