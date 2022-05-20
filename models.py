@@ -961,7 +961,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam1/"+ele[1]
 
         #adversarial images Naturalistic patch
-        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam1/"+ele[1]
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_Daedalus_yolov4_0.2/cam1/"+ele[1]
 
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
@@ -1020,7 +1020,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam2/"+ele[1]
 
         #adversarial images Naturalistic patch
-        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam2/"+ele[1]
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_Daedalus_yolov4_0.2/cam2/"+ele[1]
 
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
@@ -1075,7 +1075,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam3/"+ele[1]
 
         #adversarial images Naturalistic patch
-        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam3/"+ele[1]
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_Daedalus_yolov4_0.2/cam3/"+ele[1]
 
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
@@ -1129,7 +1129,7 @@ def extract_frames(path,file_name, model, class_names, width, height, savename, 
         # im = "/home/dissana8/pytorch-YOLOv4/Daedalus_Images/cam4/"+ele[1]
 
         #adversarial images Naturalistic patch
-        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/cam4/"+ele[1]
+        im = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_Daedalus_yolov4_0.2/cam4/"+ele[1]
 
         img = cv2.imread(im)
         sized = cv2.resize(img, (width, height))
@@ -1261,7 +1261,7 @@ if __name__ == "__main__":
     # # path = "/home/dissana8/Daedalus-physical/Adv_Images/"
 
     #adversarial images Naturalistic patch
-    path = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_yolov4_0.2/"
+    path = "/home/dissana8/Naturalistic-Adversarial-Patch/eval_output/LAB_Daedalus_yolov4_0.2/"
 
     file_name = 'LAB-GROUNDTRUTH.ref'
 
